@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  root "root#root"
+  root :to => "roots#root"
 end
