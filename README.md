@@ -2,7 +2,7 @@
 
 [Heroku link][heroku]
 
-[heroku]:
+[heroku]:bdmi.herokuapp.com
 
 ## Minimum Viable Product
 BDMI is a clone of IMDB built on Rails and Backbone. Users can:
