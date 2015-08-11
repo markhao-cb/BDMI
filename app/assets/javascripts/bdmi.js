@@ -1,4 +1,4 @@
-window.BDMIMaster = {
+window.BDMI = {
   Models: {},
   Collections: {},
   Views: {},
@@ -9,5 +9,5 @@ window.BDMIMaster = {
 };
 
 $(document).ready(function(){
-  BDMIMaster.initialize();
+  BDMI.initialize();
 });

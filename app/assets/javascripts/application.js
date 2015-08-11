@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require underscore
 //= require backbone
-//= require bdmi_master
+//= require bdmi
 //= require_tree ../templates
 //= require_tree ./models
 //= require_tree ./collections
