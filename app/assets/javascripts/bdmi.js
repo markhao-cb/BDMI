@@ -4,10 +4,6 @@ window.BDMI = {
   Views: {},
   Routers: {},
   initialize: function() {
-    alert('Hello from Backbone!');
+    
   }
 };
-
-$(document).ready(function(){
-  BDMI.initialize();
-});
