@@ -2,9 +2,9 @@
   <img src="<%= movie.escape("img_url") %>" class="small_image"></img>
 </div>
 <div id="movie_title">
-  <label class="small_title">
+  <a href="#/movies/<%=movie.get("id")%>" class="small_title">
     <%= movie.escape("title") %>
-  </label>
+  </a>
   <span id="movie_score">
     <%= movie.escape("score") %>
   </span>

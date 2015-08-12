@@ -13,8 +13,9 @@ BDMI.Routers.Router = Backbone.Router.extend({
   },
 
   show: function(id) {
-    this.movies.getOrFetch(id);
-
+    var movie = this.movies.getOrFetch(id);
+    var showView = new BDMI.Views.Movie({model: movie});
+    this.swap(showView);
   },
 
   swap: function(view) {
