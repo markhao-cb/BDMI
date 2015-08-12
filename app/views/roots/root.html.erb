@@ -1,9 +1,9 @@
 <!-- <div id="bg">
   <img src="images/bg.jpg" alt="">
 </div> -->
-<h1>Welcome to BDMI</h1>
-<div id="content"></div>
-<div id="sidebar"></div>
+<div id="navbar"></div>
+<div id="content">
+</div>
 <!-- <div class="banner">
     <ul>
         <li style="width: 25%; background-image: url(http://www.bootcss.com/p/unslider/img/sunset.jpg); background-size: 100% 100%;">
@@ -43,8 +43,14 @@
 
 
 <script>
-  BDMI.initialize();
   $(function() {
+    <% if signed_in? %>
+      BDMI.CURRENT_USER = {
+        username: "<%= current_user.username %>",
+        email: "<%= current_user.email %>"
+      }
+    <% end %>
+    BDMI.initialize();
     $('.banner').unslider();
   });
 </script>
