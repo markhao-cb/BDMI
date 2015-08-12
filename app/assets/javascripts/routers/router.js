@@ -5,12 +5,9 @@ BDMI.Routers.Router = Backbone.Router.extend({
 
   initialize: function(options) {
     this.$rootEl = options.$rootEl;
-    this.movies = new BDMI.Collections.Movies();
   },
 
   index: function() {
-    // this.movies.fetch();
-    // var movieIndexView = new BDMI.Views.MoviesIndex({ collection: this.movies });
     var mainView = new BDMI.Views.Main();
     this.swap(mainView);
   },
