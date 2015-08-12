@@ -1,7 +1,6 @@
 BDMI.Routers.Router = Backbone.Router.extend({
   routes: {
-    "": "index",
-    "movies/:id": "show"
+    "": "index"
   },
 
   initialize: function(options) {
@@ -10,9 +9,10 @@ BDMI.Routers.Router = Backbone.Router.extend({
   },
 
   index: function() {
-    this.movies.fetch();
-    var movieIndexView = new BDMI.Views.MoviesIndex({ collection: this.movies });
-    
+    // this.movies.fetch();
+    // var movieIndexView = new BDMI.Views.MoviesIndex({ collection: this.movies });
+    var mainView = new BDMI.Views.Main();
+    this.swap(mainView);
   },
 
   show: function(id) {

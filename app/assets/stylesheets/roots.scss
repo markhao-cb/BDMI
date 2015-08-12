@@ -10,6 +10,10 @@
   width: 100%;
 }
 
+#navbar {
+  height: 52px;
+}
+
 .banner {
   position: relative;
   overflow: auto;
@@ -21,6 +25,13 @@
 
 .banner li {
   list-style: none;
+}
+
+.main_container {
+  width: 90%;
+  margin: 0 auto;
+  display: block;
+  border: 1px solid #000;
 }
 
 #bg {
@@ -39,4 +50,25 @@
   margin: auto;
   min-width: 50%;
   min-height: 50%;
+}
+
+#content {
+  float: left;
+  display: block;
+  width: 70%;
+  box-sizing: border-box;
+}
+
+#sidebar {
+  float: left;
+  display: block;
+  width: 30%;
+  box-sizing: border-box;
+  border-left: 1px solid #000;
+}
+
+.group::after {
+  content: "";
+  clear: both;
+  display: block;
 }

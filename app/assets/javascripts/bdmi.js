@@ -4,9 +4,9 @@ window.BDMI = {
   Views: {},
   Routers: {},
   initialize: function() {
-    var $rootEl = $("#content");
+    var $rootEl = $("#main");
     var router = new BDMI.Routers.Router({
-      $rootEl: $rootEl
+      $rootEl: $rootEl,
     });
 
     var navbar = new BDMI.Views.Navbar({
