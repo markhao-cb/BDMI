@@ -1,8 +1,10 @@
 <div id="bg">
-  <img src="https://photos-1.dropbox.com/t/2/AAAXzX-nckHqN0v_HO1BAKRwpbqMqJt78V4_9xau8loZHw/12/455194318/jpeg/32x32/1/_/1/2/sea.jpeg/EKS99tYDGAUgBygH/TiAHHT7U_E0PGh09Rk0djjpSfH7Wh1oNL1otsYpvmoU?size=1280x960&size_mode=2" alt="">
+  <img src="https://photos-3.dropbox.com/t/2/AADA0BuvaMWXQqcLxAnZjlV7jPl8c5uNakndSNT28Zi5oA/12/455194318/jpeg/32x32/1/_/1/2/cloud.jpeg/EKS99tYDGA0gBygH/zYnPwlyZ1yafwnyI7PMJaPYGGc2vVjStIvXPc-7vq4c?size=1600x1200&size_mode=2" alt="">
 </div>
 
-
+<div id="login-logo">
+  <a href="/#"><img src="http://i.imgur.com/OLyJWY0.png" class="login-logo-image"></a>
+</div>
 
 <div class="container login-form">
   <% if flash[:errors] %>
@@ -28,7 +30,7 @@
 								<form id="login-form" action="<%= session_url %>" method="post" role="form" style="display: block;">
 									<input type="hidden" name="authenticity_token" value=" <%= form_authenticity_token %> ">
                   <div class="form-group">
-										<input type="text" name="user[email_or_username]" id="username" tabindex="1" class="form-control" placeholder="Email" value="">
+										<input type="text" name="user[email_or_username]" id="username" tabindex="1" class="form-control" placeholder="Email Or Username" value="<%=params[:email_or_username]%>">
 									</div>
 									<div class="form-group">
 										<input type="password" name="user[password]" id="password" tabindex="2" class="form-control" placeholder="Password">

@@ -8,17 +8,26 @@
   font-family: inherit;
   width: 500px;
   height: 43px;
-  background-color: rgba(213, 9, 137, 0.08)
+  background-color: rgba(255, 0, 31, 0.1);
+  position: relative;
 }
 
+#login-logo {
+  position: relative;
+}
+
+.login-logo-image {
+  margin: 0 auto;
+  display: block;
+}
 #error {
-  color:#000;
+  color: rgb(240, 240, 240);
   padding-top: 11px;
   filter: none;
 }
 
 .container.login-form {
-    padding-top: 90px;
+    padding-top: 30px;
 }
 .panel-login {
 	border-color: #ccc;
@@ -45,6 +54,7 @@
 	color: #029f5b;
 	font-size: 18px;
 }
+
 .panel-login>.panel-heading hr{
 	margin-top: 10px;
 	margin-bottom: 0px;
