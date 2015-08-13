@@ -4,13 +4,12 @@ BDMI.Views.Intro = Backbone.CompositeView.extend({
   className: "intro-body",
 
   initialize: function() {
-    // this.addMovieIndexView();
+    this.listenTo(this.model, 'sync', this.render);
   },
 
   render: function() {
-    var content = this.template();
+    var content = this.template({ movie: this.model });
     this.$el.html(content);
-    this.attachSubviews();
     return this;
   }
 });

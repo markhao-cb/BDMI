@@ -8,6 +8,7 @@ BDMI.Views.Main = Backbone.CompositeView.extend({
     this.addMovieInTheatersView();
     this.addRankView();
     this.addSearchView();
+    this.introMovies = new BDMI.Collections.IntroMovies();
   },
 
   addIntroView: function() {

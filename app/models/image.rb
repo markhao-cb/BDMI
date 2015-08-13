@@ -1,5 +1,5 @@
 class Image < ActiveRecord::Base
-  validates :title, presence: true
+  validates :image_url, presence: true
 
   belongs_to :imageable, :polymorphic => true
 end
