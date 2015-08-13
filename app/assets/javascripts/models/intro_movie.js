@@ -1,5 +1,5 @@
-BDMI.Models.IntroMovies = Backbone.Model.extend({
-  urlRoot: "/api/intro_movie_index",
+BDMI.Models.IntroMovie = Backbone.Model.extend({
+  urlRoot: "/api/intro_movies_index",
 
   parse: function(payload) {
     if(payload.images) {

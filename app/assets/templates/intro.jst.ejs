@@ -10,10 +10,10 @@
           <!-- Carousel items -->
           <div class="carousel-inner">
             <div class="active item"><div id="player"></div></div>
-            <div class="item"><img src="<%= movie.escape("image_url")%>" alt="" class="carousel-image"/></div>
+            <div class="item"><img src="<%= movie_image.escape("image_url")%>" alt="" class="carousel-image"/></div>
             <div class="item">
               <!-- <h2>Download Grayscale</h2> -->
-              <p>Click <i class="fa fa-hand-pointer-o animated"></i> For More Info About</p>
+              <p>Click <i class="fa fa-angle-double-down animated"></i> For More Info About</p>
               <p><%= movie.title %></p>
               <a href="#/movies/<%= movie.id %>" class="btn btn-default btn-lg">Visit Detail Page</a>
             </div>
@@ -65,5 +65,16 @@
               event.target.parent.removeChild();
           }
         }
+
+        // jQuery for page scrolling feature - requires jQuery Easing plugin
+        $(function() {
+            $('a.page-scroll').bind('click', function(event) {
+                var $anchor = $(this);
+                $('html, body').stop().animate({
+                    scrollTop: $($anchor.attr('href')).offset().top
+                }, 1500, 'easeInOutExpo');
+                event.preventDefault();
+            });
+        });
 
     </script>

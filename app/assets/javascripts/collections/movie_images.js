@@ -1,3 +1,3 @@
 BDMI.Collections.MovieImages = Backbone.Collection.extend({
-  model: BDMI.Collections.MovieImage
+  model: BDMI.Models.MovieImage
 });

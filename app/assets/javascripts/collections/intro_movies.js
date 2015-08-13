@@ -1,5 +1,5 @@
 BDMI.Collections.IntroMovies = Backbone.Collection.extend({
-  url: "/api/intro_movie_index",
+  url: "/api/intro_movies_index",
   model: BDMI.Models.IntroMovie,
 
   getOrFetch: function(id) {
