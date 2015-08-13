@@ -23,7 +23,6 @@ BDMI.Routers.Router = Backbone.Router.extend({
   swap: function(view) {
     this._view && this._view.remove();
     this._view = view;
-    debugger;
     this.$rootEl.html(view.render().$el);
   }
 });
