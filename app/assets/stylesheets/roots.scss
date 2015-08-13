@@ -10,8 +10,24 @@
   width: 100%;
 }
 
+.nav {
+  display: block;
+}
+
 #navbar {
-  height: 52px;
+  display: block;
+  border-bottom: 3px solid #fff;
+  height: 85px;
+}
+
+#login-section {
+  border-left: 2px solid #fff;
+  padding-left: 15px;
+  margin-right: -40px;
+}
+
+#logged-in-section {
+  
 }
 
 .banner {
@@ -29,6 +45,7 @@
 
 #main {
   margin: 30px;
+  padding-top: 40px;
 }
 
 .main_container {

@@ -3,6 +3,10 @@ BDMI.Views.Rank = Backbone.CompositeView.extend({
 
   className: "rank-section",
 
+  attributes: {
+    "id": "rank"
+  },
+
   render: function() {
     var content = this.template();
     this.$el.html(content);
