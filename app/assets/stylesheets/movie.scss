@@ -1,3 +1,19 @@
+#myCarousel {
+  width:1220px;
+  height:484px;
+  margin-left: -235px
+}
+
+.carousel-image {
+  max-height: 472px;
+  width: auto;
+  margin: 0 auto;
+}
+
+.carousel-control {
+  bottom: 50px;
+}
+
 .rating > span:hover:before {
    content: "\2605";
    position: absolute;
