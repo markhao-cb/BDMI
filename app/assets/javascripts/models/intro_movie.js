@@ -8,7 +8,7 @@ BDMI.Models.IntroMovie = Backbone.Model.extend({
     }
     if(payload.reviews) {
       this.reviews().set(payload.reviews);
-      delete payload.toys;
+      delete payload.reviews;
     }
 
     return payload;
@@ -22,9 +22,9 @@ BDMI.Models.IntroMovie = Backbone.Model.extend({
   },
 
   reviews: function() {
-    if(this.reviews === undefined) {
-      this.reviews = new BDMI.Collections.Reviews();
+    if(this._reviews === undefined) {
+      this._reviews = new BDMI.Collections.Reviews();
     }
-    return this.reviews;
+    return this._reviews;
   }
 });

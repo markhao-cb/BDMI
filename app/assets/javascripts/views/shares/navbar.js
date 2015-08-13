@@ -3,14 +3,6 @@ BDMI.Views.Navbar = Backbone.CompositeView.extend({
 
   className: "nav group",
 
-  attributes: {
-    "id" : "page-top",
-
-    "data-spy" : "scroll",
-
-    "data-target" : ".navbar-fixed-top"
-  },
-
   initialize: function(options) {
     this.router = options.router;
     this.listenTo(this.router, 'routes', this.handleNav);

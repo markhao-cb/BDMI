@@ -17,8 +17,9 @@ class User < ActiveRecord::Base
 
   attr_reader :password
 
-  has_many :images, :as => :imageable
+  has_many :images, as: :imageable
   has_many :reviews, foreign_key: :author_id, class_name: :Review
+  has_many :likes, foreign_key: :author_id, class_name: :Like
 
   after_initialize :ensure_session_token
 
