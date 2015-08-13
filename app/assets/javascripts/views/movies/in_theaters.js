@@ -1,5 +1,7 @@
-BDMI.Views.MoviesIndex = Backbone.CompositeView.extend({
-  template: JST['movie/index'],
+BDMI.Views.InTheaters = Backbone.CompositeView.extend({
+  template: JST['movie/in_theaters'],
+
+  className: "row",
 
   initialize: function() {
     this.listenTo(this.collection, 'sync', this.render);
@@ -9,8 +11,8 @@ BDMI.Views.MoviesIndex = Backbone.CompositeView.extend({
   },
 
   addMovieView: function(movie) {
-    var subview = new BDMI.Views.MovieIndexItem({ model: movie });
-    this.addSubview(".movie-index", subview);
+    var subview = new BDMI.Views.InTheatersItem({ model: movie });
+    this.addSubview(".in-theaters", subview);
   },
 
   render: function() {
@@ -21,6 +23,6 @@ BDMI.Views.MoviesIndex = Backbone.CompositeView.extend({
   },
 
   removeMovieView: function(movie) {
-    this.removeModelSubview(".movie-index",movie);
+    this.removeModelSubview(".in-theaters",movie);
   }
 });

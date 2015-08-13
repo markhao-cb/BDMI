@@ -27,11 +27,12 @@
   list-style: none;
 }
 
+#main {
+  margin: 30px;
+}
+
 .main_container {
-  width: 90%;
-  margin: 0 auto;
   display: block;
-  border: 1px solid #000;
 }
 
 #bg {
@@ -53,19 +54,9 @@
 }
 
 #content {
-  float: left;
-  display: block;
-  width: 70%;
-  box-sizing: border-box;
+  width: 100%;
 }
 
-#sidebar {
-  float: left;
-  display: block;
-  width: 30%;
-  box-sizing: border-box;
-  border-left: 1px solid #000;
-}
 
 .group::after {
   content: "";

@@ -32,6 +32,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'bootstrap-sass', '~> 3.3.5'
 
+gem 'font-awesome-sass', '~> 4.3.0'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

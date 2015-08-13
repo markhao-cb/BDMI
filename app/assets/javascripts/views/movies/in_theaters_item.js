@@ -1,7 +1,7 @@
-BDMI.Views.MovieIndexItem = Backbone.CompositeView.extend({
-  template: JST['movie/movie_index_item'],
+BDMI.Views.InTheatersItem = Backbone.CompositeView.extend({
+  template: JST['movie/in_theaters_item'],
 
-  className: "movie_index_item",
+  className: "in_theaters_item",
 
   initialize: function() {
     this.listenTo(this.model, 'sync', this.render);

@@ -1,2 +1,44 @@
-<div id="content"></div>
-<div id="sidebar"></div>
+<!-- Intro Header -->
+<header class="intro"></header>
+<!-- New Section -->
+<section id="new" class="container content-section text-center"></section>
+<!-- Download Section -->
+<section id="rank" class="content-section text-center"></section>
+<!-- Contact Section -->
+<section id="search" class="container content-section text-center"></section>
+<!-- Footer -->
+<footer>
+    <div class="container text-center">
+        <p>Copyright &copy; Your Website 2014</p>
+    </div>
+</footer>
+
+
+<script type="text/javascript">
+
+$(window).scroll(function() {
+  if($(".navbar").length !== 0) {
+    if ($(".navbar").offset().top > 50) {
+        $(".navbar-fixed-top").addClass("top-nav-collapse");
+    } else {
+        $(".navbar-fixed-top").removeClass("top-nav-collapse");
+    }
+  }
+});
+// jQuery for page scrolling feature - requires jQuery Easing plugin
+$(function() {
+    $('a.page-scroll').bind('click', function(event) {
+        var $anchor = $(this);
+        $('html, body').stop().animate({
+            scrollTop: $($anchor.attr('href')).offset().top
+        }, 1500, 'easeInOutExpo');
+        event.preventDefault();
+    });
+});
+
+// Closes the Responsive Menu on Menu Item Click
+$('.navbar-collapse ul li a').click(function() {
+    $('.navbar-toggle:visible').click();
+});
+
+</script>

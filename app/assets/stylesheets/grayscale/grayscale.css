@@ -147,7 +147,10 @@ a:focus {
     padding: 100px 0;
     text-align: center;
     color: #fff;
-    background-image: url(http://i.imgur.com/cFMob33.jpg) no-repeat bottom center scroll;
+    background-image: url("https://photos-3.dropbox.com/t/2/AAANuk3vAkOwKNdZsJ79cF3tbwDuVk4WA8bDRHU45V0fiw/12/455194318/jpeg/32x32/1/_/1/2/intro-bg.jpg/EKS99tYDGBQgBygH/k2pxpbI5vAVJBL8gjdr2cgZLOoCvYWSHj2iRgJYLPEc?size=1024x768&size_mode=2");
+    background-repeat:  no-repeat;
+    background-position: center bottom;
+    background-attachment: scroll;
     background-color: #000;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -156,11 +159,13 @@ a:focus {
 }
 
 .intro .intro-body {
+    margin-top: 90px;
     display: table-cell;
     vertical-align: middle;
 }
 
 .intro .intro-body .brand-heading {
+    margin-top: 120px;
     font-size: 40px;
 }
 
@@ -261,11 +266,14 @@ a:focus {
     padding-top: 100px;
 }
 
-.download-section {
+.rank-section {
     width: 100%;
     padding: 50px 0;
     color: #fff;
-    background-image: url(https://photos-4.dropbox.com/t/2/AAAuKyo7_8Ik-obtYgc0SlWKaYgEU-4Cyr8r2BP-jTMc1A/12/455194318/jpeg/32x32/1/_/1/2/downloads-bg.jpg/EKS99tYDGBQgBygH/Xixq6NXQVKvxNx2L5JoKDWgtwjyytzg1AluzPuxCiJ4?size=1024x768&size_mode=2) no-repeat center center scroll;
+    background-image: url("https://photos-4.dropbox.com/t/2/AAAuKyo7_8Ik-obtYgc0SlWKaYgEU-4Cyr8r2BP-jTMc1A/12/455194318/jpeg/32x32/1/_/1/2/downloads-bg.jpg/EKS99tYDGBQgBygH/Xixq6NXQVKvxNx2L5JoKDWgtwjyytzg1AluzPuxCiJ4?size=1024x768&size_mode=2");
+    background-repeat:  no-repeat;
+    background-position: center center;
+    background-attachment: scroll;
     background-color: #000;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -284,7 +292,7 @@ a:focus {
         padding-top: 250px;
     }
 
-    .download-section {
+    .rank-section {
         padding: 100px 0;
     }
 
