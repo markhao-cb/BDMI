@@ -1,7 +1,9 @@
 BDMI.Views.Movie = Backbone.CompositeView.extend({
-  template: JST['movies/show'],
+  template: JST['movie/show'],
 
   render: function() {
-    
+    var content = this.template();
+    this.$el.html(content);
+    return this;
   }
 });

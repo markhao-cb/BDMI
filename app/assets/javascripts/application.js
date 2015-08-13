@@ -11,12 +11,14 @@
 // about supported directives.
 //
 //= require jquery
-//= require bootstrap-sprockets
 //= require jquery_ujs
+//= require bootstrap-sprockets
 //= require underscore
 //= require backbone
 //= require_tree ./utils
 //= require bdmi
+//= require jquery.easing.min
+//= require_tree ./grayscale
 //= require_tree ../templates
 //= require_tree ./models
 //= require_tree ./collections

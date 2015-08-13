@@ -1,5 +1,5 @@
 BDMI.Views.Navbar = Backbone.CompositeView.extend({
-  template: JST['shares/navbar'],
+  template: JST['shares/new_nav'],
 
   initialize: function(options) {
     this.router = options.router;
