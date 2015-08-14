@@ -18,8 +18,8 @@ end
 
 if display_reviews
   json.reviews do
-    json.array! movie.reviews do |review|
-      json.partial! 'api/movies/review', review: review
+    json.array! movie.reviews.includes(:author).includes(:likes) do |review|
+      json.partial! 'api/reviews/review', review: review
     end
   end
 end

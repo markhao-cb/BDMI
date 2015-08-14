@@ -20,7 +20,6 @@ BDMI.Views.Main = Backbone.CompositeView.extend({
         this.addSubview('.intro',subview);
       }.bind(this)
     });
-    // var introMovie = this.introMovies.
   },
 
   addMovieInTheatersView: function() {
