@@ -16,4 +16,4 @@
 
 movie = Movie.create!(title:"Mission Impossible Rogue Nation", yr: 2015, score:7.8, votes: 1534, director_id: 1)
 image = movie.images.create!(image_url:"http://redcarpetrefs.com/wp-content/uploads/2015/07/zz6.jpg")
-review = movie.reviews.create(title:"It;s just Amazing!", body: "Tom Cruise!!!", author_id:1, grade:10)
+review = movie.reviews.create!(title:"It's just Amazing!", body: "Tom Cruise!!!", author_id:1, grade:10)

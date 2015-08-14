@@ -1,16 +1,14 @@
 BDMI.Views.Review = Backbone.View.extend({
   template: JST['review'],
 
-  initialize: function(options) {
-    this.newestReview = options.newestReview;
-    this.hottestReview = options.hottestReview;
+  className: "review-section-item",
+
+  initialize: function() {
+    this.listenTo(this.model, 'sync', this.render);
   },
 
   render: function() {
-    var content = this.template({
-      newestReview: this.newestReview,
-      hottestReview: this.hottestReview
-    });
+    var content = this.template({ review: this.model });
     this.$el.html(content);
     return this;
   }

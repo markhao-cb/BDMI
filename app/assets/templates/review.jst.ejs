@@ -1,1 +1,38 @@
-<h1>REVIEWS HERE</h1>
+<div class="review review-title">
+  <h4 class="small-review-title"><%= review.escape("title") %></h4>
+</div>
+<div class="review review-grade rating">
+  <h4 class="small-review-grade"><%= review.escape("grade") %></h4>
+</div>
+<div class="review review-body">
+  <p class="small-review-body"><%= review.escape("body") %></p>
+</div>
+<div class="review review-author">
+  <label class="small-review-author">--- <%= escape(review.attributes.author_name) %></label>
+</div>
+
+<script type="text/javascript">
+  $(function() {
+    debugger
+    if(typeof review !== "undefined") {
+      debugger
+      $(".small-review-grade").empty();
+      var grade = review.attributes.grade / 2;
+      // var grade = 5;
+      var star = Math.max(0, (Math.min(5, grade)));
+      var blank = 5 - star;
+      while (star > 0) {
+        var $star = $("<span></span>");
+        $star.text("★");
+        $(".small-review-grade").append($star);
+        star--;
+      }
+      while (blank > 0) {
+        var $blank = $("<span></span>");
+        $blank.text("☆");
+        $(".small-review-grade").append($blank);
+        blank--;
+      }
+    }
+  });
+</script>

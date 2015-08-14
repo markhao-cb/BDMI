@@ -1,10 +1,17 @@
 BDMI.Views.Intro = Backbone.CompositeView.extend({
   template: JST['intro'],
 
-  className: "intro-body",
+  className: "intro-body group",
 
   initialize: function() {
     this.image = this.model._images.first();
+    if(this.model._reviews !== undefined) {
+        this.generateReviews();
+      }
+    this.listenTo(this.model, 'sync', this.render);
+  },
+
+  generateReviews: function() {
     this.hottestReview = this.newestReview = this.model._reviews.first();
     this.model._reviews.each(function(review) {
       if(review.attributes.updated_at > this.newestReview.attributes.updated_at) {
@@ -13,19 +20,30 @@ BDMI.Views.Intro = Backbone.CompositeView.extend({
         this.hottestReview = review;
       }
     }.bind(this));
-    this.addReviewView({ newestReview:this.newestReview, hottestReview:this.hottestReview});
-    this.listenTo(this.model, 'sync', this.render);
+    this.addNewestReviewView(this.newestReview);
+    this.addHottestReviewView(this.hottestReview);
   },
 
-  addReviewView: function(review) {
+  addNewestReviewView: function(review) {
     var subview = new BDMI.Views.Review({ model: review });
-    this.addSubview("#review-section",subview);
+    this.addSubview("#new-review",subview);
+  },
+
+  addHottestReviewView: function(review) {
+    var subview = new BDMI.Views.Review({ model: review });
+    this.addSubview("#hot-review",subview);
   },
 
   render: function() {
     var content = this.template({ movie: this.model, movie_image: this.image });
     this.$el.html(content);
-    this.attachSubviews();
+    if(this.model._reviews === undefined) {
+      var $noReview = $("<p>");
+      $noReview.text('SORRY, NO REVIEW YET.').css('margin-top', '210').css('font-size', '36px');
+      $("#review-section").append($noReview);
+    } else {
+      this.attachSubviews();
+    }
     return this;
   }
 });
