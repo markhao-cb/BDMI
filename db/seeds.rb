@@ -17,3 +17,8 @@
 movie = Movie.create!(title:"Mission Impossible Rogue Nation", yr: 2015, score:7.8, votes: 1534, director_id: 1)
 image = movie.images.create!(image_url:"http://redcarpetrefs.com/wp-content/uploads/2015/07/zz6.jpg")
 review = movie.reviews.create!(title:"It's just Amazing!", body: "Tom Cruise!!!", author_id:1, grade:10)
+
+
+movie1 = Movie.create!(title:"Ted 2", yr: 2014, score:6, votes: 333, director_id: 1)
+image1 = movie1.images.create!(image_url:"http://redcarpetrefs.com/wp-content/uploads/2015/07/zz6.jpg")
+review1 = movie1.reviews.create!(title:"This review is for Ted 2", body: "Laasdfnaoekqo qoenqvkeq oqerjn kjnqwerkj oqwernqvjqe jqwejqwvqe qweaafdqienqer qewasdkj.", author_id:1, grade:8)

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :reviews, only: :index
     end
     get '/intro_movies_index', to: 'movies#intro_movies_index'
+    get '/in_theaters_movies', to: 'movies#in_theaters_movies_index'
     resources :reviews, only: [:create, :update, :destroy]
   end
 end

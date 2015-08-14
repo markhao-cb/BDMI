@@ -7,7 +7,6 @@
   float: left;
   display: block;
   min-height: 200px;
-  border: 1px solid #fff;
   padding: 20px 20px;
 }
 
@@ -16,6 +15,10 @@
   float: left;
   padding: 5px 10px;
   text-align: left;
+}
+
+.review-tag {
+  border-bottom: 1px solid #fff;
 }
 
 .review-grade {

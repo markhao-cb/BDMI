@@ -10,29 +10,3 @@
 <div class="review review-author">
   <label class="small-review-author">--- <%= escape(review.attributes.author_name) %></label>
 </div>
-
-<script type="text/javascript">
-  $(function() {
-    debugger
-    if(typeof review !== "undefined") {
-      debugger
-      $(".small-review-grade").empty();
-      var grade = review.attributes.grade / 2;
-      // var grade = 5;
-      var star = Math.max(0, (Math.min(5, grade)));
-      var blank = 5 - star;
-      while (star > 0) {
-        var $star = $("<span></span>");
-        $star.text("★");
-        $(".small-review-grade").append($star);
-        star--;
-      }
-      while (blank > 0) {
-        var $blank = $("<span></span>");
-        $blank.text("☆");
-        $(".small-review-grade").append($blank);
-        blank--;
-      }
-    }
-  });
-</script>

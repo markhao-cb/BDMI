@@ -8,6 +8,7 @@ BDMI.Views.InTheatersItem = Backbone.CompositeView.extend({
   },
 
   render: function() {
+    debugger
     var content = this.template({ movie: this.model });
     this.$el.html(content);
     return this;
