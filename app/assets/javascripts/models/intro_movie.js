@@ -4,7 +4,7 @@ BDMI.Models.IntroMovie = Backbone.Model.extend({
   parse: function(payload) {
     if(payload.images) {
       this.images().set(payload.images);
-      delete payload.toys;
+      delete payload.images;
     }
     if(payload.reviews) {
       this.reviews().set(payload.reviews);
