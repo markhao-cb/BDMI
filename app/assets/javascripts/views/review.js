@@ -14,10 +14,6 @@ BDMI.Views.Review = Backbone.View.extend({
     return this;
   },
 
-  onRender: function() {
-    this.generateStars();
-  },
-
   generateStars: function() {
         this.$('.small-review-grade').empty();
         var grade = this.model.attributes.grade / 2;

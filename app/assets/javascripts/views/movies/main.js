@@ -43,6 +43,20 @@ BDMI.Views.Main = Backbone.CompositeView.extend({
     var content = this.template();
     this.$el.html(content);
     this.attachSubviews();
+    this.navScroll();
     return this;
+  },
+
+  navScroll: function() {
+    $(window).scroll(function() {
+      if($(".navbar").length !== 0) {
+        if ($(".navbar").offset().top > 50) {
+            $(".navbar-fixed-top").addClass("top-nav-collapse");
+        } else {
+            $(".navbar-fixed-top").removeClass("top-nav-collapse");
+        }
+      }
+    });
   }
+
 });

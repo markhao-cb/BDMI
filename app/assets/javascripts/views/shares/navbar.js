@@ -11,11 +11,19 @@ BDMI.Views.Navbar = Backbone.CompositeView.extend({
   render: function() {
     var content = this.template();
     this.$el.html(content);
+    this.onRender();
     return this;
   },
 
   handleNav: function(routeName, params) {
     $(".active").removeClass('active');
     $("." + routeName).addClass('active');
+  },
+
+  onRender: function() {
+    $('.navbar-collapse ul li a').click(function() {
+        $('.navbar-toggle:visible').click(function() {
+        });
+    });
   }
 });

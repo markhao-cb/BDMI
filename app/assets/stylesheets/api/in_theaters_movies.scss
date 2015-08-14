@@ -6,8 +6,17 @@
   display: block;
   float: left;
   padding: 10px 20px;
+  width: 20%;
 }
 
-.in_theaters_item > image {
+.small_image {
+  height: 148px;
+  width: 100px;
+}
 
+.small_title {
+}
+
+#movie_item {
+  padding-top: 20px;
 }

@@ -10,6 +10,10 @@ BDMI.Models.InTheatersMovie = Backbone.Model.extend({
       this.reviews().set(payload.reviews);
       delete payload.reviews;
     }
+    if(payload.posts) {
+      this.posts().set(payload.posts);
+      delete payload.posts;
+    }
 
     return payload;
   },
@@ -26,5 +30,12 @@ BDMI.Models.InTheatersMovie = Backbone.Model.extend({
       this._reviews = new BDMI.Collections.Reviews();
     }
     return this._reviews;
+  },
+
+  posts: function() {
+    if(this._posts === undefined) {
+      this._posts = new BDMI.Collections.MoviePosts();
+    }
+    return this._posts;
   }
 });

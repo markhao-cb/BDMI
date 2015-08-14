@@ -25,6 +25,9 @@
                 <li>
                   <a class="page-scroll" href="#search">SEARCH</a>
                 </li>
+                <li class="hidden">
+                    <a href="#footer"></a>
+                </li>
                 <% if (BDMI.CURRENT_USER) { %>
                   <li class="dropdown" id="login-section">
                   <% if (BDMI.CURRENT_USER) { %>
@@ -52,11 +55,3 @@
     </div>
     <!-- /.container -->
 </nav>
-
-<script type="text/javascript">
-  $('.navbar-collapse ul li a').click(function() {
-      $('.navbar-toggle:visible').click(function() {
-        debugger
-      });
-  });
-</script>

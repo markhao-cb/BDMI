@@ -1,11 +1,9 @@
-<div id="movie_image">
-  <img src="<%= movie.escape("img_url") %>" class="small_image"></img>
+<div id="movie_item" class="group">
+  <img src="<%= post.escape("post_url") %>" class="small_image"></img>
 </div>
-<div id="movie_title">
-  <a href="#/movies/<%=movie.get("id")%>" class="small_title">
+<div id="movie_item" class="group">
+  <label class="small_title">
     <%= movie.escape("title") %>
-  </a>
-  <span id="movie_score">
-    <%= movie.escape("score") %>
-  </span>
+  </label>
 </div>
+  <div class="small_movie_score"></div>
