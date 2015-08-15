@@ -17,7 +17,6 @@
 //= require backbone
 //= require_tree ./utils
 //= require bdmi
-//= require_tree ./api
 //= require_tree ../templates
 //= require_tree ./models
 //= require_tree ./collections
@@ -25,3 +24,4 @@
 //= require_tree ./routers
 //= require_tree .
 //= require_tree ./grayscale
+//= require_tree ./api

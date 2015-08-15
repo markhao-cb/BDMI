@@ -1,7 +1,8 @@
 BDMI.Routers.Router = Backbone.Router.extend({
   routes: {
     "": "index",
-    "movies/:id": "show"
+    "movies/:id": "show",
+    "form": "review_form"
   },
 
   initialize: function(options) {
@@ -18,6 +19,11 @@ BDMI.Routers.Router = Backbone.Router.extend({
     var movie = this.movies.getOrFetch(id);
     var showView = new BDMI.Views.Movie({model: movie});
     this.swap(showView);
+  },
+
+  review_form: function() {
+    var formView = new BDMI.Views.ReviewForm();
+    this.swap(formView);
   },
 
   swap: function(view) {
