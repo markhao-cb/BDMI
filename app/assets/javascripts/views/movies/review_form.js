@@ -1,7 +1,7 @@
 BDMI.Views.ReviewForm = Backbone.View.extend({
   template: JST['review_form'],
 
-  // className: "form",
+  className: "review-form group",
 
   render: function() {
     var content = this.template();
