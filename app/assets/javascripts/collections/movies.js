@@ -19,5 +19,5 @@ BDMI.Collections.Movies = Backbone.Collection.extend({
     }
     return movie;
   }
-  
+
 });

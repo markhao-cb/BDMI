@@ -4,7 +4,16 @@ BDMI.Views.Movie = Backbone.CompositeView.extend({
   className: "movie-show container group",
 
   initialize: function() {
+    this.listenTo(this.model, 'sync', this.generateSubviews);
     this.listenTo(this.model, 'sync', this.render);
+    // this.addReviewView();
+  },
+
+  generateSubviews: function() {
+    // this.addInfoView();
+    // this.addPosterView();
+    // this.addActorView();
+    this.addReviewView();
   },
 
   addInfoView: function() {
@@ -23,13 +32,14 @@ BDMI.Views.Movie = Backbone.CompositeView.extend({
   },
 
   addReviewView: function() {
-    var subview = new BDMI.Views.MovieReview({ model: this.model });
+    var subview = new BDMI.Views.MovieReviews({ collection: this.model.reviews() });
     this.addSubview("#review-section", subview);
   },
 
   render: function() {
     var content = this.template({ movie: this.model });
     this.$el.html(content);
+    this.attachSubviews();
     return this;
   }
 });

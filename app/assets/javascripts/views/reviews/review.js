@@ -1,5 +1,5 @@
 BDMI.Views.Review = Backbone.View.extend({
-  template: JST['review'],
+  template: JST['reviews/review'],
 
   className: "review-section-item",
 

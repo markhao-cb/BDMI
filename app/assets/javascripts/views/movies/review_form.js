@@ -1,5 +1,5 @@
 BDMI.Views.ReviewForm = Backbone.View.extend({
-  template: JST['review_form'],
+  template: JST['reviews/review_form'],
 
   className: "review-form group",
 
@@ -7,12 +7,14 @@ BDMI.Views.ReviewForm = Backbone.View.extend({
     "click #create-btn": "postReview",
     'click .my-background': 'handleRemove',
     'click .close-form': 'removeBtn',
-    'click #cancel-btn': 'saveForLater'
+    'click #cancel-btn': 'removeBtn'
   },
 
   initialize: function(options) {
      $(document).on('keyup', this.handleKey.bind(this));
      this.model = new BDMI.Models.Review();
+     debugger
+     //todo pass movie in as an option
      this.movie = options.movie;
   },
 
@@ -74,13 +76,13 @@ BDMI.Views.ReviewForm = Backbone.View.extend({
     });
   },
 
+  // TODO save data for later
   saveForLater: function(event) {
     event.preventDefault();
     var formdata = $("#review-form").serializeJSON().review;
     this.model.set(formdata);
     this.$el.addClass('animated zoomOutDown');
     this.$el.one('webkitAnimationEnd', function() {
-      // TODO save data
       this.remove();
     }.bind(this));
   }
