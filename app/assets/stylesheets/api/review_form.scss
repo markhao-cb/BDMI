@@ -1,9 +1,25 @@
-.review-form {
-  width: 60%;
-  margin: 0 auto;
-  background-color: rgba(64, 67, 72, 0.62);
+.my-background {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.43);
+  z-index: 10;
+}
+
+.my-content {
+  z-index: 11;
+  position: absolute;
+  top: 25%;
+  left: 17%;
+  background: #000;
   border: 1px solid;
   border-radius: 10px;
+}
+
+.review-form {
+
 }
 
 .review-item {
@@ -15,6 +31,29 @@
 
 .review-item.title {
   margin-top: 20px;
+}
+
+.close-form {
+  border: 1px solid;
+  border-radius: 5px;
+  background: #000;
+  height: 24px;
+  width: 24px;
+  margin-right: 20px;
+  padding: 0 0;
+  float: right;
+}
+
+.form-title {
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 0;
+  text-align: center;
+  padding-left: 60px;
+}
+
+.close-form:hover {
+  color: rgb(255,70,70);
 }
 
 .review-item .input {

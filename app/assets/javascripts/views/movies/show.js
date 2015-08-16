@@ -22,8 +22,8 @@ BDMI.Views.Movie = Backbone.CompositeView.extend({
     this.addSubview("#actor-section", subview);
   },
 
-  addRevieView: function() {
-    var subview = new BDMI.Views.Review({ model: this.model });
+  addReviewView: function() {
+    var subview = new BDMI.Views.MovieReview({ model: this.model });
     this.addSubview("#review-section", subview);
   },
 
