@@ -7,5 +7,7 @@ class Movie < ActiveRecord::Base
   has_many :posts
   has_many :castings
   has_many :actors, through: :castings
+  has_many :taggings
+  has_many :genres, through: :taggings
   belongs_to :director, foreign_key: :director_id, class_name: :Actor
 end

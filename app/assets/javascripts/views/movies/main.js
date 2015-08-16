@@ -16,6 +16,7 @@ BDMI.Views.Main = Backbone.CompositeView.extend({
     this.introMovies.fetch({
       success: function() {
         var introMovie = this.introMovies.sample();
+        debugger
         var subview = new BDMI.Views.Intro({ model: introMovie });
         this.addSubview('.intro',subview);
       }.bind(this)

@@ -1,21 +1,21 @@
 class Api::MoviesController < ApplicationController
   def index
-    @movies = Movie.all
+    @movies = Movie.limit(20)
     render json: @movies
   end
 
   def show
     @movie = Movie.find(params[:id])
-    render json: @movie
+    render 'show'
   end
 
   def intro_movies_index
-    @movies = Movie.where('yr = ? or score > ?', 2015, 7)
+    @movies = Movie.where('yr = ? and score >= ?', 2015, 7)
     render 'movie_index'
   end
 
   def in_theaters_movies_index
-    @movies = Movie.where('created_at > ?', 30.days.ago)
+    @movies = Movie.where('yr > ?', 2000)
     render 'movie_index'
   end
 end

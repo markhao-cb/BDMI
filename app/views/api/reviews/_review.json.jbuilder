@@ -1,4 +1,3 @@
-
 json.extract!(
   review,
   :title,

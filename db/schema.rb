@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150815073719) do
+ActiveRecord::Schema.define(version: 20150815172604) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,12 @@ ActiveRecord::Schema.define(version: 20150815073719) do
 
   add_index "castings", ["actor_id"], name: "index_castings_on_actor_id", using: :btree
   add_index "castings", ["movie_id"], name: "index_castings_on_movie_id", using: :btree
+
+  create_table "genres", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "images", force: :cascade do |t|
     t.string   "image_url",      null: false
@@ -87,6 +93,16 @@ ActiveRecord::Schema.define(version: 20150815073719) do
 
   add_index "reviews", ["author_id"], name: "index_reviews_on_author_id", using: :btree
   add_index "reviews", ["movie_id"], name: "index_reviews_on_movie_id", using: :btree
+
+  create_table "taggings", force: :cascade do |t|
+    t.integer  "movie_id",   null: false
+    t.integer  "genre_id",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "taggings", ["genre_id"], name: "index_taggings_on_genre_id", using: :btree
+  add_index "taggings", ["movie_id"], name: "index_taggings_on_movie_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",           null: false

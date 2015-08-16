@@ -4,16 +4,17 @@ BDMI.Views.Intro = Backbone.CompositeView.extend({
   className: "intro-body group",
 
   initialize: function() {
-    this.image = this.model._images.first();
-    if(this.model._reviews !== undefined) {
+    debugger
+    this.image = this.model.images().first();
+    if(this.model.reviews().length !== 0) {
         this.generateReviews();
       }
     this.listenTo(this.model, 'sync', this.render);
   },
 
   generateReviews: function() {
-    this.hottestReview = this.newestReview = this.model._reviews.first();
-    this.model._reviews.each(function(review) {
+    this.hottestReview = this.newestReview = this.model.reviews().first();
+    this.model.reviews().each(function(review) {
       if(review.attributes.updated_at > this.newestReview.attributes.updated_at) {
         this.newestReview = review;
       } else if(review.attributes.num_likes > this.hottestReview.attributes.num_likes) {
@@ -37,10 +38,10 @@ BDMI.Views.Intro = Backbone.CompositeView.extend({
   render: function() {
     var content = this.template({ movie: this.model, movie_image: this.image });
     this.$el.html(content);
-    if(this.model._reviews === undefined) {
+    if(this.model.reviews().length === 0) {
       var $noReview = $("<p>");
-      $noReview.text('SORRY, NO REVIEW YET.').css('margin-top', '210').css('font-size', '36px');
-      $("#review-section").append($noReview);
+      $noReview.text('SORRY, NO REVIEW YET.').css('margin-top', '210px').css('font-size', '24px');
+      $("#review-section").html($noReview);
     } else {
       this.attachSubviews();
     }
