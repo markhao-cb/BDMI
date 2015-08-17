@@ -1,1 +1,1 @@
-json.extract!(image, :image_url)
+json.extract!(image, :id, :image_url)

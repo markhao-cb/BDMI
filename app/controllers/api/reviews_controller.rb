@@ -6,17 +6,17 @@ class Api::ReviewsController < ApplicationController
     if movie_id && user_id
       @reviews = Review.where('movie_id = ? and author_id = ?', movie_id, user_id)
                        .limit(4)
-                       .offset(( page.to_i - 1) * 10 )
+                       .offset(( page.to_i - 1) * 4 )
                        .includes(:author)
     elsif movie_id
       @reviews = Review.where('movie_id = ?', movie_id)
                        .limit(4)
-                       .offset(( page.to_i - 1) * 10 )
+                       .offset(( page.to_i - 1) * 4 )
                        .includes(:author)
     elsif user_id
       @reviews = Review.where('author_id = ?', user_id)
                        .limit(4)
-                       .offset(( page.to_i - 1) * 10 )
+                       .offset(( page.to_i - 1) * 4 )
                        .includes(:author)
     end
     render "api/reviews/index"
