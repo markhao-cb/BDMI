@@ -1,7 +1,7 @@
 BDMI.Views.Search = Backbone.CompositeView.extend({
   template: JST['movie/search'],
 
-  className: "row",
+  className: "row search-section",
 
   render: function() {
     var content = this.template();

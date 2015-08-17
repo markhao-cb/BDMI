@@ -7,6 +7,10 @@
 <div class="review review-body">
   <p class="small-review-body"><%= review.escape("body") %></p>
 </div>
+<div class="review review-time">
+  <label>created at: <%= timeAgo %>
+  </label>
+</div>
 <div class="review review-author">
   <label class="small-review-author">--- <%= escape(review.attributes.author_name) %></label>
 </div>

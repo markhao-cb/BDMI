@@ -9,8 +9,33 @@
   height: 490px;
 }
 
-.intro-title {
+.intro {
+  padding-top: 0;
+  width:80%;
+  border-radius: 20%;
+  overflow: hidden;
+  margin: 0 auto;
+  padding-bottom: 10px;
+}
 
+.intro-content {
+  padding-top: 100px;
+}
+
+.intro-body {
+  padding-top: 0;
+}
+
+.content-section {
+    margin-bottom: 50px;
+}
+
+.search-section {
+  margin-top: 10%;
+}
+
+.in-theaters-section {
+  margin-top: 10%;
 }
 
 .carousel-image {

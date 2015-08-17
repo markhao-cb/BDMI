@@ -46,7 +46,6 @@ BDMI.Views.InTheatersItem = Backbone.CompositeView.extend({
   generateStars: function() {
         this.$('.small_movie_score').empty();
         var grade = Math.floor(this.model.attributes.score / 2);
-        // var grade = 5;
         var star = Math.max(0, (Math.min(5, grade)));
         var blank = 5 - star;
         while (star > 0) {

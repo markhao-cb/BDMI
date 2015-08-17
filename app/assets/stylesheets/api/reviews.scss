@@ -8,7 +8,18 @@
   display: block;
   min-height: 200px;
   padding: 20px 20px;
+  background: rgba(0, 0, 0, 0.71);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 10px;
 }
+
+.section-item {
+  float: left;
+  display: block;
+}
+
+
 
 .review {
   display: block;
@@ -50,7 +61,21 @@
   font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
+.review-button {
+  margin-left:25%;
+}
+
 .review-button:hover {
+  background: #fff;
+  color: #333;
+}
+
+.load-more {
+  color: #fff;
+  margin-left: 20%;
+}
+
+.load-more:hover {
   background: #fff;
   color: #333;
 }

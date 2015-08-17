@@ -1,7 +1,7 @@
 BDMI.Views.InTheaters = Backbone.CompositeView.extend({
   template: JST['movie/in_theaters'],
 
-  className: "row",
+  className: "in-theaters-section",
 
   initialize: function() {
     this.page = 1;

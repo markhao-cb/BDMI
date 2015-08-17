@@ -7,8 +7,15 @@ BDMI.Views.Review = Backbone.View.extend({
     this.listenTo(this.model, 'sync', this.render);
   },
 
+  getTimeAgo: function(){
+    return $.timeago(this.model.get('created_at'));
+  },
+
   render: function() {
-    var content = this.template({ review: this.model });
+    var content = this.template({
+      review: this.model,
+      timeAgo: this.getTimeAgo()
+    });
     this.$el.html(content);
     this.generateStars();
     return this;

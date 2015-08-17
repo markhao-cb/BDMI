@@ -62,7 +62,7 @@ BDMI.Views.MovieReviews = Backbone.CompositeView.extend({
       success: function(resp) {
         if (resp.length < 4) {
           alert("No more reviews.");
-          this.flashAlert();
+          // this.flashAlert();
         }
       },
       error: function(a,b,c) {

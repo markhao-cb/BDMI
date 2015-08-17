@@ -13,9 +13,9 @@
         <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
             <ul class="nav navbar-nav">
                 <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                <li class="hidden">
+                <!-- <li class="hidden">
                     <a href="#page-top"></a>
-                </li>
+                </li> -->
                 <li>
                   <a class="page-scroll" href="#hot">WHAT'S HOT</a>
                 </li>
@@ -23,10 +23,10 @@
                   <a class="page-scroll" href="#new">IN THEATERS</a>
                 </li>
                 <li>
-                  <a class="page-scroll" href="#rank">RANK</a>
+                  <a class="page-scroll" href="#search">SEARCH</a>
                 </li>
                 <li>
-                  <a class="page-scroll" href="#search">SEARCH</a>
+                  <a class="page-scroll" href="#rank">RANK</a>
                 </li>
                 <li class="hidden">
                     <a href="#footer"></a>
@@ -39,11 +39,11 @@
                     <a  class="page-scroll" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">WELCOME, <%= BDMI.CURRENT_USER.email %><span class="caret"></span></a>
                   <% } %>
                   <ul class="dropdown-menu">
-                    <li><a href="#"> NOTIFICATIONS </a></li>
+                    <!-- <li><a href="#"> NOTIFICATIONS </a></li>
                     <li><a href="#"> MY WATCHING LIST </a></li>
                     <li><a href="#"> MY REVIEWS </a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#"> SETTING </a></li>
+                    <li><a href="#"> SETTING </a></li> -->
                     <li><a href="/session" data-method="delete"> LOG OUT </a></li>
                   </ul>
                 </li>

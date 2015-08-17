@@ -5,5 +5,50 @@
 .section-title {
   margin: 10px 10px;
   border-bottom: 1px solid;
-  
+}
+
+.show-section {
+  min-height: 500px;
+}
+
+#movie-info-list {
+  list-style-type: none;
+}
+
+.movie-info-item {
+  padding: 10px 20px;
+}
+
+.info-title {
+  border-bottom: 1px solid;
+  width: 15%;
+}
+
+.detail-item {
+  float: left;
+  display: block;
+}
+.info-subitem {
+  padding-left: 20px;
+}
+.small-movie-star {
+  margin-bottom: 25px;
+}
+
+.movie-list {
+  width: 60%;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin-right: 10%;
+  border-radius: 5px;
+  padding-top: 30px;
+}
+
+.movie-poster {
+  width: 30%;
+  margin-top: 5%;
+}
+
+.large_image {
+  max-height: 500px;
+  width: auto;
 }

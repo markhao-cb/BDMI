@@ -10,20 +10,20 @@ BDMI.Views.Movie = Backbone.CompositeView.extend({
   },
 
   generateSubviews: function() {
-    // this.addInfoView();
+    this.addInfoView();
     // this.addPosterView();
     // this.addActorView();
     this.addReviewView();
   },
 
-  addInfoView: function() {
-    var subview = new BDMI.Views.Info({ model: this.model });
-    this.addSubview("#info-section", subview);
-  },
+  // addPosterView: function() {
+  //   var subview = new BDMI.Views.Poster({ model: this.model });
+  //   this.addSubview("#poster-section", subview);
+  // },
 
-  addPosterView: function() {
-    var subview = new BDMI.Views.Poster({ model: this.model });
-    this.addSubview("#poster-section", subview);
+  addInfoView: function() {
+    var subview = new BDMI.Views.InfoView({ model: this.model });
+    this.addSubview("#info-section", subview);
   },
 
   addActorView: function() {

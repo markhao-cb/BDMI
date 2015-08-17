@@ -10,4 +10,10 @@ class Movie < ActiveRecord::Base
   has_many :taggings
   has_many :genres, through: :taggings
   belongs_to :director, foreign_key: :director_id, class_name: :Actor
+
+  def update_info(score)
+    all_scores = self.score * self.votes + score
+    self.score = all_scores / (self.votes + 1)
+    self.votes += 1
+  end
 end

@@ -15,6 +15,7 @@
 //= require bootstrap-sprockets
 //= require underscore
 //= require backbone
+//= require time_ago
 //= require_tree ./utils
 //= require bdmi
 //= require_tree ../templates
@@ -23,5 +24,5 @@
 //= require_tree ./views
 //= require_tree ./routers
 //= require_tree .
-//= require_tree ./grayscale
 //= require_tree ./api
+//= require_tree ./grayscale

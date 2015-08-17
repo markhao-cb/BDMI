@@ -8,16 +8,19 @@ class Api::ReviewsController < ApplicationController
                        .limit(4)
                        .offset(( page.to_i - 1) * 4 )
                        .includes(:author)
+                       .order(updated_at: :desc)
     elsif movie_id
       @reviews = Review.where('movie_id = ?', movie_id)
                        .limit(4)
                        .offset(( page.to_i - 1) * 4 )
                        .includes(:author)
+                       .order(updated_at: :desc)
     elsif user_id
       @reviews = Review.where('author_id = ?', user_id)
                        .limit(4)
                        .offset(( page.to_i - 1) * 4 )
                        .includes(:author)
+                       .order(updated_at: :desc)
     end
     render "api/reviews/index"
   end
@@ -25,6 +28,9 @@ class Api::ReviewsController < ApplicationController
   def create
     @review = current_user.reviews.new(review_params)
     if @review.save
+      movie = Movie.find(@review.movie_id)
+      movie.update_score_and_num_of_votes(@review.grade)
+      movie.update()
       render json: @review
     else
       render json: { error: @review.errors.full_messages }, status: 422
