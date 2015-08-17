@@ -10,10 +10,18 @@ BDMI.Views.MovieReviews = Backbone.CompositeView.extend({
   },
 
   initialize: function(options) {
+    this.page = 1;
+    this.movie = options.movie;
+    this.collection.fetch({
+      data: {
+        page: this.page,
+        movie_id: this.movie.id
+      },
+      processData: true
+    });
     this.listenTo(this.collection, 'add', this.addReviewView);
     this.listenTo(this.collection, 'sync', this.render);
     this.collection.each(this.addReviewView.bind(this));
-    this.movie = options.movie;
   },
 
   addReviewView: function(review) {

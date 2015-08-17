@@ -24,7 +24,6 @@ BDMI.Views.Main = Backbone.CompositeView.extend({
 
   addMovieInTheatersView: function() {
     var movies = new BDMI.Collections.InTheatersMovies();
-    movies.fetch();
     var subview = new BDMI.Views.InTheaters({ collection: movies });
     this.addSubview('#new', subview);
   },

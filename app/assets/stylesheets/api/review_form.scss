@@ -81,6 +81,7 @@
 .large-input {
   resize: none;
   height: 100px;
+  overflow-y: scroll;
 }
 
 .review-item.rate {

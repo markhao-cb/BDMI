@@ -4,6 +4,11 @@ BDMI.Views.InTheaters = Backbone.CompositeView.extend({
   className: "row",
 
   initialize: function() {
+    this.page = 1;
+    this.collection.fetch({
+      data: { page: this.page },
+      processData: true
+    });
     this.listenTo(this.collection, 'sync', this.render);
     this.listenTo(this.collection, 'add', this.addMovieView);
     this.collection.each(this.addMovieView.bind(this));

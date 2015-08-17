@@ -1,6 +1,7 @@
 class Api::MoviesController < ApplicationController
   def index
-    @movies = Movie.limit(20)
+    page = params[:page]|| 1
+    @movies = Movie.limit(10).offset((page.to_i  - 1) * 10)
     render json: @movies
   end
 
@@ -10,12 +11,13 @@ class Api::MoviesController < ApplicationController
   end
 
   def intro_movies_index
-    @movies = Movie.where('yr = ? and score >= ?', 2015, 7)
+    @movies = Movie.where('yr = ? and score >= ?', 2015, 7).limit(10)
     render 'movie_index'
   end
 
   def in_theaters_movies_index
-    @movies = Movie.where('yr > ?', 2000)
+    page = params[:page] || 1
+    @movies = Movie.where('yr = ?', 2015).limit(10).offset((page.to_i  - 1) * 10)
     render 'movie_index'
   end
 end
