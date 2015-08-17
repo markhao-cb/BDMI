@@ -44,6 +44,9 @@
 											<div class="col-sm-6 col-sm-offset-3">
 												<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn-login" value="Log In">
 											</div>
+                      <div class="col-sm-6 col-sm-offset-3">
+												<input type="submit" name="guest-submit" id="guest-submit" tabindex="4" class="form-control btn-register" value="Guest Login">
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
@@ -102,5 +105,10 @@
   		$(this).addClass('active');
   		e.preventDefault();
   	});
+    $('#guest-submit').click(function(e) {
+      $('#username').val("guest");
+      $('#password').val("123456");
+    });
+
   });
 </script>

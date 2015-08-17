@@ -75,7 +75,7 @@ BDMI.Views.ReviewForm = Backbone.View.extend({
         }.bind(this));
       }.bind(this),
       error: function(error) {
-
+        alert("Please confirm you entered both title and body, as well as gave your grade.");
       }
     });
   },
