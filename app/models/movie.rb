@@ -1,5 +1,5 @@
 class Movie < ActiveRecord::Base
-  validates :title, :yr, :score, :votes, :director, presence: true
+  validates :title, :yr, :score, :votes, presence: true
 
   has_many :reviews
   has_many :images, as: :imageable
