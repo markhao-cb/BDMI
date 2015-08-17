@@ -31,6 +31,7 @@ BDMI.Views.InTheatersItem = Backbone.CompositeView.extend({
   },
 
   movieShow: function() {
+    window.scrollTo(0, 0);
     Backbone.history.navigate("#/movies/"+this.model.id, { trigger: true });
   },
 
