@@ -24,6 +24,9 @@
 # end
 
 
+mark = User.create(email:"mark@gmail.com", username:"Markximu", password:"123456")
+gizmo = User.create(email:"gizmo@gmail.com", username:"Gizmo", password:"123456")
+guest = User.create(email:"guest@gmail.com", username:"guest", password:"123456")
 
 movie = Movie.create(id:1846,title:"Mission Impossible Rogue Nation", yr: 2015, score:7.8, votes: 1534, director_id: 10)
 image = movie.images.create(image_url:"http://redcarpetrefs.com/wp-content/uploads/2015/07/zz6.jpg")
