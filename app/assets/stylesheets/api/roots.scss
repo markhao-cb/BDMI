@@ -78,3 +78,8 @@
   clear: both;
   display: block;
 }
+
+.btn:focus {
+  background: #000;
+  color: #fff;
+}

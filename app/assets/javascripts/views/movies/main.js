@@ -1,5 +1,5 @@
 BDMI.Views.Main = Backbone.CompositeView.extend({
-  template: JST['main'],
+  template: JST.main,
 
   className: "main_container group",
 
@@ -16,7 +16,6 @@ BDMI.Views.Main = Backbone.CompositeView.extend({
     this.introMovies.fetch({
       success: function() {
         var introMovie = this.introMovies.sample();
-        debugger
         var subview = new BDMI.Views.Intro({ model: introMovie });
         this.addSubview('.intro',subview);
       }.bind(this)
@@ -44,20 +43,7 @@ BDMI.Views.Main = Backbone.CompositeView.extend({
     var content = this.template();
     this.$el.html(content);
     this.attachSubviews();
-    this.navScroll();
     return this;
-  },
-
-  navScroll: function() {
-    $(window).scroll(function() {
-      if($(".navbar").length !== 0) {
-        if ($(".navbar").offset().top > 50) {
-            $(".navbar-fixed-top").addClass("top-nav-collapse");
-        } else {
-            $(".navbar-fixed-top").removeClass("top-nav-collapse");
-        }
-      }
-    });
   }
 
 });

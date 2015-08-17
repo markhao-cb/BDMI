@@ -345,12 +345,21 @@ ul.banner-social-buttons {
 }
 
 footer {
+    width: 60%;
+    margin-left: 20%;
+    border-top: 1px solid;
     margin-top: 100px;
-    padding: 50px 0;
+    padding: 10px 0;
+}
+
+.footer-div {
+  width: 100%;
 }
 
 footer p {
-    margin: 0;
+  margin: 0;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
 }
 
 ::-moz-selection {

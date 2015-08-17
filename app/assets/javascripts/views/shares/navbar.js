@@ -12,6 +12,7 @@ BDMI.Views.Navbar = Backbone.CompositeView.extend({
     var content = this.template();
     this.$el.html(content);
     this.onRender();
+    this.navScroll();
     return this;
   },
 
@@ -24,6 +25,18 @@ BDMI.Views.Navbar = Backbone.CompositeView.extend({
     $('.navbar-collapse ul li a').click(function() {
         $('.navbar-toggle:visible').click(function() {
         });
+    });
+  },
+
+  navScroll: function() {
+    $(window).scroll(function() {
+      if($(".navbar").length !== 0) {
+        if ($(".navbar").offset().top > 50) {
+            $(".navbar-fixed-top").addClass("top-nav-collapse");
+        } else {
+            $(".navbar-fixed-top").removeClass("top-nav-collapse");
+        }
+      }
     });
   }
 });

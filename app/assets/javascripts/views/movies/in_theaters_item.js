@@ -35,11 +35,11 @@ BDMI.Views.InTheatersItem = Backbone.CompositeView.extend({
   },
 
   handleEnter: function(event) {
-    $(event.currentTarget).addClass('animated infinite pulse')
+    $(event.currentTarget).addClass('animated infinite pulse');
   },
 
   handleLeave: function(event) {
-    $(event.currentTarget).removeClass('animated infinite pulse')
+    $(event.currentTarget).removeClass('animated infinite pulse');
   },
 
 

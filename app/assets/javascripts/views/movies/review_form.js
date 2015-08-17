@@ -12,32 +12,32 @@ BDMI.Views.ReviewForm = Backbone.View.extend({
 
   initialize: function(options) {
      $(document).on('keyup', this.handleKey.bind(this));
-     this.model = new BDMI.Models.Review();
-     debugger
-     //todo pass movie in as an option
      this.movie = options.movie;
   },
 
   handleKey: function (event) {
     if (event.keyCode === 27) {
-      this.$el.addClass('animated rollOut');
-      this.$el.one('webkitAnimationEnd', function() {
+      this.$(".my-background").remove();
+      this.$(".my-content").addClass('animated fadeOut');
+      this.$(".my-content").one('webkitAnimationEnd', function() {
         this.remove();
       }.bind(this));
     }
   },
 
   handleRemove: function (event) {
-      this.$el.addClass('animated fadeOutDown');
-      this.$el.one('webkitAnimationEnd', function() {
+    this.$(".my-background").remove();
+      this.$(".my-content").addClass('animated fadeOut');
+      this.$(".my-content").one('webkitAnimationEnd', function() {
         this.remove();
       }.bind(this));
   },
 
   removeBtn: function (event) {
     event.preventDefault();
-    this.$el.addClass('animated rollOut');
-    this.$el.one('webkitAnimationEnd', function() {
+    this.$(".my-background").remove();
+    this.$(".my-content").addClass('animated rollOut');
+    this.$(".my-content").one('webkitAnimationEnd', function() {
       this.remove();
     }.bind(this));
   },
@@ -63,16 +63,20 @@ BDMI.Views.ReviewForm = Backbone.View.extend({
     event.preventDefault();
     var formdata = $("#review-form").serializeJSON().review;
     formdata.grade *= 2;
-    debugger
     formdata.movie_id = this.movie.id;
     this.model.save(formdata, {
       success: function() {
+        this.model.attributes.author_name = BDMI.CURRENT_USER.username;
         this.collection.add(this.model);
-        this.$el.addClass('animated zoomOutup');
-        this.$el.one('webkitAnimationEnd', function() {
+        this.$(".my-background").remove();
+        this.$(".my-content").addClass('animated zoomOutUp');
+        this.$(".my-content").one('webkitAnimationEnd', function() {
           this.remove();
         }.bind(this));
-      }.bind(this)
+      }.bind(this),
+      error: function(error) {
+
+      }
     });
   },
 
@@ -81,8 +85,9 @@ BDMI.Views.ReviewForm = Backbone.View.extend({
     event.preventDefault();
     var formdata = $("#review-form").serializeJSON().review;
     this.model.set(formdata);
-    this.$el.addClass('animated zoomOutDown');
-    this.$el.one('webkitAnimationEnd', function() {
+    this.$(".my-background").remove();
+    this.$(".my-content").addClass('animated zoomOutDown');
+    this.$(".my-content").one('webkitAnimationEnd', function() {
       this.remove();
     }.bind(this));
   }

@@ -12,14 +12,20 @@
   z-index: 11;
   position: absolute;
   top: 25%;
-  left: 17%;
+  left: 25%;
   background: #000;
   border: 1px solid;
   border-radius: 10px;
+  -webkit-animation-duration: 0.3s;
 }
 
 .review-form {
-
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  -webkit-animation-duration: 0.3s;
 }
 
 .review-item {

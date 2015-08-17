@@ -1,10 +1,9 @@
 BDMI.Views.Intro = Backbone.CompositeView.extend({
-  template: JST['intro'],
+  template: JST.intro,
 
   className: "intro-body group",
 
   initialize: function() {
-    debugger
     this.image = this.model.images().first();
     if(this.model.reviews().length !== 0) {
         this.generateReviews();
