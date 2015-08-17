@@ -3,6 +3,7 @@ json.extract!(
   :title,
   :body,
   :grade,
+  :created_at,
   :updated_at,
   :author_id
 )

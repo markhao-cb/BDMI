@@ -4,19 +4,22 @@ class Api::ReviewsController < ApplicationController
     movie_id = params[:movie_id]
     user_id = params[:user_id]
     if movie_id && user_id
-      @reviews = Review.where('movie_id = ? and user_id = ?', movie_id, user_id)
+      @reviews = Review.where('movie_id = ? and author_id = ?', movie_id, user_id)
                        .limit(4)
                        .offset(( page.to_i - 1) * 10 )
+                       .includes(:author)
     elsif movie_id
       @reviews = Review.where('movie_id = ?', movie_id)
                        .limit(4)
                        .offset(( page.to_i - 1) * 10 )
+                       .includes(:author)
     elsif user_id
-      @reviews = Review.where('user_id = ?', user_id)
+      @reviews = Review.where('author_id = ?', user_id)
                        .limit(4)
                        .offset(( page.to_i - 1) * 10 )
+                       .includes(:author)
     end
-    render json: @reviews
+    render "api/reviews/index"
   end
 
   def create
