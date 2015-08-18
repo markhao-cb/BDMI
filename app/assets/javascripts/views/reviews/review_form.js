@@ -13,6 +13,7 @@ BDMI.Views.ReviewForm = Backbone.View.extend({
   initialize: function(options) {
      $(document).on('keyup', this.handleKey.bind(this));
      this.movie = options.movie;
+     this.parentView = options.mainView;
   },
 
   handleKey: function (event) {
@@ -69,6 +70,7 @@ BDMI.Views.ReviewForm = Backbone.View.extend({
     this.model.save(formdata, {
       success: function() {
         this.model.attributes.author_name = BDMI.CURRENT_USER.username;
+        this.parentView.fromFetch = false;
         this.collection.add(this.model);
         this.$(".my-background").remove();
         this.$(".my-content").addClass('animated zoomOutUp');

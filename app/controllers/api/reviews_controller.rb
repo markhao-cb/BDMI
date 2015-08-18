@@ -1,26 +1,26 @@
 class Api::ReviewsController < ApplicationController
   def index
     page = params[:page] || 1
-    movie_id = params[:movie_id]
+    movie_id = params[:movie_id] || 1
     user_id = params[:user_id]
     if movie_id && user_id
       @reviews = Review.where('movie_id = ? and author_id = ?', movie_id, user_id)
                        .limit(4)
                        .offset(( page.to_i - 1) * 4 )
                        .includes(:author)
-                       .order(updated_at: :desc)
+                       .order(created_at: :desc)
     elsif movie_id
       @reviews = Review.where('movie_id = ?', movie_id)
                        .limit(4)
                        .offset(( page.to_i - 1) * 4 )
                        .includes(:author)
-                       .order(updated_at: :desc)
+                       .order(created_at: :desc)
     elsif user_id
       @reviews = Review.where('author_id = ?', user_id)
                        .limit(4)
                        .offset(( page.to_i - 1) * 4 )
                        .includes(:author)
-                       .order(updated_at: :desc)
+                       .order(created_at: :desc)
     end
     render "api/reviews/index"
   end

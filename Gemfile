@@ -34,7 +34,6 @@ gem 'bootstrap-sass', '~> 3.3.5'
 
 gem 'font-awesome-sass', '~> 4.3.0'
 
-gem 'jquery-raty-rails'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

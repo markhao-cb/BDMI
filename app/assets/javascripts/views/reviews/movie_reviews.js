@@ -12,7 +12,7 @@ BDMI.Views.MovieReviews = Backbone.CompositeView.extend({
 
   initialize: function(options) {
     this.page = 1;
-    this.hadMore = true;
+    this.fromFetch = true;
     this.movie = options.movie;
     this.fetchReview();
     this.listenTo(this.collection, 'add', this.addReviewView);
@@ -22,13 +22,17 @@ BDMI.Views.MovieReviews = Backbone.CompositeView.extend({
 
   addReviewView: function(review) {
     var subview = new BDMI.Views.Review({ model: review });
-    this.addSubview('.review-list', subview, true);
+    if(this.fromFetch) {
+      this.addSubview('.review-list', subview);
+    } else {
+      this.addSubview('.review-list', subview, true);
+      this.fromFetch = true;
+    }
   },
 
   render: function() {
     var content = this.template({
-      reviews: this.collection,
-      hasMore: this.hasMore
+      reviews: this.collection
     });
     this.$el.html(content);
     this.attachSubviews();
@@ -40,7 +44,8 @@ BDMI.Views.MovieReviews = Backbone.CompositeView.extend({
     modal = new BDMI.Views.ReviewForm({
       model: review,
       collection: this.collection,
-      movie: this.movie
+      movie: this.movie,
+      mainView: this
     });
     $('body').prepend(modal.$el);
     modal.render();
