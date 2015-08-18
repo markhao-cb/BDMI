@@ -72,11 +72,15 @@
 }
 
 .load-more {
-  color: #fff;
-  padding-left: 20%;
+  margin-left: 25%
 }
 
-.load-more:hover {
+#load-more-button {
+  float: right;
+  color: #fff;
+}
+
+#load-more-button:hover {
   background: #fff;
   color: #333;
 }
