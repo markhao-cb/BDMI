@@ -74,9 +74,10 @@ BDMI.Views.ReviewForm = Backbone.View.extend({
           this.remove();
         }.bind(this));
       }.bind(this),
-      error: function(error) {
-        alert("Please confirm you entered both title and body, as well as gave your grade.");
-      }
+      error: function(model,error,options) {
+        var messages = $.parseJSON(error.responseText);
+        this.flashAlert("decline",messages);
+      }.bind(this),
     });
   },
 
@@ -90,5 +91,23 @@ BDMI.Views.ReviewForm = Backbone.View.extend({
     this.$(".my-content").one('webkitAnimationEnd', function() {
       this.remove();
     }.bind(this));
+  },
+
+  flashAlert: function(type, messages) {
+    var alertView = new BDMI.Views.AlertView({
+      alertType: type,
+      messages: messages
+    });
+    $('body').append(alertView.$el);
+    alertView.render();
+    alertView.$(".alert").addClass('animated fadeIn');
+    setTimeout(function() {
+      alertView.$(".alert").removeClass('fadeIn');
+      alertView.$(".alert").addClass('fadeOut');
+      alertView.$(".alert").one("webkitAnimationEnd", function() {
+        debugger
+        alertView.remove();
+      });
+    },2000);
   }
 });

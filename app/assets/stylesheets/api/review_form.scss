@@ -9,13 +9,22 @@
 }
 
 .my-content {
+  width: 40%;
   z-index: 11;
   position: absolute;
   top: 25%;
-  left: 25%;
+  left: 30%;
   background: #000;
   border: 1px solid;
   border-radius: 10px;
+  -webkit-animation-duration: 0.3s;
+}
+
+.alert {
+  position: fixed;
+  width: 38%;
+  top: 50%;
+  left: 31%;
   -webkit-animation-duration: 0.3s;
 }
 

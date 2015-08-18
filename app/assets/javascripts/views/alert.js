@@ -6,9 +6,9 @@ BDMI.Views.AlertView = Backbone.View.extend({
       case "decline":
         return JST['alerts/decline_alert'];
       case "no_more":
-        return JST['alerts/no_more'];
+        return JST['alerts/no_more_alert'];
       default:
-        return JST['alerts/success'];
+        return JST['alerts/success_alert'];
     }
   },
 
@@ -16,10 +16,18 @@ BDMI.Views.AlertView = Backbone.View.extend({
 
   initialize: function(options) {
     this.alertType = options.alertType;
+    this.messages = options.messages;
   },
 
   render: function() {
-    var content = this.template({ alertType: this.alertType });
+    var content;
+    if (this.alertType === "decline") {
+      debugger
+      content = this.template({ messages: this.messages.error });
+    } else {
+      debugger
+      content = this.template();
+    }
     this.$el.html(content);
     return this;
   }

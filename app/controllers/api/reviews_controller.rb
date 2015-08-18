@@ -30,7 +30,7 @@ class Api::ReviewsController < ApplicationController
     if @review.save
       movie = Movie.find(@review.movie_id)
       movie.update_score_and_num_of_votes(@review.grade)
-      movie.update()
+      movie.save
       render json: @review
     else
       render json: { error: @review.errors.full_messages }, status: 422

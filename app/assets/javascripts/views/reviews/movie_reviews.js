@@ -22,7 +22,7 @@ BDMI.Views.MovieReviews = Backbone.CompositeView.extend({
 
   addReviewView: function(review) {
     var subview = new BDMI.Views.Review({ model: review });
-    this.addSubview('.review-list', subview);
+    this.addSubview('.review-list', subview, true);
   },
 
   render: function() {
@@ -60,29 +60,28 @@ BDMI.Views.MovieReviews = Backbone.CompositeView.extend({
       },
       processData: true,
       success: function(resp) {
-        if (resp.length < 4) {
-          // alert("No more reviews.");
-          // this.flashAlert();
+        if (resp.length < 4 && this.page != 1) {
+          this.flashAlert("no_more",["No more reviews!"]);
+          this.page -= 1;
         }
-      },
-      error: function(a,b,c) {
-        debugger
-      }
+      }.bind(this)
     });
   },
 
-  flashAlert: function() {
-    var alertView = new BDMI.Views.AlertView({ alertType: "no_more" });
+  flashAlert: function(type, message) {
+    var alertView = new BDMI.Views.AlertView({
+      alertType: type,
+      message: message
+    });
     $('body').append(alertView.$el);
     alertView.render();
-    alertView.$el.addClass('animated fadeIn');
-    var myTimeout = setTimeout(function() {
-      alertView.$el.removeClass('fadeIn');
-      alertView.$el.addClass('fadeOut');
-      clearTimeout(myTimeout);
-    }, 3000);
-    alertView.$el.one("webkitTransitionEnd", function() {
-      alertView.$el.remove();
-    });
+    alertView.$(".alert").addClass('animated fadeIn');
+    setTimeout(function() {
+      alertView.$(".alert").removeClass('fadeIn');
+      alertView.$(".alert").addClass('fadeOut');
+      alertView.$(".alert").one("webkitAnimationEnd", function() {
+        alertView.remove();
+      });
+    },2000);
   }
 });
