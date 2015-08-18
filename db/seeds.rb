@@ -33,6 +33,8 @@ image = movie.images.create(image_url:"http://redcarpetrefs.com/wp-content/uploa
 review = movie.reviews.create(title:"It's just Amazing!", body: "Tom Cruise!!!", author_id:1, grade:10)
 review2 = movie.reviews.create(title:"I don't like it.", body: "It's terrible, I left befor it's over.", author_id:2, grade:2)
 post = movie.posts.create(post_url:"http://res.cloudinary.com/dypfv4yqq/image/upload/v1439859209/11266619_10153122819937730_9045367438836263730_o_iy9lck.jpg")
+actor = movie.actors.create(name:"Tom Cruise");
+image = actor.images.create(image_url:"http://res.cloudinary.com/dypfv4yqq/image/upload/c_fill,h_1280,w_1280/v1439921602/Tom-Cruise-Wallpapers-141_vlz8kh.jpg")
 #
 movie1 = Movie.create(title:"Ted 2", yr: 2015, score:6, votes: 333, director_id: 1)
 image1 = movie1.images.create(image_url:"http://geeknewsnetwork.net/wp-content/uploads/2015/06/2015_ted_2_movie-3840x2160.jpg")

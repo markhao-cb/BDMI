@@ -33,7 +33,7 @@ if display_posts
 end
 
 if display_actors
-  json.actor do
+  json.actors do
     json.array! movie.actors.includes(:images).includes(:likes) do |actor|
       json.partial! 'api/actors/actor', actor: actor, display_images: true
     end
