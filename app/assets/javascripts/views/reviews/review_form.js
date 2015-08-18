@@ -52,7 +52,9 @@ BDMI.Views.ReviewForm = Backbone.View.extend({
   onRender: function() {
     this.$('#star').raty('destroy');
     this.$('#star').raty({
-      path: "/assets/",
+      starOff: "http://res.cloudinary.com/dypfv4yqq/image/upload/v1439888579/star-off_j7trzb.png",
+      starOn: "http://res.cloudinary.com/dypfv4yqq/image/upload/v1439888579/star-on_iezcg6.png",
+      starHalf: "http://res.cloudinary.com/dypfv4yqq/image/upload/v1439888579/star-half_w79ezb.png",
       helf: true,
       score: 0,
       scoreName:"review[grade]"

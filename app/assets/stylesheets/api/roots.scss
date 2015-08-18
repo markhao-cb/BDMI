@@ -72,6 +72,9 @@
 
 .content-section {
   min-height:500px;
+  background: #000;
+  width: 80%;
+  border-radius: 20px;
 }
 
 .group::after {
@@ -83,4 +86,16 @@
 .btn:focus {
   background: #000;
   color: #fff;
+}
+
+#new {
+  background-color: #000;
+  width: 80%;
+  border-radius: 20px;
+  padding-top: 0;
+  padding-bottom: 50px;
+}
+
+#rank {
+  margin: 0 auto;
 }
