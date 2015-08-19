@@ -1,7 +1,7 @@
 class Api::MoviesController < ApplicationController
   def index
     movie = Movie.getData
-    a = Movie.upload
+    a = Movie.getacData
     fail
     # page = params[:page]|| 1
     # @movies = Movie.limit(10).offset((page.to_i  - 1) * 10)

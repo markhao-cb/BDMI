@@ -41,8 +41,13 @@ class Movie < ActiveRecord::Base
   end
 
   def self.getData
-    Tmdb::Movie.popular
+    Tmdb::Movie.casts(177677)
   end
+
+  def self.getacData
+    Tmdb::Person.detail(500)
+  end
+
 
   def self.upload
     auth = {
