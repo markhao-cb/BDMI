@@ -1,5 +1,5 @@
 BDMI.Views.Actors = Backbone.CompositeView.extend({
-  template: JST['actors/actor'],
+  template: JST['actors/actors'],
 
   initialize: function() {
     this.listenTo(this.collection, 'add', this.addActorView);

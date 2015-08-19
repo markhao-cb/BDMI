@@ -40,8 +40,8 @@ end
 
 if display_actors
   json.actors do
-    json.array! movie.actors.includes(:images).includes(:likes) do |actor|
-      json.partial! 'api/actors/actor', actor: actor, display_images: true
+    json.array! movie.actors.includes(:castings, :images, :likes) do |actor|
+      json.partial! 'api/actors/actor', actor: actor, display_images: true, display_casting: true, movie_id: movie.id
     end
   end
 end
