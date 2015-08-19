@@ -12,6 +12,7 @@ window.BDMI = {
     var navbar = new BDMI.Views.Navbar({
       router: router
     });
+
     $("#navbar").html(navbar.render().$el);
     Backbone.history.start();
   }

@@ -16,7 +16,6 @@ BDMI.Views.InTheatersItem = Backbone.CompositeView.extend({
   },
 
   render: function() {
-    debugger
     var content = this.template({ movie: this.model, poster: this.poster });
     this.$el.html(content);
     this.generateStars();

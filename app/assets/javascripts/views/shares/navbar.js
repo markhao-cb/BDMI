@@ -13,6 +13,7 @@ BDMI.Views.Navbar = Backbone.CompositeView.extend({
     this.$el.html(content);
     this.onRender();
     this.navScroll();
+    $("body").scrollspy({ target: '.navbar-fixed-top' });
     return this;
   },
 

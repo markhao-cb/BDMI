@@ -4,7 +4,6 @@ BDMI.Views.Main = Backbone.CompositeView.extend({
   className: "main_container group",
 
   initialize: function() {
-    this.introMovies = new BDMI.Collections.IntroMovies();
     this.addIntroView();
     this.addMovieInTheatersView();
     this.addRankView();
@@ -12,14 +11,9 @@ BDMI.Views.Main = Backbone.CompositeView.extend({
   },
 
   addIntroView: function() {
-    var that = this;
-    this.introMovies.fetch({
-      success: function() {
-        var introMovie = this.introMovies.sample();
-        var subview = new BDMI.Views.Intro({ model: introMovie });
-        this.addSubview('.intro',subview);
-      }.bind(this)
-    });
+    var introMovies = new BDMI.Collections.IntroMovies();
+    var subview = new BDMI.Views.Intro({ collection: introMovies });
+    this.addSubview('#hot',subview);
   },
 
   addMovieInTheatersView: function() {

@@ -1,34 +1,24 @@
-#myCarousel {
-  width:1220px;
-  margin-left: -235px;
+#owl-example .item img{
+    display: block;
+    width: auto;
+    height: 427px;
+    margin: 0 auto;
 }
 
-.carousel-inner {
-  margin: 0 auto;
-  display: block;
-  height: 490px;
-}
-
-.intro {
-  padding-top: 0;
-  width:80%;
-  border-radius: 20px;
+#hot {
+  padding-top: 60px;
+  width:99%;
+  border-radius: 0;
   overflow: hidden;
   margin: 0 auto;
-  padding-bottom: 10px;
-}
-
-.intro-content {
-  padding-top: 100px;
-}
-
-.intro-body {
-  padding-top: 0;
 }
 
 .content-section {
-    margin-bottom: 50px;
+  padding-top: 50px;
+  margin-bottom: 50px;
+  background: rgba(19, 19, 19, 0.7);
 }
+
 
 .search-section {
   margin-top: 10%;
@@ -36,16 +26,6 @@
 
 .in-theaters-section {
   margin-top: 10%;
-}
-
-.carousel-image {
-  max-height: 472px;
-  width: auto;
-  margin: 0 auto;
-}
-
-.carousel-control {
-  bottom: 50px;
 }
 
 .rating > span:hover:before {

@@ -1,51 +1,35 @@
 BDMI.Views.Intro = Backbone.CompositeView.extend({
   template: JST.intro,
 
-  className: "intro-body group",
+  // className: "hot-body group",
 
   initialize: function() {
-    this.image = this.model.images().first();
-    if(this.model.reviews().length !== 0) {
-        this.generateReviews();
-      }
-    this.listenTo(this.model, 'sync', this.render);
+    this.collection.fetch();
+    this.listenTo(this.collection, 'sync', this.render);
+    this.listenTo(this.collection, 'add', this.addCarouselItem);
+    this.collection.each(this.addCarouselItem.bind(this));
   },
 
-  generateReviews: function() {
-    this.hottestReview = this.newestReview = this.model.reviews().first();
-    this.model.reviews().each(function(review) {
-      if(review.attributes.updated_at > this.newestReview.attributes.updated_at) {
-        this.newestReview = review;
-      } else if(review.attributes.num_likes > this.hottestReview.attributes.num_likes) {
-        this.hottestReview = review;
-      }
-    }.bind(this));
-    this.addNewestReviewView(this.newestReview);
-    this.addHottestReviewView(this.hottestReview);
-  },
-
-  addNewestReviewView: function(review) {
-    var subview = new BDMI.Views.Review({ model: review });
-    this.addSubview("#new-review",subview);
-  },
-
-  addHottestReviewView: function(review) {
-    var subview = new BDMI.Views.Review({ model: review });
-    this.addSubview("#hot-review",subview);
+  addCarouselItem: function(movie) {
+    var subview = new BDMI.Views.CarouselItemView({ model:movie });
+    this.addSubview('#owl-example',subview);
   },
 
   render: function() {
     var content = this.template({ movie: this.model, movie_image: this.image });
     this.$el.html(content);
-    if(this.model.reviews().length === 0) {
-      var $noReview = $("<p>");
-      $noReview.text('SORRY, NO REVIEW YET.').css('margin-top', '210px').css('font-size', '24px');
-      $("#review-section").html($noReview);
-    } else {
-      this.attachSubviews();
-    }
+    this.attachSubviews();
     this.addPageScrollAnimation();
-    this.generateYTPlayer();
+    $("#owl-example").owlCarousel({
+      navigation : false, // Show next and prev buttons
+      // slideSpeed : 300,
+      // paginationSpeed : 400,
+      singleItem:true,
+      autoplay:true,
+      afterAction: function(event) {
+        debugger
+      }
+  });
     return this;
   },
 

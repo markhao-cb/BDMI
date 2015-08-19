@@ -14,6 +14,19 @@
   display: block;
 }
 
+.big-title {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.big-title-border {
+  width: 10%;
+  margin: 0 auto;
+  height: 3px;
+  background-color: #FF0000;
+  margin-bottom: 70px;
+}
+
 #navbar {
   display: block;
   height: 85px;
@@ -39,7 +52,7 @@
 }
 
 #main {
-  padding-top: 40px;
+  margin-top: 1%;
 }
 
 .main_container {
@@ -89,7 +102,7 @@
 }
 
 #new {
-  background-color: rgba(74, 47, 28, 0.59);
+  background-color: rgba(41, 41, 41, 0.7);
   width: 95%;
   border-radius: 20px;
   padding-top: 0;

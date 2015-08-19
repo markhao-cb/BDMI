@@ -1,40 +1,11 @@
-<div class="container group">
-  <div class="row group intro-content">
-      <div class="col-md-8 col-md-offset-2">
-        <h2 class="intro-title">What's hot</h2>
-        <div id="myCarousel" class="carousel slide">
-          <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-          </ol>
-          <!-- Carousel items -->
-          <div class="carousel-inner">
-            <div class="active item"><div id="player"></div></div>
-            <% if (movie_image) { %>
-              <div class="item">
-                <img src="<%= movie_image.escape("image_url")%>" alt="" class="carousel-image"/>
-              </div>
-            <% } %>
-            <div class="item" id="review-section">
-              <label for="hot-review" class="review-tag">HOT REVIEW</label>
-              <div id="hot-review" class="group"></div>
-              <label for="new-review" class="review-tag">NEW REVIEW</label>
-              <div id="new-review" class="group"></div>
-            </div>
-          </div>
-          <!-- Carousel nav -->
-          <a class="carousel-control left icon-prev" href="#myCarousel" data-slide="prev">
-            <span class="icon-prev fa-stack fa-lg"></span>
-          </a>
-          <a class="carousel-control right icon-next" href="#myCarousel" data-slide="next">
-            <span class="icon-next fa-stack fa-lg"></span>
-          </a>
-          </div>
-          <h4 style="margin-bottom:0;margin-top:16px;">See more new movies</h4>
-          <a href="#new" class="btn btn-circle page-scroll">
-            <i class="fa fa-angle-double-down animated"></i>
-          </a>
-      </div>
-  </div>
+<h1 class="big-title">What's Hot</h1>
+<div class="big-title-border"></div>
+<div class="hot-body container">
+  <div class="row">
+    <div id="owl-example" class="owl-carousel owl-theme"></div>
+    <h4 style="margin-bottom:0;margin-top:16px;">See more new movies</h4>
+    <a href="#new" class="btn btn-circle page-scroll">
+      <i class="fa fa-angle-double-down animated"></i>
+    </a>
+  </row>
 </div>
