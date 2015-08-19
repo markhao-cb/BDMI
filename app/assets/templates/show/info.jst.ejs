@@ -1,23 +1,48 @@
-<h3 class="section-title">Movie Details</h3>
-<div class="movie-list detail-item">
-  <ul id="movie-info-list">
-    <li class="movie-info-item">
-      <h4 class="info-title">Title :</h4>
-      <h3 class="info-subitem"><%= movie.escape("title") %></h3>
-    </li>
-    <li class="movie-info-item">
-      <h4 class="info-title">Year :</h4>
-      <h3 class="info-subitem"><%= movie.escape("yr") %></h3>
-    </li>
-    <li class="movie-info-item">
-      <h4 class="info-title">Score :</h4>
-      <div class="small-movie-star info-subitem">
-    </li>
-    <li class="movie-info-item">
-      <h4 class="info-title">Votes :</h4>
-      <h3 class="info-subitem"><%= movie.escape("votes") %></h3>
-    </li>
-  </ul>
-</div>
-<div class="movie-poster detail-item">
-</div>
+
+<section id="about">
+<div class="container wp2">
+<h1 class="section-title" id="about-title">About the film</h1>
+
+    <div class="row">
+        <div class="col-lg-6 wp2 delay-05s movie-poster">
+
+        </div><!-- /.col-lg-6 -->
+
+        <div class="col-lg-6 wp2 delay-1s info-body">
+        <h2><%= movie.escape("title")%></h2>
+        <h4 class="sub-text">Release Date: <%= movie.escape("release_date") %> <br>
+        </h4>
+
+
+
+        <TABLE class="text-dark">
+
+                <TR><TD>Slogan </TD><TD>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</TD><TD><%= movie.escape("tagline") %></TD></TR>
+
+                <TR><TD>Genre </TD><TD>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</TD>
+                  <TD>
+                    <% movie._genres.forEach(function(genre){ %>
+                      <%= genre.escape("name") + ", " %>
+                    <% }) %>
+                  </TD>
+                </TR>
+
+                <TR><TD>Time </TD><TD>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</TD><TD><%= movie.escape("runtime")+ "min" %></TD></TR>
+
+                <TR><TD>IMDB_id </TD>   <TD>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</TD><TD><span class="detailed-text"><%= movie.escape("imdb_id")%> </span></TD></TR>
+
+        </TABLE>
+        <br>
+        <h4 class="sub-text overview">Overview: <br></h4>
+        <span class="info-overview"> <%= movie.escape("overview") %> </span>
+        <br>
+
+        <div class="detailed">
+          <h4 class="sub-text movie-rating">Rating: <br></h4>
+          <div id="star"></div>
+        </div>
+        <p></p>
+        </div><!-- /.col-lg-6 -->
+  </div><!-- /.row -->
+</div><!-- /.container -->
+</section><!-- /#about -->

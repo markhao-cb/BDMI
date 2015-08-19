@@ -9,6 +9,7 @@ BDMI.Views.Movie = Backbone.CompositeView.extend({
   },
 
   generateSubviews: function() {
+    debugger
     this.addInfoView();
     this.addActorView();
     this.addReviewView();

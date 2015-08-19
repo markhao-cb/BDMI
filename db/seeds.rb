@@ -6,6 +6,7 @@ auth = {
   upload_preset: ENV['UPLOAD_PRESET']
 };
 
+#-------------------------Genres---------------------------
 genres = Tmdb::Genre.list["genres"]
 genres.each do |genre|
   id = genre["id"]
@@ -13,9 +14,11 @@ genres.each do |genre|
   Genre.create(id:id, name:name)
 end
 
-in_theaters_movies = Tmdb::Movie.now_playing
+in_theaters_movies = Tmdb::Movie.now_playing # API called here !!
+
 config = Tmdb::Configuration.new
 
+#-------------------------Movies---------------------------
 in_theaters_movies.each do |m|
   movie = Tmdb::Movie.detail(m["id"])
   id = movie["id"]
@@ -37,6 +40,8 @@ in_theaters_movies.each do |m|
   poster_path = "#{config.base_url}original#{movie["poster_path"]}"
   poster = Cloudinary::Uploader.upload(poster_path,auth)
   poster_url = poster["url"]
+
+
   newMovie = Movie.create(
               id: id,
               title: title,
@@ -52,11 +57,26 @@ in_theaters_movies.each do |m|
               revenue: revenue
             )
 
+
+#---------------------------Taggings---------------------------
+
+
   movie["genres"].each do |genre|
     genre_id = genre["id"]
     Tagging.create(genre_id:genre_id, movie_id:movie["id"])
   end
 
+
+#---------------------------Images---------------------------
+
   newMovie.posters.create(poster_url:poster_url)
   newMovie.images.create(image_url:image_url)
 end
+
+
+
+#---------------------------Actors---------------------------
+
+  Movie.all.each do |dbmovie|
+    Tmdb:Movie.casts(dbmovie.id)
+  end

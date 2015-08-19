@@ -11,33 +11,35 @@ BDMI.Views.InfoView = Backbone.CompositeView.extend({
   render: function() {
     var content = this.template({ movie: this.model });
     this.$el.html(content);
-    this.generateStars();
+    this.onRender();
     this.attachSubviews();
     return this;
   },
 
   addPosterView: function() {
-    var poster = this.model.posts().first();
+    var poster = this.model.posters().first();
     var subview = new BDMI.Views.Poster({ model: poster });
     this.addSubview(".movie-poster", subview);
   },
 
+  onRender: function() {
+    this.$('#star').raty('destroy');
+    var grade = this.model.attributes.vote_average / 2;
+    this.$('#star').raty({
+      starOff: "http://res.cloudinary.com/dypfv4yqq/image/upload/v1439888579/star-off_j7trzb.png",
+      starOn: "http://res.cloudinary.com/dypfv4yqq/image/upload/v1439888579/star-on_iezcg6.png",
+      starHalf: "http://res.cloudinary.com/dypfv4yqq/image/upload/v1439888579/star-half_w79ezb.png",
+      helf: true,
+      score: grade,
+      readOnly: true
+    });
+  },
+
   generateStars: function() {
-        this.$('.small-movie-star').empty();
-        var grade = Math.floor(this.model.attributes.score / 2);
-        var star = Math.max(0, (Math.min(5, grade)));
-        var blank = 5 - star;
-        while (star > 0) {
-          var $star = $("<span></span>");
-          $star.text("★");
-          this.$('.small-movie-star').append($star);
-          star--;
-        }
-        while (blank > 0) {
-          var $blank = $("<span></span>");
-          $blank.text("☆");
-          this.$('.small-movie-star').append($blank);
-          blank--;
-        }
-    }
+    var grade = this.model.attributes.vote_average / 2;
+    $('vote-average').raty({
+      score: grade,
+      readOnly: true
+    });
+  }
 });

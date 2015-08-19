@@ -1,5 +1,6 @@
 json.extract!(
   movie,
+  :id,
   :title,
   :release_date,
   :vote_average,
@@ -38,9 +39,17 @@ if display_posters
 end
 
 if display_actors
-  json.actor do
+  json.actors do
     json.array! movie.actors.includes(:images).includes(:likes) do |actor|
       json.partial! 'api/actors/actor', actor: actor, display_images: true
+    end
+  end
+end
+
+if display_genres
+  json.genres do
+    json.array! movie.genres do |genre|
+      json.partial! 'api/genres/genre', genre: genre
     end
   end
 end

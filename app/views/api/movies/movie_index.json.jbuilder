@@ -4,5 +4,6 @@ json.array! @movies do |movie|
                 display_images: true,
                 display_reviews: false,
                 display_posters: true,
-                display_actors: false
+                display_actors: false,
+                display_genres: false
 end

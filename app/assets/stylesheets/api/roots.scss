@@ -20,10 +20,13 @@
 }
 
 .big-title-border {
-  width: 10%;
+  width: 15%;
   margin: 0 auto;
   height: 3px;
-  background-color: #FF0000;
+  background: radial-gradient(circle, red, darkred);
+  border: 0.01px solid;
+  border-radius: 50%;
+  background-co: #FF0000;
   margin-bottom: 70px;
 }
 
