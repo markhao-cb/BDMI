@@ -4,6 +4,7 @@ class CreateCastings < ActiveRecord::Migration
       t.integer :movie_id
       t.integer :actor_id
       t.integer :ord
+      t.string  :act_as
 
       t.timestamps null: false
     end

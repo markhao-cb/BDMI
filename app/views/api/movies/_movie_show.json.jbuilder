@@ -1,11 +1,16 @@
 json.extract!(
   movie,
-  :id,
   :title,
-  :yr,
-  :score,
-  :votes,
-  :director_id
+  :release_date,
+  :vote_average,
+  :vote_count,
+  :popularity,
+  :revenue,
+  :runtime,
+  :overview,
+  :budget,
+  :tagline,
+  :imdb_id,
 )
 
 if display_images
@@ -24,10 +29,10 @@ if display_reviews
   end
 end
 
-if display_posts
-  json.posts do
-    json.array! movie.posts do |post|
-      json.partial! 'api/movies/post', post: post
+if display_posters
+  json.posters do
+    json.array! movie.posters do |poster|
+      json.partial! 'api/movies/poster', poster: poster
     end
   end
 end

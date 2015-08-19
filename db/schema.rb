@@ -11,21 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150815172604) do
+ActiveRecord::Schema.define(version: 20150818233354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "actors", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",           null: false
+    t.string   "place_of_birth"
+    t.date     "birthday"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "castings", force: :cascade do |t|
     t.integer  "movie_id"
     t.integer  "actor_id"
     t.integer  "ord"
+    t.string   "act_as"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -41,6 +44,7 @@ ActiveRecord::Schema.define(version: 20150815172604) do
 
   create_table "images", force: :cascade do |t|
     t.string   "image_url",      null: false
+    t.string   "thumbnil_url"
     t.integer  "imageable_id"
     t.string   "imageable_type"
     t.datetime "created_at",     null: false
@@ -61,25 +65,29 @@ ActiveRecord::Schema.define(version: 20150815172604) do
   add_index "likes", ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id", using: :btree
 
   create_table "movies", force: :cascade do |t|
-    t.string   "title",       null: false
-    t.integer  "yr"
-    t.float    "score"
-    t.integer  "votes"
-    t.integer  "director_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "title",        null: false
+    t.date     "release_date"
+    t.integer  "runtime"
+    t.float    "vote_average"
+    t.integer  "vote_count"
+    t.float    "popularity"
+    t.text     "overview"
+    t.string   "imdb_id"
+    t.integer  "revenue"
+    t.string   "tagline"
+    t.integer  "budget"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
-  add_index "movies", ["director_id"], name: "index_movies_on_director_id", using: :btree
-
-  create_table "posts", force: :cascade do |t|
-    t.string   "post_url",   null: false
+  create_table "posters", force: :cascade do |t|
+    t.string   "poster_url", null: false
     t.integer  "movie_id",   null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "posts", ["movie_id"], name: "index_posts_on_movie_id", using: :btree
+  add_index "posters", ["movie_id"], name: "index_posters_on_movie_id", using: :btree
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "author_id",  null: false
@@ -106,15 +114,35 @@ ActiveRecord::Schema.define(version: 20150815172604) do
 
   create_table "users", force: :cascade do |t|
     t.string   "email",           null: false
+    t.string   "username",        null: false
     t.string   "password_digest", null: false
     t.string   "session_token",   null: false
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.string   "username",        null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["session_token"], name: "index_users_on_session_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
+
+  create_table "wantwatchmovies", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "movie_id",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "wantwatchmovies", ["movie_id"], name: "index_wantwatchmovies_on_movie_id", using: :btree
+  add_index "wantwatchmovies", ["user_id"], name: "index_wantwatchmovies_on_user_id", using: :btree
+
+  create_table "watchedmovies", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "movie_id",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "watchedmovies", ["movie_id"], name: "index_watchedmovies_on_movie_id", using: :btree
+  add_index "watchedmovies", ["user_id"], name: "index_watchedmovies_on_user_id", using: :btree
 
 end

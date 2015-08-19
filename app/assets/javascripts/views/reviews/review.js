@@ -23,7 +23,7 @@ BDMI.Views.Review = Backbone.View.extend({
 
   generateStars: function() {
         this.$('.small-review-grade').empty();
-        var grade = this.model.attributes.grade / 2;
+        var grade = this.model.attributes.vote_average / 2;
         // var grade = 5;
         var star = Math.max(0, (Math.min(5, grade)));
         var blank = 5 - star;

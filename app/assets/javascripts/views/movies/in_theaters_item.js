@@ -11,12 +11,13 @@ BDMI.Views.InTheatersItem = Backbone.CompositeView.extend({
   },
 
   initialize: function() {
-    this.post = this.model.posts().sample();
+    this.poster = this.model.posters().sample();
     this.listenTo(this.model, 'sync', this.render);
   },
 
   render: function() {
-    var content = this.template({ movie: this.model, post: this.post });
+    debugger
+    var content = this.template({ movie: this.model, poster: this.poster });
     this.$el.html(content);
     this.generateStars();
     return this;
@@ -46,7 +47,7 @@ BDMI.Views.InTheatersItem = Backbone.CompositeView.extend({
 
   generateStars: function() {
         this.$('.small_movie_score').empty();
-        var grade = Math.floor(this.model.attributes.score / 2);
+        var grade = Math.floor(this.model.attributes.vote_average / 2);
         var star = Math.max(0, (Math.min(5, grade)));
         var blank = 5 - star;
         while (star > 0) {
