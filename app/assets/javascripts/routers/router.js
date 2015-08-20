@@ -1,7 +1,9 @@
 BDMI.Routers.Router = Backbone.Router.extend({
   routes: {
     "": "index",
-    "movies/:id": "show"
+    "movies/:id": "show",
+    "search/movies/:title": "movieIndex",
+    "search/person/:name": "personIndex",
   },
 
   initialize: function(options) {
@@ -18,6 +20,28 @@ BDMI.Routers.Router = Backbone.Router.extend({
     var movie = this.movies.getOrFetch(id);
     var showView = new BDMI.Views.Movie({ model: movie });
     this.swap(showView);
+  },
+
+  movieIndex: function(title) {
+
+    var searchedMovies = new BDMI.Collections.SearchedMovies();
+    var searchedMovie = searchedMovies.fetch({
+      data: {
+        title:title
+      },
+      processData: true,
+      success: function() {
+
+      }
+    });
+    var resultView = new BDMI.Views.ResultView({
+      collection: searchedMovies
+    });
+    this.swap(resultView);
+  },
+
+  personIndex: function(name) {
+
   },
 
   swap: function(view) {

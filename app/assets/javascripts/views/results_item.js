@@ -1,7 +1,7 @@
-BDMI.Views.InTheatersItem = Backbone.CompositeView.extend({
-  template: JST['movie/in_theaters_item'],
+BDMI.Views.ResultsItem = Backbone.CompositeView.extend({
+  template: JST['movie/results_item'],
 
-  className: "in_theaters_item",
+  className: "results_item",
 
   events: {
     "click .small_image":"handleClick",
@@ -11,7 +11,7 @@ BDMI.Views.InTheatersItem = Backbone.CompositeView.extend({
   },
 
   initialize: function() {
-    this.poster = this.model.posters().sample();
+    this.poster_url = this.model.posters().sample();
     this.listenTo(this.model, 'sync', this.render);
   },
 

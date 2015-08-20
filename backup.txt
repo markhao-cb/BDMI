@@ -1,0 +1,1615 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: actors; Type: TABLE; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE TABLE actors (
+    id integer NOT NULL,
+    name character varying NOT NULL,
+    place_of_birth character varying,
+    birthday date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE actors OWNER TO "Mark";
+
+--
+-- Name: actors_id_seq; Type: SEQUENCE; Schema: public; Owner: Mark
+--
+
+CREATE SEQUENCE actors_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE actors_id_seq OWNER TO "Mark";
+
+--
+-- Name: actors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Mark
+--
+
+ALTER SEQUENCE actors_id_seq OWNED BY actors.id;
+
+
+--
+-- Name: castings; Type: TABLE; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE TABLE castings (
+    id integer NOT NULL,
+    movie_id integer,
+    actor_id integer,
+    ord integer,
+    act_as character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE castings OWNER TO "Mark";
+
+--
+-- Name: castings_id_seq; Type: SEQUENCE; Schema: public; Owner: Mark
+--
+
+CREATE SEQUENCE castings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE castings_id_seq OWNER TO "Mark";
+
+--
+-- Name: castings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Mark
+--
+
+ALTER SEQUENCE castings_id_seq OWNED BY castings.id;
+
+
+--
+-- Name: genres; Type: TABLE; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE TABLE genres (
+    id integer NOT NULL,
+    name character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE genres OWNER TO "Mark";
+
+--
+-- Name: genres_id_seq; Type: SEQUENCE; Schema: public; Owner: Mark
+--
+
+CREATE SEQUENCE genres_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE genres_id_seq OWNER TO "Mark";
+
+--
+-- Name: genres_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Mark
+--
+
+ALTER SEQUENCE genres_id_seq OWNED BY genres.id;
+
+
+--
+-- Name: images; Type: TABLE; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE TABLE images (
+    id integer NOT NULL,
+    image_url character varying NOT NULL,
+    thumbnil_url character varying,
+    imageable_id integer,
+    imageable_type character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE images OWNER TO "Mark";
+
+--
+-- Name: images_id_seq; Type: SEQUENCE; Schema: public; Owner: Mark
+--
+
+CREATE SEQUENCE images_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE images_id_seq OWNER TO "Mark";
+
+--
+-- Name: images_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Mark
+--
+
+ALTER SEQUENCE images_id_seq OWNED BY images.id;
+
+
+--
+-- Name: likes; Type: TABLE; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE TABLE likes (
+    id integer NOT NULL,
+    author_id integer NOT NULL,
+    likeable_id integer,
+    likeable_type character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE likes OWNER TO "Mark";
+
+--
+-- Name: likes_id_seq; Type: SEQUENCE; Schema: public; Owner: Mark
+--
+
+CREATE SEQUENCE likes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE likes_id_seq OWNER TO "Mark";
+
+--
+-- Name: likes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Mark
+--
+
+ALTER SEQUENCE likes_id_seq OWNED BY likes.id;
+
+
+--
+-- Name: movies; Type: TABLE; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE TABLE movies (
+    id integer NOT NULL,
+    title character varying NOT NULL,
+    release_date date,
+    runtime integer,
+    vote_average double precision,
+    vote_count integer,
+    popularity double precision,
+    overview text,
+    imdb_id character varying,
+    revenue integer,
+    tagline character varying,
+    budget integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE movies OWNER TO "Mark";
+
+--
+-- Name: movies_id_seq; Type: SEQUENCE; Schema: public; Owner: Mark
+--
+
+CREATE SEQUENCE movies_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE movies_id_seq OWNER TO "Mark";
+
+--
+-- Name: movies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Mark
+--
+
+ALTER SEQUENCE movies_id_seq OWNED BY movies.id;
+
+
+--
+-- Name: posters; Type: TABLE; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE TABLE posters (
+    id integer NOT NULL,
+    poster_url character varying NOT NULL,
+    movie_id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE posters OWNER TO "Mark";
+
+--
+-- Name: posters_id_seq; Type: SEQUENCE; Schema: public; Owner: Mark
+--
+
+CREATE SEQUENCE posters_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE posters_id_seq OWNER TO "Mark";
+
+--
+-- Name: posters_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Mark
+--
+
+ALTER SEQUENCE posters_id_seq OWNED BY posters.id;
+
+
+--
+-- Name: reviews; Type: TABLE; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE TABLE reviews (
+    id integer NOT NULL,
+    author_id integer NOT NULL,
+    movie_id integer NOT NULL,
+    grade integer NOT NULL,
+    title character varying,
+    body character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE reviews OWNER TO "Mark";
+
+--
+-- Name: reviews_id_seq; Type: SEQUENCE; Schema: public; Owner: Mark
+--
+
+CREATE SEQUENCE reviews_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE reviews_id_seq OWNER TO "Mark";
+
+--
+-- Name: reviews_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Mark
+--
+
+ALTER SEQUENCE reviews_id_seq OWNED BY reviews.id;
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE TABLE schema_migrations (
+    version character varying NOT NULL
+);
+
+
+ALTER TABLE schema_migrations OWNER TO "Mark";
+
+--
+-- Name: taggings; Type: TABLE; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE TABLE taggings (
+    id integer NOT NULL,
+    movie_id integer NOT NULL,
+    genre_id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE taggings OWNER TO "Mark";
+
+--
+-- Name: taggings_id_seq; Type: SEQUENCE; Schema: public; Owner: Mark
+--
+
+CREATE SEQUENCE taggings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE taggings_id_seq OWNER TO "Mark";
+
+--
+-- Name: taggings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Mark
+--
+
+ALTER SEQUENCE taggings_id_seq OWNED BY taggings.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    email character varying NOT NULL,
+    username character varying NOT NULL,
+    password_digest character varying NOT NULL,
+    session_token character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE users OWNER TO "Mark";
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: Mark
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE users_id_seq OWNER TO "Mark";
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Mark
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- Name: wantwatchmovies; Type: TABLE; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE TABLE wantwatchmovies (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    movie_id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE wantwatchmovies OWNER TO "Mark";
+
+--
+-- Name: wantwatchmovies_id_seq; Type: SEQUENCE; Schema: public; Owner: Mark
+--
+
+CREATE SEQUENCE wantwatchmovies_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE wantwatchmovies_id_seq OWNER TO "Mark";
+
+--
+-- Name: wantwatchmovies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Mark
+--
+
+ALTER SEQUENCE wantwatchmovies_id_seq OWNED BY wantwatchmovies.id;
+
+
+--
+-- Name: watchedmovies; Type: TABLE; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE TABLE watchedmovies (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    movie_id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE watchedmovies OWNER TO "Mark";
+
+--
+-- Name: watchedmovies_id_seq; Type: SEQUENCE; Schema: public; Owner: Mark
+--
+
+CREATE SEQUENCE watchedmovies_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE watchedmovies_id_seq OWNER TO "Mark";
+
+--
+-- Name: watchedmovies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Mark
+--
+
+ALTER SEQUENCE watchedmovies_id_seq OWNED BY watchedmovies.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Mark
+--
+
+ALTER TABLE ONLY actors ALTER COLUMN id SET DEFAULT nextval('actors_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Mark
+--
+
+ALTER TABLE ONLY castings ALTER COLUMN id SET DEFAULT nextval('castings_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Mark
+--
+
+ALTER TABLE ONLY genres ALTER COLUMN id SET DEFAULT nextval('genres_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Mark
+--
+
+ALTER TABLE ONLY images ALTER COLUMN id SET DEFAULT nextval('images_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Mark
+--
+
+ALTER TABLE ONLY likes ALTER COLUMN id SET DEFAULT nextval('likes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Mark
+--
+
+ALTER TABLE ONLY movies ALTER COLUMN id SET DEFAULT nextval('movies_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Mark
+--
+
+ALTER TABLE ONLY posters ALTER COLUMN id SET DEFAULT nextval('posters_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Mark
+--
+
+ALTER TABLE ONLY reviews ALTER COLUMN id SET DEFAULT nextval('reviews_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Mark
+--
+
+ALTER TABLE ONLY taggings ALTER COLUMN id SET DEFAULT nextval('taggings_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Mark
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Mark
+--
+
+ALTER TABLE ONLY wantwatchmovies ALTER COLUMN id SET DEFAULT nextval('wantwatchmovies_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Mark
+--
+
+ALTER TABLE ONLY watchedmovies ALTER COLUMN id SET DEFAULT nextval('watchedmovies_id_seq'::regclass);
+
+
+--
+-- Data for Name: actors; Type: TABLE DATA; Schema: public; Owner: Mark
+--
+
+COPY actors (id, name, place_of_birth, birthday, created_at, updated_at) FROM stdin;
+22226	Paul Rudd	Passaic, New Jersey, U.S.	1969-04-06	2015-08-19 20:47:06.443598	2015-08-19 20:47:06.443598
+3392	Michael Douglas	New Brunswick, New Jersey	1944-09-25	2015-08-19 20:47:08.432876	2015-08-19 20:47:08.432876
+19034	Evangeline Lilly	Fort Saskatchewan, Alberta, Canada	1979-08-03	2015-08-19 20:47:11.498956	2015-08-19 20:47:11.498956
+74541	Corey Stoll	Manhattan - New York City - New York - USA	1976-03-14	2015-08-19 20:47:12.50087	2015-08-19 20:47:12.50087
+21127	Bobby Cannavale	Union City - New Jersey - USA	1970-05-03	2015-08-19 20:47:13.388772	2015-08-19 20:47:13.388772
+20750	Judy Greer	Detroit - Michigan - USA	1975-07-20	2015-08-19 20:47:14.384518	2015-08-19 20:47:14.384518
+454	Michael Peña	Chicago, Illinois, USA 	1976-01-13	2015-08-19 20:47:15.470099	2015-08-19 20:47:15.470099
+53650	Anthony Mackie	New Orleans, Louisiana, USA	1979-09-23	2015-08-19 20:47:16.394111	2015-08-19 20:47:16.394111
+65829	Wood Harris	Chicago, Illinois, United States	1969-10-17	2015-08-19 20:47:17.356856	2015-08-19 20:47:17.356856
+83854	David Dastmalchian		\N	2015-08-19 20:47:18.182568	2015-08-19 20:47:18.182568
+76126	T.I.	Atlanta - Georgia - USA	1980-09-25	2015-08-19 20:47:19.115387	2015-08-19 20:47:19.115387
+500	Tom Cruise	Syracuse, New York, U.S	1962-07-03	2015-08-19 20:47:20.414397	2015-08-19 20:47:20.414397
+17604	Jeremy Renner	Modesto - California - USA	1971-01-07	2015-08-19 20:47:21.609659	2015-08-19 20:47:21.609659
+11108	Simon Pegg	Brockworth - Gloucestershire - England - UK	1970-02-14	2015-08-19 20:47:22.548454	2015-08-19 20:47:22.548454
+933238	Rebecca Ferguson	\N	1983-10-19	2015-08-19 20:47:23.591244	2015-08-19 20:47:23.591244
+10182	Ving Rhames	New York City, New York, USA	1959-05-12	2015-08-19 20:47:24.50125	2015-08-19 20:47:24.50125
+16702	Sean Harris	London, England, UK	\N	2015-08-19 20:47:26.44398	2015-08-19 20:47:26.44398
+16358	Simon McBurney	Cambridge - Cambridgeshire - England - UK	1957-08-25	2015-08-19 20:47:27.381099	2015-08-19 20:47:27.381099
+41894	Zhang Jingchu	Yong'an, Fujian, China	1980-02-02	2015-08-19 20:47:28.222215	2015-08-19 20:47:28.222215
+2441	Tom Hollander	Oxford, Oxfordshire, England, UK	1967-08-25	2015-08-19 20:47:29.072705	2015-08-19 20:47:29.072705
+92429	Jens Hultén	Stockholm, Sweden	1963-12-03	2015-08-19 20:47:30.236927	2015-08-19 20:47:30.236927
+7447	Alec Baldwin	Amityville, New York, USA	1958-04-03	2015-08-19 20:47:31.553088	2015-08-19 20:47:31.553088
+996701	Miles Teller	Downingtown - Pennsylvania - USA	1987-02-20	2015-08-19 20:47:33.450712	2015-08-19 20:47:33.450712
+51072	Kate Mara	Bedford - New York - USA	1983-02-27	2015-08-19 20:47:35.395813	2015-08-19 20:47:35.395813
+478	Jamie Bell	Billingham, Stockton on Tees, England, UK	1986-03-14	2015-08-19 20:47:36.514508	2015-08-19 20:47:36.514508
+20286	Toby Kebbell	Pontefract, Yorkshire, England, UK	1982-07-09	2015-08-19 20:47:37.382229	2015-08-19 20:47:37.382229
+135651	Michael B. Jordan	Santa Ana - California - USA	1987-02-09	2015-08-19 20:47:38.241967	2015-08-19 20:47:38.241967
+1462	Tim Blake Nelson	Tulsa - Oklahoma - USA	1964-05-11	2015-08-19 20:47:39.116613	2015-08-19 20:47:39.116613
+38951	Reg E. Cathey	Huntsville, Alabama, USA	1958-08-18	2015-08-19 20:47:39.945484	2015-08-19 20:47:39.945484
+1421688	Chet Hanks	Los Angeles - California - USA	1990-08-04	2015-08-19 20:47:40.956126	2015-08-19 20:47:40.956126
+19292	Adam Sandler	Brooklyn, New York, USA	1966-09-09	2015-08-19 20:47:42.535553	2015-08-19 20:47:42.535553
+11705	Michelle Monaghan	Winthrop - Iowa - USA	1976-03-23	2015-08-19 20:47:43.3924	2015-08-19 20:47:43.3924
+22970	Peter Dinklage	Morristown, New Jersey, USA	1969-06-11	2015-08-19 20:47:44.291267	2015-08-19 20:47:44.291267
+54415	Josh Gad	Hollywood - Florida - USA	1981-02-23	2015-08-19 20:47:45.207828	2015-08-19 20:47:45.207828
+32895	Kevin James	Stony Brook - New York - USA	1965-04-26	2015-08-19 20:47:46.196359	2015-08-19 20:47:46.196359
+78030	Ashley Benson	Long Beach, California, USA	1989-12-18	2015-08-19 20:47:47.322515	2015-08-19 20:47:47.322515
+48	Sean Bean	Sheffield, South Yorkshire, England, UK	1959-04-17	2015-08-19 20:47:48.370037	2015-08-19 20:47:48.370037
+13636	Jane Krakowski	Parsippany, New Jersey, U.S.	1968-10-11	2015-08-19 20:47:49.365876	2015-08-19 20:47:49.365876
+1248	Brian Cox	Dundee, Scotland, UK	1946-06-01	2015-08-19 20:47:50.184552	2015-08-19 20:47:50.184552
+707	Dan Aykroyd	Ottawa, Ontario, Canada	1952-07-01	2015-08-19 20:47:51.280829	2015-08-19 20:47:51.280829
+440414	Amy Schumer	New York, New York, USA	1981-06-01	2015-08-19 20:47:52.427162	2015-08-19 20:47:52.427162
+19278	Bill Hader	Tulsa - Oklahoma - USA	1978-06-07	2015-08-19 20:47:53.334188	2015-08-19 20:47:53.334188
+60073	Brie Larson	Sacramento, California, USA	1989-10-01	2015-08-19 20:47:54.18873	2015-08-19 20:47:54.18873
+1219901	Colin Quinn	\N	\N	2015-08-19 20:47:55.054082	2015-08-19 20:47:55.054082
+503103	Vanessa Bayer	\N	1981-11-14	2015-08-19 20:47:55.990448	2015-08-19 20:47:55.990448
+3063	Tilda Swinton	London, United Kingdom	1960-11-05	2015-08-19 20:47:56.933362	2015-08-19 20:47:56.933362
+107379	LeBron James	Akron, Ohio, United States	1984-12-30	2015-08-19 20:47:57.842393	2015-08-19 20:47:57.842393
+113373	Mike Birbiglia	Shrewsbury, Massachusetts, United States	1978-06-20	2015-08-19 20:47:58.664861	2015-08-19 20:47:58.664861
+56446	John Cena	West Newbury - Massachusetts - USA	1977-04-23	2015-08-19 20:47:59.465347	2015-08-19 20:47:59.465347
+65923	Dave Attell		1965-01-18	2015-08-19 20:48:00.340752	2015-08-19 20:48:00.340752
+2698	Norman Lloyd	Jersey City - New Jersey - USA	1914-11-08	2015-08-19 20:48:01.22286	2015-08-19 20:48:01.22286
+227454	Alicia Vikander	Gothenburg, Västra Götalands län, Sweden	1988-10-03	2015-08-19 20:48:02.352128	2015-08-19 20:48:02.352128
+73968	Henry Cavill	Jersey, Channel Islands, UK	1983-05-05	2015-08-19 20:48:03.486787	2015-08-19 20:48:03.486787
+3291	Hugh Grant	London, England, UK	1960-09-09	2015-08-19 20:48:04.67426	2015-08-19 20:48:04.67426
+53807	Armie Hammer	Los Angeles, California, U.S.	1986-08-28	2015-08-19 20:48:05.577826	2015-08-19 20:48:05.577826
+15440	Jared Harris	London, England	1961-08-24	2015-08-19 20:48:06.423623	2015-08-19 20:48:06.423623
+1133349	Elizabeth Debicki	\N	\N	2015-08-19 20:48:07.49411	2015-08-19 20:48:07.49411
+90325	Luca Calvani	\N	1974-08-07	2015-08-19 20:48:08.398969	2015-08-19 20:48:08.398969
+1440871	Christopher Sciueref	\N	\N	2015-08-19 20:48:09.200406	2015-08-19 20:48:09.200406
+1351952	Simona Caparrini	Florence, Italy	\N	2015-08-19 20:48:10.040799	2015-08-19 20:48:10.040799
+13242	Paul Giamatti	New Haven, Connecticut, USA	1967-06-06	2015-08-19 20:48:11.66524	2015-08-19 20:48:11.66524
+83860	Aldis Hodge	Onslow County - North Carolina - USA	1986-09-20	2015-08-19 20:48:12.510561	2015-08-19 20:48:12.510561
+1200864	Keith Stanfield	San Bernardino - California - USA	1991-08-12	2015-08-19 20:48:13.364834	2015-08-19 20:48:13.364834
+1305249	Angela Elayne Gibbs	\N	\N	2015-08-19 20:48:14.27597	2015-08-19 20:48:14.27597
+149010	Orlando Brown	Los Angeles County, California, USA	1987-12-04	2015-08-19 20:48:15.39257	2015-08-19 20:48:15.39257
+1371397	R. Marcus Taylor	\N	\N	2015-08-19 20:48:16.230094	2015-08-19 20:48:16.230094
+141432	Allen Maldonado	Bellflower - California - USA	1983-05-20	2015-08-19 20:48:17.242574	2015-08-19 20:48:17.242574
+131	Jake Gyllenhaal	Los Angeles, California, USA	1980-12-19	2015-08-19 20:48:18.349178	2015-08-19 20:48:18.349178
+53714	Rachel McAdams	London - Ontario - Canada	1978-11-17	2015-08-19 20:48:19.245272	2015-08-19 20:48:19.245272
+2178	Forest Whitaker	Texas, USA	1961-07-15	2015-08-19 20:48:20.146554	2015-08-19 20:48:20.146554
+2038	Naomie Harris	London, England, UK	1976-09-06	2015-08-19 20:48:21.199182	2015-08-19 20:48:21.199182
+1089873	Rita Ora	\N	1990-11-26	2015-08-19 20:48:22.056128	2015-08-19 20:48:22.056128
+62644	50 Cent	Queens, New York City, New York, USA	1975-07-06	2015-08-19 20:48:23.177547	2015-08-19 20:48:23.177547
+928905	Clare Foley	\N	\N	2015-08-19 20:48:24.228001	2015-08-19 20:48:24.228001
+1078613	Beau Knapp	\N	\N	2015-08-19 20:48:25.086208	2015-08-19 20:48:25.086208
+232006	Nat Wolff	Los Angeles, California, U.S.A.	1994-12-17	2015-08-19 20:48:27.228029	2015-08-19 20:48:27.228029
+1289968	Cara Delevingne	London,  England	1992-08-12	2015-08-19 20:48:28.246358	2015-08-19 20:48:28.246358
+934243	Halston Sage	Los Angeles - California - USA	1993-05-10	2015-08-19 20:48:29.221311	2015-08-19 20:48:29.221311
+1421422	Caitlin Carver	\N	\N	2015-08-19 20:48:30.206719	2015-08-19 20:48:30.206719
+148992	Austin Abrams	\N	1996-09-02	2015-08-19 20:48:30.963719	2015-08-19 20:48:30.963719
+20047	Cara Buono	The Bronx - New York - USA	1971-03-01	2015-08-19 20:48:33.47286	2015-08-19 20:48:33.47286
+41379	Omid Djalili	London, England, UK	1965-09-30	2015-08-19 20:48:35.776677	2015-08-19 20:48:35.776677
+124557	Kate Harbour	London, England	\N	2015-08-19 20:48:36.914199	2015-08-19 20:48:36.914199
+155527	Simon Greenall	\N	1958-01-03	2015-08-19 20:48:37.953518	2015-08-19 20:48:37.953518
+75038	Roger Craig Smith	Orange County, California	1975-08-11	2015-08-19 20:48:39.180484	2015-08-19 20:48:39.180484
+963818	Troy Baker	\N	1976-04-01	2015-08-19 20:48:39.970346	2015-08-19 20:48:39.970346
+1217648	Chris Diamantopoulos	Toronto - Ontario - Canada	1975-05-09	2015-08-19 20:48:40.86488	2015-08-19 20:48:40.86488
+56152	Kari Wuhrer	Brookfield, Connecticut, U.S.	1967-04-28	2015-08-19 20:48:41.707363	2015-08-19 20:48:41.707363
+2	Mark Hamill	Concord, California, USA	1951-09-25	2015-08-19 20:48:42.848262	2015-08-19 20:48:42.848262
+19508	Nolan North	 New Haven, Connecticut, United States	1970-10-31	2015-08-19 20:48:43.922943	2015-08-19 20:48:43.922943
+20903	Josh Keaton	\N	1979-02-08	2015-08-19 20:48:44.703347	2015-08-19 20:48:44.703347
+65640	Khary Payton	Augusta, Georgia, US	1972-05-16	2015-08-19 20:48:45.509073	2015-08-19 20:48:45.509073
+19506	James Arnold Taylor		1969-07-22	2015-08-19 20:48:46.403809	2015-08-19 20:48:46.403809
+15761	Grey DeLisle	Fort Ord, California, USA	1972-08-12	2015-08-19 20:48:47.60796	2015-08-19 20:48:47.60796
+31531	John Di Maggio	North Plainfield, New Jersey, U.S.	1968-09-04	2015-08-19 20:48:48.557192	2015-08-19 20:48:48.557192
+24362	Kevin Michael Richardson	The Bronx, New York, USA	1964-10-25	2015-08-19 20:48:49.376959	2015-08-19 20:48:49.376959
+78798	Tom Kenny	Syracuse, New York, U.S.	1962-07-13	2015-08-19 20:48:50.233587	2015-08-19 20:48:50.233587
+1327	Ian McKellen	Burnley, England	1939-05-25	2015-08-19 20:48:51.406448	2015-08-19 20:48:51.406448
+1425134	Milo Parker	\N	\N	2015-08-19 20:48:52.298555	2015-08-19 20:48:52.298555
+350	Laura Linney	New York City - New York - USA	1964-02-05	2015-08-19 20:48:53.128994	2015-08-19 20:48:53.128994
+56103	Hattie Morahan		\N	2015-08-19 20:48:54.006611	2015-08-19 20:48:54.006611
+9195	Hiroyuki Sanada	Shinagawa - Tokyo	1960-10-12	2015-08-19 20:48:55.183651	2015-08-19 20:48:55.183651
+26854	Philip Davis		1953-07-30	2015-08-19 20:48:56.458547	2015-08-19 20:48:56.458547
+1356007	Sarah Crowden	\N	\N	2015-08-19 20:48:57.27474	2015-08-19 20:48:57.27474
+36669	Rupert Friend	Oxfordshire, England, UK	1981-10-01	2015-08-19 20:48:58.309948	2015-08-19 20:48:58.309948
+17306	Zachary Quinto	Pittsburgh, Pennsylvania, USA	1977-06-02	2015-08-19 20:48:59.158541	2015-08-19 20:48:59.158541
+577478	Hannah Ware	\N	1982-12-08	2015-08-19 20:48:59.999878	2015-08-19 20:48:59.999878
+53257	Emilio Rivera	San Antonio, Texas, USA	1961-02-24	2015-08-19 20:49:00.843645	2015-08-19 20:49:00.843645
+8801	Rolf Kanies	\N	1957-12-21	2015-08-19 20:49:02.129283	2015-08-19 20:49:02.129283
+3491	Thomas Kretschmann	Dessau - Germany	1962-09-08	2015-08-19 20:49:03.101152	2015-08-19 20:49:03.101152
+1183546	Dan Bakkedahl	Rochester - Minnesota - USA	1969-11-18	2015-08-19 20:49:04.106754	2015-08-19 20:49:04.106754
+8785	Ciarán Hinds	Belfast, Northern Ireland, UK	1953-02-09	2015-08-19 20:49:05.008113	2015-08-19 20:49:05.008113
+133168	Haruma Miura	\N	1990-04-05	2015-08-19 20:49:06.641102	2015-08-19 20:49:06.641102
+226711	Kiko Mizuhara	Dallas - Texas - USA	1990-10-15	2015-08-19 20:49:07.612181	2015-08-19 20:49:07.612181
+114725	Kanata Hongo		1990-11-15	2015-08-19 20:49:08.404631	2015-08-19 20:49:08.404631
+118579	Nanami Sakuraba		\N	2015-08-19 20:49:09.459922	2015-08-19 20:49:09.459922
+224664	Satomi Ishihara	\N	1986-12-24	2015-08-19 20:49:10.58466	2015-08-19 20:49:10.58466
+1015824	Ayame Misaki 	\N	\N	2015-08-19 20:49:11.616494	2015-08-19 20:49:11.616494
+120434	Pierre Taki		\N	2015-08-19 20:49:12.469314	2015-08-19 20:49:12.469314
+2541	Jun Kunimura	Kumamoto, Japan	1955-11-16	2015-08-19 20:49:13.320497	2015-08-19 20:49:13.320497
+4886	Norman Reedus	Hollywood - Florida - USA	1969-01-06	2015-08-19 20:49:14.319372	2015-08-19 20:49:14.319372
+938	Djimon Hounsou	Cotonou, Benin	1964-04-24	2015-08-19 20:49:15.186334	2015-08-19 20:49:15.186334
+65345	Sandrine Holt	London, England, UK	1972-11-19	2015-08-19 20:49:16.128116	2015-08-19 20:49:16.128116
+221085	Paula Lindberg	\N	\N	2015-08-19 20:49:17.109515	2015-08-19 20:49:17.109515
+53324	David Nykl	Prague, Czechoslovakia [now Czech Republic]	1967-02-07	2015-08-19 20:49:17.910934	2015-08-19 20:49:17.910934
+23532	Jason Bateman	Rye, New York, USA	1969-01-14	2015-08-19 20:49:18.98824	2015-08-19 20:49:18.98824
+15556	Rebecca Hall	London, England, UK	1982-05-19	2015-08-19 20:49:19.909463	2015-08-19 20:49:19.909463
+33192	Joel Edgerton	Blacktown, New South Wales, Australia	1974-06-23	2015-08-19 20:49:20.875128	2015-08-19 20:49:20.875128
+62562	David Denman	 Newport Beach, California, USA	1973-07-25	2015-08-19 20:49:21.734564	2015-08-19 20:49:21.734564
+1331652	Allison Tolman	\N	1981-11-18	2015-08-19 20:49:23.017963	2015-08-19 20:49:23.017963
+1211946	P. J. Byrne	Manasquan - New Jersey - USA	\N	2015-08-19 20:49:23.913129	2015-08-19 20:49:23.913129
+27031	Tim Griffin	Chicago, Illinois, USA	\N	2015-08-19 20:49:24.760384	2015-08-19 20:49:24.760384
+27105	Ed Helms	Atlanta, Georgia, U.S.	1974-01-24	2015-08-19 20:49:26.484764	2015-08-19 20:49:26.484764
+41087	Leslie Mann	San Francisco, California, USA	1972-03-26	2015-08-19 20:49:27.327572	2015-08-19 20:49:27.327572
+74568	Chris Hemsworth	Melbourne, Victoria, Australia	1983-08-11	2015-08-19 20:49:28.243698	2015-08-19 20:49:28.243698
+18979	Christina Applegate	Hollywood, California, USA	1971-11-25	2015-08-19 20:49:29.207531	2015-08-19 20:49:29.207531
+54812	Chevy Chase	Woodstock - New York - USA	1943-10-08	2015-08-19 20:49:30.290866	2015-08-19 20:49:30.290866
+95101	Charlie Day	New York City - New York - USA	1976-02-09	2015-08-19 20:49:32.337471	2015-08-19 20:49:32.337471
+206399	Elizabeth Gillies	Haworth, New Jersey, U.S.	1993-07-26	2015-08-19 20:49:34.755957	2015-08-19 20:49:34.755957
+821	Beverly D'Angelo	Columbus, Ohio, United States	1951-11-15	2015-08-19 20:49:36.088979	2015-08-19 20:49:36.088979
+298410	Keegan-Michael Key	Southfield - Michigan - USA	1971-03-22	2015-08-19 20:49:36.871837	2015-08-19 20:49:36.871837
+35705	Regina Hall	Washington, D.C., U.S.	1970-12-12	2015-08-19 20:49:37.72812	2015-08-19 20:49:37.72812
+204	Kate Winslet	Reading, UK	1975-10-05	2015-08-19 20:49:38.817483	2015-08-19 20:49:38.817483
+4566	Alan Rickman	Hammersmith, London, UK	1946-02-21	2015-08-19 20:49:39.853581	2015-08-19 20:49:39.853581
+2283	Stanley Tucci	Peekskill, New York, USA	1960-11-11	2015-08-19 20:49:40.688787	2015-08-19 20:49:40.688787
+73381	Matthias Schoenaerts		1977-12-08	2015-08-19 20:49:41.768271	2015-08-19 20:49:41.768271
+49971	Jennifer Ehle	Winston-Salem - North Carolina - USA	1969-12-29	2015-08-19 20:49:42.702886	2015-08-19 20:49:42.702886
+15737	Helen McCrory	London, England, UK	1968-08-17	2015-08-19 20:49:43.479457	2015-08-19 20:49:43.479457
+27764	Steven Waddington		\N	2015-08-19 20:49:44.333631	2015-08-19 20:49:44.333631
+383624	Adrian Schiller	\N	1964-02-21	2015-08-19 20:49:45.306507	2015-08-19 20:49:45.306507
+53917	Danny Webb	London, England, UK	1958-06-06	2015-08-19 20:49:46.094457	2015-08-19 20:49:46.094457
+17787	Phyllida Law	Glasgow, Scotland, UK	1932-05-08	2015-08-19 20:49:46.840938	2015-08-19 20:49:46.840938
+4724	Kevin Bacon	Philadelphia - Pennsylvania - USA	1958-07-08	2015-08-19 20:49:47.811411	2015-08-19 20:49:47.811411
+74242	Shea Whigham	Tallahassee, Florida, USA	1969-01-05	2015-08-19 20:49:49.207516	2015-08-19 20:49:49.207516
+20187	Camryn Manheim	Caldwell - New Jersey - USA	1961-03-08	2015-08-19 20:49:50.111508	2015-08-19 20:49:50.111508
+\.
+
+
+--
+-- Name: actors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Mark
+--
+
+SELECT pg_catalog.setval('actors_id_seq', 1, false);
+
+
+--
+-- Data for Name: castings; Type: TABLE DATA; Schema: public; Owner: Mark
+--
+
+COPY castings (id, movie_id, actor_id, ord, act_as, created_at, updated_at) FROM stdin;
+141	102899	22226	0	Scott Lang / Ant-Man	2015-08-19 20:47:08.168098	2015-08-19 20:47:08.168098
+142	102899	3392	1	Hank Pym	2015-08-19 20:47:11.284174	2015-08-19 20:47:11.284174
+143	102899	19034	2	Hope Van Dyne	2015-08-19 20:47:12.261616	2015-08-19 20:47:12.261616
+144	102899	74541	3	Darren Cross / Yellowjacket	2015-08-19 20:47:13.164735	2015-08-19 20:47:13.164735
+145	102899	21127	4	Paxton	2015-08-19 20:47:14.17612	2015-08-19 20:47:14.17612
+146	102899	20750	5	Maggie	2015-08-19 20:47:15.261812	2015-08-19 20:47:15.261812
+147	102899	454	6	Luis	2015-08-19 20:47:16.197477	2015-08-19 20:47:16.197477
+148	102899	53650	7	Sam Wilson / Falcon	2015-08-19 20:47:17.100476	2015-08-19 20:47:17.100476
+149	102899	65829	8	Gale	2015-08-19 20:47:17.942198	2015-08-19 20:47:17.942198
+150	102899	83854	9	Kurt	2015-08-19 20:47:18.916327	2015-08-19 20:47:18.916327
+151	102899	76126	10	Dave	2015-08-19 20:47:19.983814	2015-08-19 20:47:19.983814
+152	177677	500	0	Ethan Hunt	2015-08-19 20:47:21.377057	2015-08-19 20:47:21.377057
+153	177677	17604	1	William Brandt	2015-08-19 20:47:22.318021	2015-08-19 20:47:22.318021
+154	177677	11108	2	Benji Dunn	2015-08-19 20:47:23.37376	2015-08-19 20:47:23.37376
+155	177677	933238	3	Ilsa	2015-08-19 20:47:24.2679	2015-08-19 20:47:24.2679
+156	177677	10182	4	Luther Stickell	2015-08-19 20:47:26.201417	2015-08-19 20:47:26.201417
+157	177677	16702	5		2015-08-19 20:47:27.171978	2015-08-19 20:47:27.171978
+158	177677	16358	6		2015-08-19 20:47:28.016583	2015-08-19 20:47:28.016583
+159	177677	41894	7		2015-08-19 20:47:28.8704	2015-08-19 20:47:28.8704
+160	177677	2441	8	Prime Minister	2015-08-19 20:47:29.839843	2015-08-19 20:47:29.839843
+161	177677	92429	9	Janik Vinter	2015-08-19 20:47:31.075664	2015-08-19 20:47:31.075664
+162	177677	7447	10	Hunley	2015-08-19 20:47:32.535968	2015-08-19 20:47:32.535968
+163	166424	996701	0	Reed Richards / Mr. Fantastic	2015-08-19 20:47:35.172735	2015-08-19 20:47:35.172735
+164	166424	51072	1	Sue Storm / The Invisible Woman	2015-08-19 20:47:36.285281	2015-08-19 20:47:36.285281
+165	166424	478	2	Ben Grimm / The Thing	2015-08-19 20:47:37.169484	2015-08-19 20:47:37.169484
+166	166424	20286	3	Victor Domashev	2015-08-19 20:47:38.03885	2015-08-19 20:47:38.03885
+167	166424	135651	4	Johnny Storm / The Human Torch	2015-08-19 20:47:38.915204	2015-08-19 20:47:38.915204
+168	166424	1462	5	Harvey Elder	2015-08-19 20:47:39.744521	2015-08-19 20:47:39.744521
+169	166424	38951	6	Dr. Franklin Storm	2015-08-19 20:47:40.537718	2015-08-19 20:47:40.537718
+170	166424	1421688	8	Jimmy Grimm	2015-08-19 20:47:41.692053	2015-08-19 20:47:41.692053
+171	257344	19292	0	Sam Brenner	2015-08-19 20:47:43.190582	2015-08-19 20:47:43.190582
+172	257344	11705	1	Violet Van Patten	2015-08-19 20:47:44.073923	2015-08-19 20:47:44.073923
+173	257344	22970	2	Eddie Plant	2015-08-19 20:47:45.005286	2015-08-19 20:47:45.005286
+174	257344	54415	3	Ludlow Lamonsoff	2015-08-19 20:47:45.994535	2015-08-19 20:47:45.994535
+175	257344	32895	4	President Will Cooper	2015-08-19 20:47:47.037148	2015-08-19 20:47:47.037148
+176	257344	78030	5	Lady Lisa	2015-08-19 20:47:48.162718	2015-08-19 20:47:48.162718
+177	257344	48	6	Corporal Hill (SAS Officer)	2015-08-19 20:47:49.158608	2015-08-19 20:47:49.158608
+178	257344	13636	7	Carolyn Cooper	2015-08-19 20:47:49.967697	2015-08-19 20:47:49.967697
+179	257344	1248	8	Admiral Porter	2015-08-19 20:47:50.851121	2015-08-19 20:47:50.851121
+180	257344	707	10	1982 Championship MC	2015-08-19 20:47:51.989342	2015-08-19 20:47:51.989342
+181	271718	440414	0	Amy	2015-08-19 20:47:53.118909	2015-08-19 20:47:53.118909
+182	271718	19278	1	Aaron	2015-08-19 20:47:53.980048	2015-08-19 20:47:53.980048
+183	271718	60073	2	Kim	2015-08-19 20:47:54.853827	2015-08-19 20:47:54.853827
+184	271718	1219901	3	Gordon	2015-08-19 20:47:55.733212	2015-08-19 20:47:55.733212
+185	271718	503103	4	Nikki	2015-08-19 20:47:56.705277	2015-08-19 20:47:56.705277
+186	271718	3063	5	Dianna	2015-08-19 20:47:57.615636	2015-08-19 20:47:57.615636
+187	271718	107379	6	LeBron James	2015-08-19 20:47:58.463812	2015-08-19 20:47:58.463812
+188	271718	113373	7	Tom	2015-08-19 20:47:59.25541	2015-08-19 20:47:59.25541
+189	271718	56446	8	Steven	2015-08-19 20:48:00.10317	2015-08-19 20:48:00.10317
+190	271718	65923	9	Noam	2015-08-19 20:48:00.998791	2015-08-19 20:48:00.998791
+191	271718	2698	10	Norman	2015-08-19 20:48:01.902194	2015-08-19 20:48:01.902194
+192	203801	227454	0	Gaby Teller	2015-08-19 20:48:03.27803	2015-08-19 20:48:03.27803
+193	203801	73968	1	Napoleon Solo	2015-08-19 20:48:04.457423	2015-08-19 20:48:04.457423
+194	203801	3291	2	Waverly	2015-08-19 20:48:05.372043	2015-08-19 20:48:05.372043
+195	203801	53807	3	Illya Kuryakin	2015-08-19 20:48:06.218747	2015-08-19 20:48:06.218747
+196	203801	15440	4	Sanders	2015-08-19 20:48:07.289686	2015-08-19 20:48:07.289686
+197	203801	1133349	5	Victoria Vinciguerra	2015-08-19 20:48:08.200905	2015-08-19 20:48:08.200905
+198	203801	90325	6	Alexander	2015-08-19 20:48:08.990735	2015-08-19 20:48:08.990735
+199	203801	1440871	7	Colonel Massid	2015-08-19 20:48:09.833769	2015-08-19 20:48:09.833769
+200	203801	1351952	8	Countess Allegra	2015-08-19 20:48:10.764547	2015-08-19 20:48:10.764547
+201	277216	13242	1	Jerry Heller	2015-08-19 20:48:12.302122	2015-08-19 20:48:12.302122
+202	277216	83860	2	MC Ren	2015-08-19 20:48:13.154335	2015-08-19 20:48:13.154335
+203	277216	1200864	3	Snoop Dogg	2015-08-19 20:48:14.038906	2015-08-19 20:48:14.038906
+204	277216	1305249	4	Doris Jackson	2015-08-19 20:48:14.931115	2015-08-19 20:48:14.931115
+205	277216	149010	6	Block Dude	2015-08-19 20:48:16.003558	2015-08-19 20:48:16.003558
+206	277216	1371397	8	Suge Knight	2015-08-19 20:48:16.829225	2015-08-19 20:48:16.829225
+207	277216	141432	10	Al	2015-08-19 20:48:17.898969	2015-08-19 20:48:17.898969
+208	307081	131	0	Billy Hope	2015-08-19 20:48:19.036056	2015-08-19 20:48:19.036056
+209	307081	53714	1	Maureen Hope	2015-08-19 20:48:19.911875	2015-08-19 20:48:19.911875
+210	307081	2178	2	Titus 'Tick' Wills	2015-08-19 20:48:20.792626	2015-08-19 20:48:20.792626
+211	307081	2038	4	Angela Rivera	2015-08-19 20:48:21.839724	2015-08-19 20:48:21.839724
+212	307081	1089873	5		2015-08-19 20:48:22.956665	2015-08-19 20:48:22.956665
+213	307081	62644	6	Jordan Mains	2015-08-19 20:48:23.991694	2015-08-19 20:48:23.991694
+214	307081	928905	7	Alice	2015-08-19 20:48:24.878521	2015-08-19 20:48:24.878521
+215	307081	1078613	9	Jon Jon	2015-08-19 20:48:25.789561	2015-08-19 20:48:25.789561
+216	286565	232006	0	Quentin Jacobsen	2015-08-19 20:48:28.014185	2015-08-19 20:48:28.014185
+217	286565	1289968	1	Margo Roth Spiegelman	2015-08-19 20:48:29.01986	2015-08-19 20:48:29.01986
+218	286565	934243	2	Lacey Pemberton	2015-08-19 20:48:29.990388	2015-08-19 20:48:29.990388
+219	286565	1421422	3	Becca Arrington	2015-08-19 20:48:30.761023	2015-08-19 20:48:30.761023
+220	286565	148992	4	Ben Starling	2015-08-19 20:48:32.007604	2015-08-19 20:48:32.007604
+221	286565	20047	8	Connie Jacobsen	2015-08-19 20:48:34.455917	2015-08-19 20:48:34.455917
+222	263109	41379	3	Trumper (voice)	2015-08-19 20:48:36.489752	2015-08-19 20:48:36.489752
+223	263109	124557	5	Timmy's Mum and Meryl (voice)	2015-08-19 20:48:37.5254	2015-08-19 20:48:37.5254
+224	263109	155527	7	Twins (voice)	2015-08-19 20:48:38.745055	2015-08-19 20:48:38.745055
+225	342917	75038	1	Batman (voice)	2015-08-19 20:48:39.736289	2015-08-19 20:48:39.736289
+226	342917	963818	2	The Joker (voice)	2015-08-19 20:48:40.629809	2015-08-19 20:48:40.629809
+227	342917	1217648	3	Green Arrow (voice)	2015-08-19 20:48:41.49185	2015-08-19 20:48:41.49185
+228	342917	56152	4	Silver Banshee (voice)	2015-08-19 20:48:42.433353	2015-08-19 20:48:42.433353
+229	353595	2	1	Trickster/Sinestro	2015-08-19 20:48:43.483006	2015-08-19 20:48:43.483006
+230	353595	963818	2	Batman	2015-08-19 20:48:43.689941	2015-08-19 20:48:43.689941
+231	353595	19508	3	Superman	2015-08-19 20:48:44.491425	2015-08-19 20:48:44.491425
+232	353595	20903	4	Green Lantern	2015-08-19 20:48:45.278569	2015-08-19 20:48:45.278569
+233	353595	65640	5	Cyborg	2015-08-19 20:48:46.17962	2015-08-19 20:48:46.17962
+234	353595	19506	6	The Flash	2015-08-19 20:48:47.402768	2015-08-19 20:48:47.402768
+235	353595	15761	7	Wonder Woman/Lois Lane	2015-08-19 20:48:48.357609	2015-08-19 20:48:48.357609
+236	353595	31531	8	Lex Luthor/Joker	2015-08-19 20:48:49.159916	2015-08-19 20:48:49.159916
+237	353595	24362	9	Captain Cold/Gorilla Grodd/Black Manta	2015-08-19 20:48:50.031025	2015-08-19 20:48:50.031025
+238	353595	78798	10	The Penguin	2015-08-19 20:48:50.987621	2015-08-19 20:48:50.987621
+239	280996	1327	0	Sherlock Holmes	2015-08-19 20:48:52.096954	2015-08-19 20:48:52.096954
+240	280996	1425134	1	Roger	2015-08-19 20:48:52.924527	2015-08-19 20:48:52.924527
+241	280996	350	2	Mrs. Munro	2015-08-19 20:48:53.79597	2015-08-19 20:48:53.79597
+242	280996	56103	3	Ann Kelmot	2015-08-19 20:48:54.76508	2015-08-19 20:48:54.76508
+243	280996	9195	5	Tamiki Umezaki	2015-08-19 20:48:55.806149	2015-08-19 20:48:55.806149
+244	280996	26854	9	Inspector Gilbert	2015-08-19 20:48:57.043148	2015-08-19 20:48:57.043148
+245	280996	1356007	10	Mrs. Hudson	2015-08-19 20:48:57.822153	2015-08-19 20:48:57.822153
+246	249070	36669	0	Agent 47	2015-08-19 20:48:58.956472	2015-08-19 20:48:58.956472
+247	249070	17306	1	John Smith	2015-08-19 20:48:59.796147	2015-08-19 20:48:59.796147
+248	249070	577478	2	Katia van Dees	2015-08-19 20:49:00.631831	2015-08-19 20:49:00.631831
+249	249070	53257	3	Fabian	2015-08-19 20:49:01.874074	2015-08-19 20:49:01.874074
+250	249070	8801	4	Dr. Delriego	2015-08-19 20:49:02.897262	2015-08-19 20:49:02.897262
+251	249070	3491	5	Le Clerq	2015-08-19 20:49:03.882444	2015-08-19 20:49:03.882444
+252	249070	1183546	6		2015-08-19 20:49:04.808983	2015-08-19 20:49:04.808983
+253	249070	8785	7	Dr. Litvenko	2015-08-19 20:49:05.615882	2015-08-19 20:49:05.615882
+254	295830	133168	1	Eren Yeager	2015-08-19 20:49:07.41049	2015-08-19 20:49:07.41049
+255	295830	226711	2	Mikasa Ackerman	2015-08-19 20:49:08.192049	2015-08-19 20:49:08.192049
+256	295830	114725	3	Armin Arlert	2015-08-19 20:49:09.250796	2015-08-19 20:49:09.250796
+257	295830	118579	4	Sasha Blouse	2015-08-19 20:49:10.116892	2015-08-19 20:49:10.116892
+258	295830	224664	6	Hanji Zoe	2015-08-19 20:49:11.211885	2015-08-19 20:49:11.211885
+259	295830	1015824	8	Hiana	2015-08-19 20:49:12.26946	2015-08-19 20:49:12.26946
+260	295830	120434	9	Souda	2015-08-19 20:49:13.091307	2015-08-19 20:49:13.091307
+261	295830	2541	10	Kubal	2015-08-19 20:49:13.875332	2015-08-19 20:49:13.875332
+262	284674	4886	1	Bauer	2015-08-19 20:49:14.974409	2015-08-19 20:49:14.974409
+263	284674	938	2	Cartwright	2015-08-19 20:49:15.917355	2015-08-19 20:49:15.917355
+264	284674	65345	4	Abby	2015-08-19 20:49:16.883186	2015-08-19 20:49:16.883186
+265	284674	221085	5	Reporter	2015-08-19 20:49:17.697859	2015-08-19 20:49:17.697859
+266	284674	53324	6	Sleeper 1	2015-08-19 20:49:18.57422	2015-08-19 20:49:18.57422
+267	328425	23532	1	Simon	2015-08-19 20:49:19.696591	2015-08-19 20:49:19.696591
+268	328425	15556	2	Robyn	2015-08-19 20:49:20.663678	2015-08-19 20:49:20.663678
+269	328425	33192	3	Gordo	2015-08-19 20:49:21.531067	2015-08-19 20:49:21.531067
+270	328425	62562	4	Greg	2015-08-19 20:49:22.574686	2015-08-19 20:49:22.574686
+271	328425	1078613	5	Detective Walker	2015-08-19 20:49:22.774632	2015-08-19 20:49:22.774632
+272	328425	1331652	6	Lucy	2015-08-19 20:49:23.711494	2015-08-19 20:49:23.711494
+273	328425	1211946	7	Danny	2015-08-19 20:49:24.525123	2015-08-19 20:49:24.525123
+274	328425	27031	8	Kevin	2015-08-19 20:49:25.543648	2015-08-19 20:49:25.543648
+275	296099	27105	1	Rusty Griswold	2015-08-19 20:49:27.119023	2015-08-19 20:49:27.119023
+276	296099	41087	2	Audrey Griswold	2015-08-19 20:49:28.03005	2015-08-19 20:49:28.03005
+277	296099	74568	3	Stone Crandall	2015-08-19 20:49:28.971511	2015-08-19 20:49:28.971511
+278	296099	18979	4	Debbie Griswold	2015-08-19 20:49:29.864036	2015-08-19 20:49:29.864036
+279	296099	54812	5	Clark Griswold	2015-08-19 20:49:32.053265	2015-08-19 20:49:32.053265
+280	296099	95101	6	Chad	2015-08-19 20:49:34.429801	2015-08-19 20:49:34.429801
+281	296099	206399	7	Heather	2015-08-19 20:49:35.746757	2015-08-19 20:49:35.746757
+282	296099	821	8	Ellen Griswold	2015-08-19 20:49:36.674833	2015-08-19 20:49:36.674833
+283	296099	298410	9	Jack Peterson	2015-08-19 20:49:37.500226	2015-08-19 20:49:37.500226
+284	296099	35705	10	Nancy Peterson	2015-08-19 20:49:38.377565	2015-08-19 20:49:38.377565
+285	283227	204	0	Sabine De Barra	2015-08-19 20:49:39.648079	2015-08-19 20:49:39.648079
+286	283227	4566	1	Le Roi Louis XIV	2015-08-19 20:49:40.482042	2015-08-19 20:49:40.482042
+287	283227	2283	2	Duke Philippe d'Orleans	2015-08-19 20:49:41.560331	2015-08-19 20:49:41.560331
+288	283227	73381	3	Andre Le Notre	2015-08-19 20:49:42.462446	2015-08-19 20:49:42.462446
+289	283227	49971	4	Madame De Montespan	2015-08-19 20:49:43.274993	2015-08-19 20:49:43.274993
+290	283227	15737	5	Madame Le Notre	2015-08-19 20:49:44.117805	2015-08-19 20:49:44.117805
+291	283227	27764	6	Duras	2015-08-19 20:49:45.084666	2015-08-19 20:49:45.084666
+292	283227	383624	7	Jean Risse	2015-08-19 20:49:45.889174	2015-08-19 20:49:45.889174
+293	283227	53917	8	Moulin	2015-08-19 20:49:46.637762	2015-08-19 20:49:46.637762
+294	283227	17787	9		2015-08-19 20:49:47.40283	2015-08-19 20:49:47.40283
+295	310133	4724	1	Sheriff Kretzer	2015-08-19 20:49:48.475168	2015-08-19 20:49:48.475168
+296	310133	74242	4	Man	2015-08-19 20:49:49.877974	2015-08-19 20:49:49.877974
+297	310133	20187	5	Bev	2015-08-19 20:49:51.180362	2015-08-19 20:49:51.180362
+\.
+
+
+--
+-- Name: castings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Mark
+--
+
+SELECT pg_catalog.setval('castings_id_seq', 297, true);
+
+
+--
+-- Data for Name: genres; Type: TABLE DATA; Schema: public; Owner: Mark
+--
+
+COPY genres (id, name, created_at, updated_at) FROM stdin;
+28	Action	2015-08-19 05:15:58.320478	2015-08-19 05:15:58.320478
+12	Adventure	2015-08-19 05:15:58.324846	2015-08-19 05:15:58.324846
+16	Animation	2015-08-19 05:15:58.326503	2015-08-19 05:15:58.326503
+35	Comedy	2015-08-19 05:15:58.32799	2015-08-19 05:15:58.32799
+80	Crime	2015-08-19 05:15:58.329562	2015-08-19 05:15:58.329562
+99	Documentary	2015-08-19 05:15:58.331048	2015-08-19 05:15:58.331048
+18	Drama	2015-08-19 05:15:58.332608	2015-08-19 05:15:58.332608
+10751	Family	2015-08-19 05:15:58.334069	2015-08-19 05:15:58.334069
+14	Fantasy	2015-08-19 05:15:58.335485	2015-08-19 05:15:58.335485
+10769	Foreign	2015-08-19 05:15:58.336928	2015-08-19 05:15:58.336928
+36	History	2015-08-19 05:15:58.338444	2015-08-19 05:15:58.338444
+27	Horror	2015-08-19 05:15:58.33996	2015-08-19 05:15:58.33996
+10402	Music	2015-08-19 05:15:58.341556	2015-08-19 05:15:58.341556
+9648	Mystery	2015-08-19 05:15:58.343087	2015-08-19 05:15:58.343087
+10749	Romance	2015-08-19 05:15:58.344522	2015-08-19 05:15:58.344522
+878	Science Fiction	2015-08-19 05:15:58.345977	2015-08-19 05:15:58.345977
+10770	TV Movie	2015-08-19 05:15:58.347402	2015-08-19 05:15:58.347402
+53	Thriller	2015-08-19 05:15:58.348912	2015-08-19 05:15:58.348912
+10752	War	2015-08-19 05:15:58.350324	2015-08-19 05:15:58.350324
+37	Western	2015-08-19 05:15:58.351801	2015-08-19 05:15:58.351801
+\.
+
+
+--
+-- Name: genres_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Mark
+--
+
+SELECT pg_catalog.setval('genres_id_seq', 1, false);
+
+
+--
+-- Data for Name: images; Type: TABLE DATA; Schema: public; Owner: Mark
+--
+
+COPY images (id, image_url, thumbnil_url, imageable_id, imageable_type, created_at, updated_at) FROM stdin;
+1	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961359/n6shkm03lat5muuehx4r.jpg	\N	102899	Movie	2015-08-19 05:16:00.672597	2015-08-19 05:16:00.672597
+2	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961361/jzfbkwlivgoujzctzybe.jpg	\N	177677	Movie	2015-08-19 05:16:02.871684	2015-08-19 05:16:02.871684
+3	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961363/xrbyvrekovtmtmrm0gkw.jpg	\N	166424	Movie	2015-08-19 05:16:05.113452	2015-08-19 05:16:05.113452
+4	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961365/gv3axfod6zho0abxekfm.jpg	\N	257344	Movie	2015-08-19 05:16:07.008514	2015-08-19 05:16:07.008514
+5	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961367/oeabmy1gwmffksa95fwa.jpg	\N	271718	Movie	2015-08-19 05:16:09.20809	2015-08-19 05:16:09.20809
+6	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961369/dbysnwadgjrhowtmxg3a.jpg	\N	203801	Movie	2015-08-19 05:16:11.283811	2015-08-19 05:16:11.283811
+7	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961371/ak1zodqroh65lnnznuer.jpg	\N	277216	Movie	2015-08-19 05:16:13.201625	2015-08-19 05:16:13.201625
+8	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961373/mhkv16jvw9vvkyiqwnh2.jpg	\N	307081	Movie	2015-08-19 05:16:14.952869	2015-08-19 05:16:14.952869
+9	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961375/nmdnfqlnbebu85ecd8xt.jpg	\N	286565	Movie	2015-08-19 05:16:16.790767	2015-08-19 05:16:16.790767
+10	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961377/zl4rm2hnebfrqps6mktt.jpg	\N	263109	Movie	2015-08-19 05:16:18.647995	2015-08-19 05:16:18.647995
+11	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961379/kzlcdkdzk7ns7vbprjk9.jpg	\N	342917	Movie	2015-08-19 05:16:20.68822	2015-08-19 05:16:20.68822
+12	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961381/p05w5ogzeevkfcxdyxzr.jpg	\N	353595	Movie	2015-08-19 05:16:22.520826	2015-08-19 05:16:22.520826
+13	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961383/lyssrwmqwd8kr26kxybs.jpg	\N	280996	Movie	2015-08-19 05:16:23.890821	2015-08-19 05:16:23.890821
+14	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961384/hbop7puldxk924hanpi9.jpg	\N	249070	Movie	2015-08-19 05:16:26.211013	2015-08-19 05:16:26.211013
+15	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961386/krghrvmbe6yblkqvsi1u.jpg	\N	295830	Movie	2015-08-19 05:16:28.047779	2015-08-19 05:16:28.047779
+16	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961388/lvx2dmm1ta5yxsu878lg.jpg	\N	284674	Movie	2015-08-19 05:16:29.895994	2015-08-19 05:16:29.895994
+17	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961390/bchzaidjb5mkfbb23ofm.jpg	\N	328425	Movie	2015-08-19 05:16:31.735405	2015-08-19 05:16:31.735405
+18	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961392/j35y3wrrqqzuqqujoscs.jpg	\N	296099	Movie	2015-08-19 05:16:33.814503	2015-08-19 05:16:33.814503
+19	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961394/nqgwacio0zboqjskd5ty.jpg	\N	283227	Movie	2015-08-19 05:16:36.245271	2015-08-19 05:16:36.245271
+20	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961397/ape7ysk7vk7fts3admdy.jpg	\N	310133	Movie	2015-08-19 05:16:38.693703	2015-08-19 05:16:38.693703
+162	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017227/nq8yjqiaocfgo26u8c0x.jpg	\N	22226	Actor	2015-08-19 20:47:08.155925	2015-08-19 20:47:08.155925
+163	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017230/ecblzovi8xocjueet7dj.jpg	\N	3392	Actor	2015-08-19 20:47:11.280736	2015-08-19 20:47:11.280736
+164	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017231/rvvqqvv18xxgcekatqcw.jpg	\N	19034	Actor	2015-08-19 20:47:12.258008	2015-08-19 20:47:12.258008
+165	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017232/nhfyvsmobr6r7rd2mxo5.jpg	\N	74541	Actor	2015-08-19 20:47:13.161448	2015-08-19 20:47:13.161448
+166	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017233/k3l8n5echwl4a1c0jwvd.jpg	\N	21127	Actor	2015-08-19 20:47:14.172528	2015-08-19 20:47:14.172528
+167	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017234/fp6vpzasrn6bnk2nnhix.jpg	\N	20750	Actor	2015-08-19 20:47:15.258363	2015-08-19 20:47:15.258363
+168	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017235/xg6trss9elfvjgldozzj.jpg	\N	454	Actor	2015-08-19 20:47:16.194132	2015-08-19 20:47:16.194132
+169	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017236/okc8ibeucwd3lyuxyn2b.jpg	\N	53650	Actor	2015-08-19 20:47:17.097768	2015-08-19 20:47:17.097768
+170	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017237/qd9ikcbluhqfu153mhbt.jpg	\N	65829	Actor	2015-08-19 20:47:17.938771	2015-08-19 20:47:17.938771
+171	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017238/nchqgcomg60uaoeigiwp.jpg	\N	83854	Actor	2015-08-19 20:47:18.912794	2015-08-19 20:47:18.912794
+172	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017239/afchwnkaaeouihm9gdlk.jpg	\N	76126	Actor	2015-08-19 20:47:19.980588	2015-08-19 20:47:19.980588
+173	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017240/xze5j8yhv1qqwlbrbs1j.jpg	\N	500	Actor	2015-08-19 20:47:21.373554	2015-08-19 20:47:21.373554
+174	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017242/h5fvqdkpdg5wyn9breug.jpg	\N	17604	Actor	2015-08-19 20:47:22.314697	2015-08-19 20:47:22.314697
+175	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017243/oxpoz3bi53dmdpcqe1z3.jpg	\N	11108	Actor	2015-08-19 20:47:23.370381	2015-08-19 20:47:23.370381
+176	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017243/tgqzkzu1fjibotprdukq.jpg	\N	933238	Actor	2015-08-19 20:47:24.26456	2015-08-19 20:47:24.26456
+177	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017245/yeuu2zjutgdzjzygl0tc.jpg	\N	10182	Actor	2015-08-19 20:47:26.198467	2015-08-19 20:47:26.198467
+178	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017246/osyrd9vih2mavpiiowzk.jpg	\N	16702	Actor	2015-08-19 20:47:27.168691	2015-08-19 20:47:27.168691
+179	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017247/v2zpaasyqjupfck59ym6.jpg	\N	16358	Actor	2015-08-19 20:47:28.012768	2015-08-19 20:47:28.012768
+180	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017248/adwwzfipdsmk48pxkwjd.jpg	\N	41894	Actor	2015-08-19 20:47:28.866312	2015-08-19 20:47:28.866312
+181	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017249/vzwgggldnkq6hlovfeh3.jpg	\N	2441	Actor	2015-08-19 20:47:29.83669	2015-08-19 20:47:29.83669
+182	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017250/f2lkvtjkci2ar2osbnhn.jpg	\N	92429	Actor	2015-08-19 20:47:31.072546	2015-08-19 20:47:31.072546
+183	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017252/pgdvitoyx93tcutmgq6n.jpg	\N	7447	Actor	2015-08-19 20:47:32.529591	2015-08-19 20:47:32.529591
+184	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017254/rzfeipndwvkedyt0q12j.jpg	\N	996701	Actor	2015-08-19 20:47:35.169537	2015-08-19 20:47:35.169537
+185	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017255/fqfrppa0b7z2rbor4vhh.jpg	\N	51072	Actor	2015-08-19 20:47:36.281932	2015-08-19 20:47:36.281932
+186	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017256/yowxhqy7ejzkuyaav5ns.jpg	\N	478	Actor	2015-08-19 20:47:37.166783	2015-08-19 20:47:37.166783
+187	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017257/xmjjterwf4uo7kvtmcpq.jpg	\N	20286	Actor	2015-08-19 20:47:38.03554	2015-08-19 20:47:38.03554
+188	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017258/liwgovztax7lya8fgoeg.jpg	\N	135651	Actor	2015-08-19 20:47:38.910467	2015-08-19 20:47:38.910467
+189	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017259/ilhgpi9p83illj75qckt.jpg	\N	1462	Actor	2015-08-19 20:47:39.741627	2015-08-19 20:47:39.741627
+190	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017260/qkqkrntxe6h95uklt3di.jpg	\N	38951	Actor	2015-08-19 20:47:40.534277	2015-08-19 20:47:40.534277
+191	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017261/jy4rmkxgdwfhdbshgtud.jpg	\N	1421688	Actor	2015-08-19 20:47:41.688608	2015-08-19 20:47:41.688608
+192	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017262/v1rlyievlssqxmr0bbmd.jpg	\N	19292	Actor	2015-08-19 20:47:43.187311	2015-08-19 20:47:43.187311
+193	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017263/lzzbxwkus9orerr5jetg.jpg	\N	11705	Actor	2015-08-19 20:47:44.0705	2015-08-19 20:47:44.0705
+194	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017264/i08xln5komgutwf2fsb4.jpg	\N	22970	Actor	2015-08-19 20:47:45.002614	2015-08-19 20:47:45.002614
+195	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017265/j2adqcgvy0pefnuf5qvm.jpg	\N	54415	Actor	2015-08-19 20:47:45.991896	2015-08-19 20:47:45.991896
+196	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017266/bnyharhdnbxtyhan5nkv.jpg	\N	32895	Actor	2015-08-19 20:47:47.034552	2015-08-19 20:47:47.034552
+197	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017267/d1ixalzkrfgyc6aln7mm.jpg	\N	78030	Actor	2015-08-19 20:47:48.158229	2015-08-19 20:47:48.158229
+198	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017268/xgrjmoalbncoc37efocr.jpg	\N	48	Actor	2015-08-19 20:47:49.155139	2015-08-19 20:47:49.155139
+199	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017269/fi8ozfnydhcgym1glesa.jpg	\N	13636	Actor	2015-08-19 20:47:49.964278	2015-08-19 20:47:49.964278
+200	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017270/h50p90gp43jmdmcyvi3b.jpg	\N	1248	Actor	2015-08-19 20:47:50.847509	2015-08-19 20:47:50.847509
+201	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017271/wfs7nbt3uaqzl5pgfhab.jpg	\N	707	Actor	2015-08-19 20:47:51.985981	2015-08-19 20:47:51.985981
+202	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017272/w1bqtf2kfru55frglbyf.jpg	\N	440414	Actor	2015-08-19 20:47:53.116317	2015-08-19 20:47:53.116317
+203	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017273/mnuy7nonqbcmbtrwgkrd.jpg	\N	19278	Actor	2015-08-19 20:47:53.976658	2015-08-19 20:47:53.976658
+204	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017274/ojw23uhsgw6ejzuz6twu.jpg	\N	60073	Actor	2015-08-19 20:47:54.850624	2015-08-19 20:47:54.850624
+205	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017275/nphenmutrb4sqatdrjxp.jpg	\N	1219901	Actor	2015-08-19 20:47:55.729849	2015-08-19 20:47:55.729849
+206	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017276/pgekxooevadjotjvrxcv.jpg	\N	503103	Actor	2015-08-19 20:47:56.702204	2015-08-19 20:47:56.702204
+207	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017277/hjuw9snpzxtxef55mv2l.jpg	\N	3063	Actor	2015-08-19 20:47:57.612267	2015-08-19 20:47:57.612267
+208	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017278/xs3ho0is5sxqihsefzed.jpg	\N	107379	Actor	2015-08-19 20:47:58.460562	2015-08-19 20:47:58.460562
+209	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017279/ipgb0a8bqptvlllxwasp.jpg	\N	113373	Actor	2015-08-19 20:47:59.252111	2015-08-19 20:47:59.252111
+210	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017279/ppyhifib7nkuvgpd8qog.jpg	\N	56446	Actor	2015-08-19 20:48:00.099882	2015-08-19 20:48:00.099882
+211	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017280/s661lqhdb20qq7jjlur4.jpg	\N	65923	Actor	2015-08-19 20:48:00.995373	2015-08-19 20:48:00.995373
+212	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017281/ap8w5kozxsc6ba8ejcvw.jpg	\N	2698	Actor	2015-08-19 20:48:01.895629	2015-08-19 20:48:01.895629
+213	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017282/p6k4fvaou2ikjp23ruod.jpg	\N	227454	Actor	2015-08-19 20:48:03.274362	2015-08-19 20:48:03.274362
+214	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017283/egcw8wtgumvbsnr1iohk.jpg	\N	73968	Actor	2015-08-19 20:48:04.453939	2015-08-19 20:48:04.453939
+215	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017285/i2p1yx2kznckc9lqhb2x.jpg	\N	3291	Actor	2015-08-19 20:48:05.36872	2015-08-19 20:48:05.36872
+216	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017285/xk9cf6rgvk9b5qs2pzdw.jpg	\N	53807	Actor	2015-08-19 20:48:06.215883	2015-08-19 20:48:06.215883
+217	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017286/d3fbo9b4bfyephpuxjee.jpg	\N	15440	Actor	2015-08-19 20:48:07.28608	2015-08-19 20:48:07.28608
+218	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017287/opgcg2n9atoegwqd4htj.jpg	\N	1133349	Actor	2015-08-19 20:48:08.197524	2015-08-19 20:48:08.197524
+219	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017288/iyx5axfzdqaaxnm43jhe.jpg	\N	90325	Actor	2015-08-19 20:48:08.98735	2015-08-19 20:48:08.98735
+220	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017289/oqp0vmibmrom9rmc7osy.jpg	\N	1440871	Actor	2015-08-19 20:48:09.830837	2015-08-19 20:48:09.830837
+221	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017290/pmwwpnrawiyzfdrxoite.jpg	\N	1351952	Actor	2015-08-19 20:48:10.761114	2015-08-19 20:48:10.761114
+222	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017292/zurtdpwmudsrhacpment.jpg	\N	13242	Actor	2015-08-19 20:48:12.295351	2015-08-19 20:48:12.295351
+223	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017292/ujjczza5nrzuulhpygau.jpg	\N	83860	Actor	2015-08-19 20:48:13.151131	2015-08-19 20:48:13.151131
+224	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017293/yf80grov0o10j2evkvk8.jpg	\N	1200864	Actor	2015-08-19 20:48:14.032331	2015-08-19 20:48:14.032331
+225	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017294/cnrlpk8tv5h4kcbvejcg.jpg	\N	1305249	Actor	2015-08-19 20:48:14.923986	2015-08-19 20:48:14.923986
+226	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017295/ghphcbhxnq0ger79bodm.jpg	\N	149010	Actor	2015-08-19 20:48:16.000323	2015-08-19 20:48:16.000323
+227	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017296/oymryofpparpo6ty12e3.jpg	\N	1371397	Actor	2015-08-19 20:48:16.826731	2015-08-19 20:48:16.826731
+228	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017297/dexsq8qghhuoqa4ei7qo.jpg	\N	141432	Actor	2015-08-19 20:48:17.895613	2015-08-19 20:48:17.895613
+229	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017298/iix5uga0dlj18dwdhgjz.jpg	\N	131	Actor	2015-08-19 20:48:19.032704	2015-08-19 20:48:19.032704
+230	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017299/mbvfhlwhoaf8mwzjv6rv.jpg	\N	53714	Actor	2015-08-19 20:48:19.908657	2015-08-19 20:48:19.908657
+231	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017300/zxmmfyv568seaysaym9l.jpg	\N	2178	Actor	2015-08-19 20:48:20.78924	2015-08-19 20:48:20.78924
+232	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017301/emdp39eyxfahzkcwirbz.jpg	\N	2038	Actor	2015-08-19 20:48:21.836374	2015-08-19 20:48:21.836374
+233	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017302/kvyv9lufmn40owwakxe1.jpg	\N	1089873	Actor	2015-08-19 20:48:22.953431	2015-08-19 20:48:22.953431
+234	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017303/oa2zmwpgvjbeyxq91ods.jpg	\N	62644	Actor	2015-08-19 20:48:23.988374	2015-08-19 20:48:23.988374
+235	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017304/dzijku0a9oetzgy8amyn.jpg	\N	928905	Actor	2015-08-19 20:48:24.875169	2015-08-19 20:48:24.875169
+236	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017305/qiwnvtkkofmwhjcnvjql.jpg	\N	1078613	Actor	2015-08-19 20:48:25.786245	2015-08-19 20:48:25.786245
+237	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017307/utssk1o2dpbtqb1dxemp.jpg	\N	232006	Actor	2015-08-19 20:48:28.011132	2015-08-19 20:48:28.011132
+238	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017308/nv7x8m719hhcfqzr6io8.jpg	\N	1289968	Actor	2015-08-19 20:48:29.016215	2015-08-19 20:48:29.016215
+239	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017309/plahfacjrxmwagqavuoc.jpg	\N	934243	Actor	2015-08-19 20:48:29.987413	2015-08-19 20:48:29.987413
+240	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017310/cucda1xwjmlmjejnb5uj.jpg	\N	1421422	Actor	2015-08-19 20:48:30.757658	2015-08-19 20:48:30.757658
+241	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017311/qndjigcepfa8na9q9i6p.jpg	\N	148992	Actor	2015-08-19 20:48:32.004269	2015-08-19 20:48:32.004269
+242	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017314/i9bfveq4lkupz6ntdfsp.jpg	\N	20047	Actor	2015-08-19 20:48:34.453341	2015-08-19 20:48:34.453341
+243	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017316/fczsw2g3wmjjaojstfbt.jpg	\N	41379	Actor	2015-08-19 20:48:36.48663	2015-08-19 20:48:36.48663
+244	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017317/swgnhom8113h4qbnzlvg.jpg	\N	124557	Actor	2015-08-19 20:48:37.522187	2015-08-19 20:48:37.522187
+245	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017318/tenmhrjkcgymdrcpfu2r.jpg	\N	155527	Actor	2015-08-19 20:48:38.741684	2015-08-19 20:48:38.741684
+246	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017319/rexg32jt8xz0r9xbwng3.jpg	\N	75038	Actor	2015-08-19 20:48:39.73294	2015-08-19 20:48:39.73294
+247	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017320/uy94pp7jgcoqmdbcddsu.jpg	\N	963818	Actor	2015-08-19 20:48:40.626385	2015-08-19 20:48:40.626385
+248	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017321/gg8v93w0urywfyn7vilf.jpg	\N	1217648	Actor	2015-08-19 20:48:41.488471	2015-08-19 20:48:41.488471
+249	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017322/kxt9edmycrd3swtfrfv2.jpg	\N	56152	Actor	2015-08-19 20:48:42.429823	2015-08-19 20:48:42.429823
+250	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017323/hk4qqe6mdkbf6lsr1szp.jpg	\N	2	Actor	2015-08-19 20:48:43.479504	2015-08-19 20:48:43.479504
+251	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017324/pnzltadjrmcrjzhidvn5.jpg	\N	19508	Actor	2015-08-19 20:48:44.485101	2015-08-19 20:48:44.485101
+252	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017325/gwe0hxyoal4evbrqhlju.jpg	\N	20903	Actor	2015-08-19 20:48:45.27316	2015-08-19 20:48:45.27316
+253	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017325/zcdquvv0rjpdiyltoreb.jpg	\N	65640	Actor	2015-08-19 20:48:46.17618	2015-08-19 20:48:46.17618
+254	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017326/stiemulg1k3zu97gf5jv.jpg	\N	19506	Actor	2015-08-19 20:48:47.399439	2015-08-19 20:48:47.399439
+255	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017328/ng9eog2fvrggkd7vi1ru.jpg	\N	15761	Actor	2015-08-19 20:48:48.355184	2015-08-19 20:48:48.355184
+256	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017328/e5addhycq8ifgjcgwi4l.jpg	\N	31531	Actor	2015-08-19 20:48:49.156641	2015-08-19 20:48:49.156641
+257	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017329/xf973lsle69x7qnbhkko.jpg	\N	24362	Actor	2015-08-19 20:48:50.027772	2015-08-19 20:48:50.027772
+258	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017330/qwtjfnxlxqmgecebmxib.jpg	\N	78798	Actor	2015-08-19 20:48:50.985208	2015-08-19 20:48:50.985208
+259	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017331/ueam9vvtnhdcxsauxnkf.jpg	\N	1327	Actor	2015-08-19 20:48:52.093639	2015-08-19 20:48:52.093639
+260	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017332/lzr3bpy6dgv8d8lq42fx.jpg	\N	1425134	Actor	2015-08-19 20:48:52.920696	2015-08-19 20:48:52.920696
+261	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017333/stb6ddltr2ugj3ovzglp.jpg	\N	350	Actor	2015-08-19 20:48:53.792653	2015-08-19 20:48:53.792653
+262	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017334/ooiodthpn4ehiyuucc4o.jpg	\N	56103	Actor	2015-08-19 20:48:54.761404	2015-08-19 20:48:54.761404
+263	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017335/wjgsumjhyjwkcsxwclpc.jpg	\N	9195	Actor	2015-08-19 20:48:55.802775	2015-08-19 20:48:55.802775
+264	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017336/cy4x9uw4naogpv7e3ali.jpg	\N	26854	Actor	2015-08-19 20:48:57.039529	2015-08-19 20:48:57.039529
+265	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017337/u36gok3guegamkqsafg0.jpg	\N	1356007	Actor	2015-08-19 20:48:57.818564	2015-08-19 20:48:57.818564
+266	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017338/pwchxvvmlp1rgfybzunb.jpg	\N	36669	Actor	2015-08-19 20:48:58.952653	2015-08-19 20:48:58.952653
+267	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017339/roibdugghudk5baeqlyx.jpg	\N	17306	Actor	2015-08-19 20:48:59.792808	2015-08-19 20:48:59.792808
+268	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017340/ae4wotiftwnb1tkqhgpd.jpg	\N	577478	Actor	2015-08-19 20:49:00.601254	2015-08-19 20:49:00.601254
+269	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017341/mu01q1rn5dyfoy97g6ep.jpg	\N	53257	Actor	2015-08-19 20:49:01.870442	2015-08-19 20:49:01.870442
+270	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017342/iifurbxiszvfxe0qc692.jpg	\N	8801	Actor	2015-08-19 20:49:02.894186	2015-08-19 20:49:02.894186
+271	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017343/avu87cmztuugoo0ag9iw.jpg	\N	3491	Actor	2015-08-19 20:49:03.879717	2015-08-19 20:49:03.879717
+272	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017344/oo2hedy6pdpgtvhypbfc.jpg	\N	1183546	Actor	2015-08-19 20:49:04.805505	2015-08-19 20:49:04.805505
+273	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017345/qi9o72fvmgdzhupp0gp8.jpg	\N	8785	Actor	2015-08-19 20:49:05.612772	2015-08-19 20:49:05.612772
+274	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017347/lma5dbaijtnfuu2xeogt.jpg	\N	133168	Actor	2015-08-19 20:49:07.382708	2015-08-19 20:49:07.382708
+275	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017347/ve2q5eouspxakurvwo9u.jpg	\N	226711	Actor	2015-08-19 20:49:08.18468	2015-08-19 20:49:08.18468
+276	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017348/afcaqwc6ueqlvxu0gslc.jpg	\N	114725	Actor	2015-08-19 20:49:09.244	2015-08-19 20:49:09.244
+277	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017349/txsvwk7wygjfuvcgd1zo.jpg	\N	118579	Actor	2015-08-19 20:49:10.113892	2015-08-19 20:49:10.113892
+278	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017350/m1im3ykvflgn3jngw3w3.jpg	\N	224664	Actor	2015-08-19 20:49:11.205155	2015-08-19 20:49:11.205155
+279	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017352/yfdqhozyfbh5ex7png78.jpg	\N	1015824	Actor	2015-08-19 20:49:12.266385	2015-08-19 20:49:12.266385
+280	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017352/ms06hoxhsu9uikvgu16z.jpg	\N	120434	Actor	2015-08-19 20:49:13.087397	2015-08-19 20:49:13.087397
+281	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017353/csrewosfbuuaxmotedv4.jpg	\N	2541	Actor	2015-08-19 20:49:13.872195	2015-08-19 20:49:13.872195
+282	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017354/ligfqkzeibqjhavcqi7k.jpg	\N	4886	Actor	2015-08-19 20:49:14.971534	2015-08-19 20:49:14.971534
+283	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017355/q38s1nqewqzwlldinobp.jpg	\N	938	Actor	2015-08-19 20:49:15.911987	2015-08-19 20:49:15.911987
+284	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017356/aq3kzzguuekilonq4wag.jpg	\N	65345	Actor	2015-08-19 20:49:16.880719	2015-08-19 20:49:16.880719
+285	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017357/lvzqqu2tjolsq1snjtwi.jpg	\N	221085	Actor	2015-08-19 20:49:17.694503	2015-08-19 20:49:17.694503
+286	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017358/lyschhmeem4t9nbaecc1.jpg	\N	53324	Actor	2015-08-19 20:49:18.57083	2015-08-19 20:49:18.57083
+287	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017359/bioshci7kzcuxj81yapy.jpg	\N	23532	Actor	2015-08-19 20:49:19.693218	2015-08-19 20:49:19.693218
+288	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017360/dep8e2flxc3dyunbwzuy.jpg	\N	15556	Actor	2015-08-19 20:49:20.660623	2015-08-19 20:49:20.660623
+289	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017361/gwuewep9lpnambvow04q.jpg	\N	33192	Actor	2015-08-19 20:49:21.527879	2015-08-19 20:49:21.527879
+290	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017362/ucinox4acu99vhz4mipc.jpg	\N	62562	Actor	2015-08-19 20:49:22.572253	2015-08-19 20:49:22.572253
+291	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017363/ylalrhuefnvtrdvuou1b.jpg	\N	1331652	Actor	2015-08-19 20:49:23.708203	2015-08-19 20:49:23.708203
+292	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017364/m82uqnenkyojvpnvqr4o.jpg	\N	1211946	Actor	2015-08-19 20:49:24.52181	2015-08-19 20:49:24.52181
+293	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017365/ras3prdcomhe356iqfpt.jpg	\N	27031	Actor	2015-08-19 20:49:25.536069	2015-08-19 20:49:25.536069
+294	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017366/u9bpnqcwla7akiug1msq.jpg	\N	27105	Actor	2015-08-19 20:49:27.115788	2015-08-19 20:49:27.115788
+295	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017367/gti4yebkhapg6osbpaam.jpg	\N	41087	Actor	2015-08-19 20:49:28.02745	2015-08-19 20:49:28.02745
+296	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017368/psicsm76wawmhwbhlk8q.jpg	\N	74568	Actor	2015-08-19 20:49:28.967658	2015-08-19 20:49:28.967658
+297	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017369/nrdtrpct0gekxky5myyp.jpg	\N	18979	Actor	2015-08-19 20:49:29.860731	2015-08-19 20:49:29.860731
+298	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017371/neubljznvbqbyeenugxb.jpg	\N	54812	Actor	2015-08-19 20:49:32.049387	2015-08-19 20:49:32.049387
+299	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017372/rzzf382mwykhkgpyvpd1.jpg	\N	95101	Actor	2015-08-19 20:49:34.426708	2015-08-19 20:49:34.426708
+300	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017375/utvptcnp4ctsn0l0m1s6.jpg	\N	206399	Actor	2015-08-19 20:49:35.743068	2015-08-19 20:49:35.743068
+301	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017376/is5whqzmwpf9bixdep2w.jpg	\N	821	Actor	2015-08-19 20:49:36.671483	2015-08-19 20:49:36.671483
+302	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017377/lrdfpmid2ehvkokk5jln.jpg	\N	298410	Actor	2015-08-19 20:49:37.497268	2015-08-19 20:49:37.497268
+303	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017378/vtdsmnxvex2r1stude0d.jpg	\N	35705	Actor	2015-08-19 20:49:38.374245	2015-08-19 20:49:38.374245
+304	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017379/tubbhg6yedx3n7fkna6o.jpg	\N	204	Actor	2015-08-19 20:49:39.640268	2015-08-19 20:49:39.640268
+305	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017380/hrmjsaied2rs3gptccz8.jpg	\N	4566	Actor	2015-08-19 20:49:40.477621	2015-08-19 20:49:40.477621
+306	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017381/xa0x4kmjaz15bl3prclr.jpg	\N	2283	Actor	2015-08-19 20:49:41.555916	2015-08-19 20:49:41.555916
+307	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017382/cvdzln4pnqwuiwi4m3ee.jpg	\N	73381	Actor	2015-08-19 20:49:42.458906	2015-08-19 20:49:42.458906
+308	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017383/ngtpz2tz9wyabdovbdow.jpg	\N	49971	Actor	2015-08-19 20:49:43.270589	2015-08-19 20:49:43.270589
+309	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017383/anyfb7jhzgcgsptwtouu.jpg	\N	15737	Actor	2015-08-19 20:49:44.115039	2015-08-19 20:49:44.115039
+310	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017384/b5otbtm85ahiddexl6wv.jpg	\N	27764	Actor	2015-08-19 20:49:45.081188	2015-08-19 20:49:45.081188
+311	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017385/vvgenlod9gjtveh3aug4.jpg	\N	383624	Actor	2015-08-19 20:49:45.885777	2015-08-19 20:49:45.885777
+312	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017386/rt1es3ubbyp1dmz9h70x.jpg	\N	53917	Actor	2015-08-19 20:49:46.634446	2015-08-19 20:49:46.634446
+313	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017387/aibszyhrfq1u0wkrvxsu.jpg	\N	17787	Actor	2015-08-19 20:49:47.40028	2015-08-19 20:49:47.40028
+314	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017388/uvgygxrph4ofpawwbges.jpg	\N	4724	Actor	2015-08-19 20:49:48.471866	2015-08-19 20:49:48.471866
+315	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017389/brwgnmp95zycex04ctbl.jpg	\N	74242	Actor	2015-08-19 20:49:49.872463	2015-08-19 20:49:49.872463
+316	http://res.cloudinary.com/dypfv4yqq/image/upload/v1440017390/f1wlzaioxn0otvqzrqbo.jpg	\N	20187	Actor	2015-08-19 20:49:51.176414	2015-08-19 20:49:51.176414
+\.
+
+
+--
+-- Name: images_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Mark
+--
+
+SELECT pg_catalog.setval('images_id_seq', 316, true);
+
+
+--
+-- Data for Name: likes; Type: TABLE DATA; Schema: public; Owner: Mark
+--
+
+COPY likes (id, author_id, likeable_id, likeable_type, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: likes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Mark
+--
+
+SELECT pg_catalog.setval('likes_id_seq', 1, false);
+
+
+--
+-- Data for Name: movies; Type: TABLE DATA; Schema: public; Owner: Mark
+--
+
+COPY movies (id, title, release_date, runtime, vote_average, vote_count, popularity, overview, imdb_id, revenue, tagline, budget, created_at, updated_at) FROM stdin;
+102899	Ant-Man	2015-07-17	115	7.09999999999999964	937	54.7158859999999976	Armed with the astonishing ability to shrink in scale but increase in strength, con-man Scott Lang must embrace his inner-hero and help his mentor, Dr. Hank Pym, protect the secret behind his spectacular Ant-Man suit from a new generation of towering threats. Against seemingly insurmountable obstacles, Pym and Lang must plan and pull off a heist that will save the world.	tt0478970	0	Heroes Don't Get Any Bigger	130000000	2015-08-19 05:16:00.613541	2015-08-19 05:16:00.613541
+177677	Mission: Impossible – Rogue Nation	2015-07-31	131	7.20000000000000018	502	24.1358749999999986	Ethan and team take on their most impossible mission yet, eradicating the Syndicate - an International rogue organization as highly skilled as they are, committed to destroying the IMF.	tt2381249	0	Go rogue	0	2015-08-19 05:16:02.853727	2015-08-19 05:16:02.853727
+166424	Fantastic Four	2015-08-07	106	4.79999999999999982	259	17.7902260000000005	Four young scientists teleport to an alternate and dangerous universe, which alters their physical form in shocking ways. They must now use these abilities to save the world from a former friend turned enemy.	tt1502712	0	Change is coming	0	2015-08-19 05:16:05.09769	2015-08-19 05:16:05.09769
+257344	Pixels	2015-07-24	105	6.40000000000000036	243	14.7347680000000008	Video game experts are recruited by the military to fight 1980s-era video game characters who've attacked New York.	tt2120120	0	Game On.	110000000	2015-08-19 05:16:06.990288	2015-08-19 05:16:06.990288
+271718	Trainwreck	2015-07-17	125	6.5	134	10.7936139999999998	Having thought that monogamy was never possible, a commitment-phobic career woman may have to face her fears when she meets a good guy.	tt3152624	0	We All Know One.	0	2015-08-19 05:16:09.192914	2015-08-19 05:16:09.192914
+203801	The Man from U.N.C.L.E.	2015-08-14	116	5.59999999999999964	67	9.55154100000000028	In the early 1960s, CIA agent Napoleon Solo and KGB operative Illya Kuryakin participate in a joint mission against a mysterious criminal organization, which is working to proliferate nuclear weapons.	tt1638355	0	A Higher Class of Hero.	75000000	2015-08-19 05:16:11.267974	2015-08-19 05:16:11.267974
+277216	Straight Outta Compton	2015-08-14	147	8.19999999999999929	43	7.90583399999999958	The group NWA emerges from the streets of Compton, California in the mid-1980s and revolutionizes pop culture with their music and tales about life in the hood.	tt1398426	0	The Story of N.W.A.	28000000	2015-08-19 05:16:13.188043	2015-08-19 05:16:13.188043
+307081	Southpaw	2015-07-24	123	6.70000000000000018	95	7.8461059999999998	A boxer fights his way to the top, only to find his life falling apart around him.	tt1798684	0	Believe in Hope.	0	2015-08-19 05:16:14.939309	2015-08-19 05:16:14.939309
+286565	Paper Towns	2015-07-24	109	7.09999999999999964	195	5.18561400000000017	Quentin Jacobsen has spent a lifetime loving the magnificently adventurous Margo Roth Spiegelman from afar. So when she cracks open a window and climbs back into his life-dressed like a ninja and summoning him for an ingenious campaign of revenge-he follows. After their all-nighter ends and a new day breaks, Q arrives at school to discover that Margo, always an enigma, has now become a mystery. But Q soon learns that there are clues-and they're for him. Urged down a disconnected path, the closer he gets, the less Q sees of the girl he thought he knew.	tt3622592	0	Get Lost. Get Found.	0	2015-08-19 05:16:16.772071	2015-08-19 05:16:16.772071
+263109	Shaun the Sheep Movie	2015-08-05	85	7	115	3.28127600000000008	When Shaun decides to take the day off and have some fun, he gets a little more action than he bargained for. A mix up with the Farmer, a caravan and a very steep hill lead them all to the Big City and it's up to Shaun and the flock to return everyone safely to the green grass of home.	tt2872750	59700000	Moving on to Pastures New.	0	2015-08-19 05:16:18.619568	2015-08-19 05:16:18.619568
+342917	Batman Unlimited: Monster Mayhem	2015-08-18	0	6.09999999999999964	4	3.885405	The Joker is aided in his Halloween quest to render modern technology useless and take over Gotham City by Solomon Grundy, Silver Banshee, Clayface and Scarecrow.	tt4729754	0		0	2015-08-19 05:16:20.662072	2015-08-19 05:16:20.662072
+353595	LEGO DC Super Heroes: Justice League - Attack of the Legion of Doom!	2015-08-25	67	4.09999999999999964	5	4.22055700000000034	Crime is on the run as the newly formed Justice League keeps Metropolis safe and this makes evil genius Lex Luthor very unhappy. Together with Black Manta, Sinestro and a gang of ruthless recruits, Lex builds his own league and declares them the Legion of Doom. With this super powered team of terror and a plan to attack the top-secret government site, Area 52, can Lex finally be on the verge of victory? Sound the alarm and get ready for the bricks to fly when Superman, Batman, Wonder Woman and the rest of the Justice League face off against the world's greatest Super-Villains! It's the next all-new original movie from LEGO® and DC Comics.	tt4938416	0		0	2015-08-19 05:16:22.504206	2015-08-19 05:16:22.504206
+280996	Mr. Holmes	2015-07-17	103	5.40000000000000036	39	3.82394200000000017	The story is set in 1947, following a long-retired Holmes living in a Sussex village with his housekeeper and rising detective son. But then he finds himself haunted by an unsolved 50-year old case. Holmes' memory isn't what it used to be, so he only remembers fragments of the case: a confrontation with an angry husband, a secret bond with his beautiful but unstable wife.	tt3168230	0	The man behind the myth	0	2015-08-19 05:16:23.872822	2015-08-19 05:16:23.872822
+249070	Hitman: Agent 47	2015-08-21	96	5	39	5.5724790000000004	An assassin teams up with a woman to help her find her father and uncover the mysteries of her ancestry.	tt2679042	0	Your Number is Up.	0	2015-08-19 05:16:26.190338	2015-08-19 05:16:26.190338
+295830	Attack on Titan	2015-08-01	90	4.59999999999999964	25	3.05863700000000005	100 years ago, titans suddenly appeared on Earth. Soon, human civilization veered on collapse due to the titans. Humans then built a giant wall to defend themselves. Within the giant walls, humans lived in peace, but, 100 years later, the giant wall is broken.	tt2072230	0		0	2015-08-19 05:16:28.034496	2015-08-19 05:16:28.034496
+284674	Air	2015-08-14	94	4.79999999999999982	11	3.53335199999999983	In the near future, breathable air is nonexistent and two engineers tasked with guarding the last hope for mankind struggle to preserve their own lives while administering to their vital task at hand.	tt2091478	0	Save your breath.	0	2015-08-19 05:16:29.882572	2015-08-19 05:16:29.882572
+328425	The Gift	2015-08-07	108	6.09999999999999964	30	3.19225599999999998	A husband and wife try to reinvigorate their relationship but their lives are threatened by a "friend" from the husband's past who holds a horrifying secret about him, sending their world into a tailspin.	tt4178092	0	The Sins Of The Past Will Become Your Present.	0	2015-08-19 05:16:31.719846	2015-08-19 05:16:31.719846
+296099	Vacation	2015-07-29	99	6.20000000000000018	51	3.12498699999999996	Hoping to bring his family closer together and to recreate his childhood vacation for his own kids, a grown up Rusty Griswold takes his wife and their two sons on a cross-country road trip to the coolest theme park in America, Walley World. Needless to say, things don't go quite as planned.	tt1524930	0	What could go wrong?	0	2015-08-19 05:16:33.799249	2015-08-19 05:16:33.799249
+283227	A Little Chaos	2015-08-04	117	4.29999999999999982	28	3.47199200000000019	A landscape gardener is hired by famous architect Le Notre to construct the grand gardens at the palace of Versailles. As the two work on the palace, they find themselves drawn to each other and are thrown into rivalries within the court of King Louis XIV.	tt2639254	0		80000	2015-08-19 05:16:36.226754	2015-08-19 05:16:36.226754
+310133	Cop Car	2015-08-07	86	4.29999999999999982	34	4.14238399999999984	Two kids find themselves in the centre of a deadly game of cat and mouse after taking a sheriff's cruiser for a joy ride.	tt3813310	0	Their first drive could be their last.	0	2015-08-19 05:16:38.683117	2015-08-19 05:16:38.683117
+\.
+
+
+--
+-- Name: movies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Mark
+--
+
+SELECT pg_catalog.setval('movies_id_seq', 1, false);
+
+
+--
+-- Data for Name: posters; Type: TABLE DATA; Schema: public; Owner: Mark
+--
+
+COPY posters (id, poster_url, movie_id, created_at, updated_at) FROM stdin;
+1	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961360/ixcf5p7qbmcbrluydddq.jpg	102899	2015-08-19 05:16:00.661784	2015-08-19 05:16:00.661784
+2	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961362/xdwxuzevkqglznzamtxq.jpg	177677	2015-08-19 05:16:02.869427	2015-08-19 05:16:02.869427
+3	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961364/gi3qg0zunhtxmzp3vaar.jpg	166424	2015-08-19 05:16:05.111259	2015-08-19 05:16:05.111259
+4	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961366/emzkxrfxxuupfn3crgsa.jpg	257344	2015-08-19 05:16:07.005939	2015-08-19 05:16:07.005939
+5	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961368/gblwl45uwmwdqsomjhpe.jpg	271718	2015-08-19 05:16:09.20529	2015-08-19 05:16:09.20529
+6	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961370/sygs0r5fxuyuifvrhnqk.jpg	203801	2015-08-19 05:16:11.281614	2015-08-19 05:16:11.281614
+7	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961372/v6zj99crre27z2rgdsv8.jpg	277216	2015-08-19 05:16:13.199306	2015-08-19 05:16:13.199306
+8	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961374/q4zjevkwajkohoaxqirr.jpg	307081	2015-08-19 05:16:14.950519	2015-08-19 05:16:14.950519
+9	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961376/xjbdgqi4ea6ah0tfzpc9.jpg	286565	2015-08-19 05:16:16.78832	2015-08-19 05:16:16.78832
+10	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961378/bnxi6zdjooq1v0pwldvv.jpg	263109	2015-08-19 05:16:18.637685	2015-08-19 05:16:18.637685
+11	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961380/an4bfjusqmcreiykoerx.jpg	342917	2015-08-19 05:16:20.682257	2015-08-19 05:16:20.682257
+12	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961382/vmdmgmos2z3mw663sp8g.jpg	353595	2015-08-19 05:16:22.51788	2015-08-19 05:16:22.51788
+13	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961383/znqpwomq6pshyxuywoxl.jpg	280996	2015-08-19 05:16:23.888285	2015-08-19 05:16:23.888285
+14	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961385/a2dsdblbjqqajpinge5b.jpg	249070	2015-08-19 05:16:26.208657	2015-08-19 05:16:26.208657
+15	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961387/susi9h3dye2u2p8trzez.jpg	295830	2015-08-19 05:16:28.045498	2015-08-19 05:16:28.045498
+16	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961389/mpe9udwfsdd2anwxl8dj.jpg	284674	2015-08-19 05:16:29.893676	2015-08-19 05:16:29.893676
+17	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961391/uuetxycukulhnm5rd7jx.jpg	328425	2015-08-19 05:16:31.73333	2015-08-19 05:16:31.73333
+18	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961393/fqimxgqfitnogzufgkch.jpg	296099	2015-08-19 05:16:33.811958	2015-08-19 05:16:33.811958
+19	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961395/a8uf7aiixmfpztazherc.jpg	283227	2015-08-19 05:16:36.242336	2015-08-19 05:16:36.242336
+20	http://res.cloudinary.com/dypfv4yqq/image/upload/v1439961398/amqqvlqr5srffjjwyuog.jpg	310133	2015-08-19 05:16:38.69127	2015-08-19 05:16:38.69127
+\.
+
+
+--
+-- Name: posters_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Mark
+--
+
+SELECT pg_catalog.setval('posters_id_seq', 20, true);
+
+
+--
+-- Data for Name: reviews; Type: TABLE DATA; Schema: public; Owner: Mark
+--
+
+COPY reviews (id, author_id, movie_id, grade, title, body, created_at, updated_at) FROM stdin;
+1	1	257344	10	asdfadf	asdf	2015-08-19 23:26:35.212288	2015-08-19 23:26:35.212288
+2	1	166424	10	It's ok	COOL!	2015-08-20 05:03:15.191993	2015-08-20 05:03:15.191993
+3	1	166424	10	hahahaha	COOOOOOOOL	2015-08-20 05:06:20.831286	2015-08-20 05:06:20.831286
+\.
+
+
+--
+-- Name: reviews_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Mark
+--
+
+SELECT pg_catalog.setval('reviews_id_seq', 3, true);
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: Mark
+--
+
+COPY schema_migrations (version) FROM stdin;
+20150811042808
+20150811160557
+20150811163329
+20150812211802
+20150813220518
+20150814184147
+20150815073709
+20150815073719
+20150815172536
+20150815172604
+20150818233325
+20150818233354
+\.
+
+
+--
+-- Data for Name: taggings; Type: TABLE DATA; Schema: public; Owner: Mark
+--
+
+COPY taggings (id, movie_id, genre_id, created_at, updated_at) FROM stdin;
+1	102899	28	2015-08-19 05:16:00.637614	2015-08-19 05:16:00.637614
+2	102899	12	2015-08-19 05:16:00.641897	2015-08-19 05:16:00.641897
+3	102899	878	2015-08-19 05:16:00.645339	2015-08-19 05:16:00.645339
+4	177677	28	2015-08-19 05:16:02.859808	2015-08-19 05:16:02.859808
+5	177677	12	2015-08-19 05:16:02.863542	2015-08-19 05:16:02.863542
+6	177677	53	2015-08-19 05:16:02.867039	2015-08-19 05:16:02.867039
+7	166424	28	2015-08-19 05:16:05.102667	2015-08-19 05:16:05.102667
+8	166424	12	2015-08-19 05:16:05.105974	2015-08-19 05:16:05.105974
+9	166424	878	2015-08-19 05:16:05.108991	2015-08-19 05:16:05.108991
+10	257344	28	2015-08-19 05:16:06.995756	2015-08-19 05:16:06.995756
+11	257344	35	2015-08-19 05:16:06.999954	2015-08-19 05:16:06.999954
+12	257344	878	2015-08-19 05:16:07.003171	2015-08-19 05:16:07.003171
+13	271718	10749	2015-08-19 05:16:09.198307	2015-08-19 05:16:09.198307
+14	271718	35	2015-08-19 05:16:09.202503	2015-08-19 05:16:09.202503
+15	203801	35	2015-08-19 05:16:11.273625	2015-08-19 05:16:11.273625
+16	203801	28	2015-08-19 05:16:11.276702	2015-08-19 05:16:11.276702
+17	203801	12	2015-08-19 05:16:11.279457	2015-08-19 05:16:11.279457
+18	277216	18	2015-08-19 05:16:13.193557	2015-08-19 05:16:13.193557
+19	277216	10402	2015-08-19 05:16:13.196867	2015-08-19 05:16:13.196867
+20	307081	28	2015-08-19 05:16:14.944681	2015-08-19 05:16:14.944681
+21	307081	18	2015-08-19 05:16:14.947973	2015-08-19 05:16:14.947973
+22	286565	10749	2015-08-19 05:16:16.778343	2015-08-19 05:16:16.778343
+23	286565	9648	2015-08-19 05:16:16.782537	2015-08-19 05:16:16.782537
+24	286565	12	2015-08-19 05:16:16.78578	2015-08-19 05:16:16.78578
+25	263109	16	2015-08-19 05:16:18.624833	2015-08-19 05:16:18.624833
+26	263109	12	2015-08-19 05:16:18.628958	2015-08-19 05:16:18.628958
+27	263109	35	2015-08-19 05:16:18.632133	2015-08-19 05:16:18.632133
+28	263109	10751	2015-08-19 05:16:18.635286	2015-08-19 05:16:18.635286
+29	342917	28	2015-08-19 05:16:20.674143	2015-08-19 05:16:20.674143
+30	342917	16	2015-08-19 05:16:20.678722	2015-08-19 05:16:20.678722
+31	353595	16	2015-08-19 05:16:22.510384	2015-08-19 05:16:22.510384
+32	353595	10751	2015-08-19 05:16:22.514773	2015-08-19 05:16:22.514773
+33	280996	9648	2015-08-19 05:16:23.878211	2015-08-19 05:16:23.878211
+34	280996	80	2015-08-19 05:16:23.882359	2015-08-19 05:16:23.882359
+35	280996	18	2015-08-19 05:16:23.885767	2015-08-19 05:16:23.885767
+36	249070	28	2015-08-19 05:16:26.195669	2015-08-19 05:16:26.195669
+37	249070	80	2015-08-19 05:16:26.199155	2015-08-19 05:16:26.199155
+38	249070	53	2015-08-19 05:16:26.205862	2015-08-19 05:16:26.205862
+39	295830	18	2015-08-19 05:16:28.039761	2015-08-19 05:16:28.039761
+40	295830	27	2015-08-19 05:16:28.043052	2015-08-19 05:16:28.043052
+41	284674	53	2015-08-19 05:16:29.887827	2015-08-19 05:16:29.887827
+42	284674	878	2015-08-19 05:16:29.891191	2015-08-19 05:16:29.891191
+43	328425	53	2015-08-19 05:16:31.724997	2015-08-19 05:16:31.724997
+44	328425	18	2015-08-19 05:16:31.728249	2015-08-19 05:16:31.728249
+45	328425	9648	2015-08-19 05:16:31.731157	2015-08-19 05:16:31.731157
+46	296099	12	2015-08-19 05:16:33.805026	2015-08-19 05:16:33.805026
+47	296099	35	2015-08-19 05:16:33.809364	2015-08-19 05:16:33.809364
+48	283227	35	2015-08-19 05:16:36.232293	2015-08-19 05:16:36.232293
+49	283227	18	2015-08-19 05:16:36.236527	2015-08-19 05:16:36.236527
+50	283227	10749	2015-08-19 05:16:36.239744	2015-08-19 05:16:36.239744
+51	310133	53	2015-08-19 05:16:38.688546	2015-08-19 05:16:38.688546
+\.
+
+
+--
+-- Name: taggings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Mark
+--
+
+SELECT pg_catalog.setval('taggings_id_seq', 51, true);
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: Mark
+--
+
+COPY users (id, email, username, password_digest, session_token, created_at, updated_at) FROM stdin;
+1	test@gmail.com	mark	$2a$10$SyiYwbHzjbJ9mGsoDN4mBuaR9b2X7lWdJZewvLDNQK5pO2YSYLgwS	KBhOqe5yyJ-KZhCd_efm7A	2015-08-19 23:25:55.155718	2015-08-20 05:18:44.250771
+\.
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Mark
+--
+
+SELECT pg_catalog.setval('users_id_seq', 1, true);
+
+
+--
+-- Data for Name: wantwatchmovies; Type: TABLE DATA; Schema: public; Owner: Mark
+--
+
+COPY wantwatchmovies (id, user_id, movie_id, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: wantwatchmovies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Mark
+--
+
+SELECT pg_catalog.setval('wantwatchmovies_id_seq', 1, false);
+
+
+--
+-- Data for Name: watchedmovies; Type: TABLE DATA; Schema: public; Owner: Mark
+--
+
+COPY watchedmovies (id, user_id, movie_id, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: watchedmovies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Mark
+--
+
+SELECT pg_catalog.setval('watchedmovies_id_seq', 1, false);
+
+
+--
+-- Name: actors_pkey; Type: CONSTRAINT; Schema: public; Owner: Mark; Tablespace: 
+--
+
+ALTER TABLE ONLY actors
+    ADD CONSTRAINT actors_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: castings_pkey; Type: CONSTRAINT; Schema: public; Owner: Mark; Tablespace: 
+--
+
+ALTER TABLE ONLY castings
+    ADD CONSTRAINT castings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: genres_pkey; Type: CONSTRAINT; Schema: public; Owner: Mark; Tablespace: 
+--
+
+ALTER TABLE ONLY genres
+    ADD CONSTRAINT genres_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: images_pkey; Type: CONSTRAINT; Schema: public; Owner: Mark; Tablespace: 
+--
+
+ALTER TABLE ONLY images
+    ADD CONSTRAINT images_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: likes_pkey; Type: CONSTRAINT; Schema: public; Owner: Mark; Tablespace: 
+--
+
+ALTER TABLE ONLY likes
+    ADD CONSTRAINT likes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: movies_pkey; Type: CONSTRAINT; Schema: public; Owner: Mark; Tablespace: 
+--
+
+ALTER TABLE ONLY movies
+    ADD CONSTRAINT movies_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: posters_pkey; Type: CONSTRAINT; Schema: public; Owner: Mark; Tablespace: 
+--
+
+ALTER TABLE ONLY posters
+    ADD CONSTRAINT posters_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: Mark; Tablespace: 
+--
+
+ALTER TABLE ONLY reviews
+    ADD CONSTRAINT reviews_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: taggings_pkey; Type: CONSTRAINT; Schema: public; Owner: Mark; Tablespace: 
+--
+
+ALTER TABLE ONLY taggings
+    ADD CONSTRAINT taggings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: Mark; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wantwatchmovies_pkey; Type: CONSTRAINT; Schema: public; Owner: Mark; Tablespace: 
+--
+
+ALTER TABLE ONLY wantwatchmovies
+    ADD CONSTRAINT wantwatchmovies_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: watchedmovies_pkey; Type: CONSTRAINT; Schema: public; Owner: Mark; Tablespace: 
+--
+
+ALTER TABLE ONLY watchedmovies
+    ADD CONSTRAINT watchedmovies_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_castings_on_actor_id; Type: INDEX; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE INDEX index_castings_on_actor_id ON castings USING btree (actor_id);
+
+
+--
+-- Name: index_castings_on_movie_id; Type: INDEX; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE INDEX index_castings_on_movie_id ON castings USING btree (movie_id);
+
+
+--
+-- Name: index_images_on_imageable_type_and_imageable_id; Type: INDEX; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE INDEX index_images_on_imageable_type_and_imageable_id ON images USING btree (imageable_type, imageable_id);
+
+
+--
+-- Name: index_likes_on_author_id; Type: INDEX; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE INDEX index_likes_on_author_id ON likes USING btree (author_id);
+
+
+--
+-- Name: index_likes_on_likeable_type_and_likeable_id; Type: INDEX; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE INDEX index_likes_on_likeable_type_and_likeable_id ON likes USING btree (likeable_type, likeable_id);
+
+
+--
+-- Name: index_posters_on_movie_id; Type: INDEX; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE INDEX index_posters_on_movie_id ON posters USING btree (movie_id);
+
+
+--
+-- Name: index_reviews_on_author_id; Type: INDEX; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE INDEX index_reviews_on_author_id ON reviews USING btree (author_id);
+
+
+--
+-- Name: index_reviews_on_movie_id; Type: INDEX; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE INDEX index_reviews_on_movie_id ON reviews USING btree (movie_id);
+
+
+--
+-- Name: index_taggings_on_genre_id; Type: INDEX; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE INDEX index_taggings_on_genre_id ON taggings USING btree (genre_id);
+
+
+--
+-- Name: index_taggings_on_movie_id; Type: INDEX; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE INDEX index_taggings_on_movie_id ON taggings USING btree (movie_id);
+
+
+--
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
+
+
+--
+-- Name: index_users_on_session_token; Type: INDEX; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_users_on_session_token ON users USING btree (session_token);
+
+
+--
+-- Name: index_users_on_username; Type: INDEX; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_users_on_username ON users USING btree (username);
+
+
+--
+-- Name: index_wantwatchmovies_on_movie_id; Type: INDEX; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE INDEX index_wantwatchmovies_on_movie_id ON wantwatchmovies USING btree (movie_id);
+
+
+--
+-- Name: index_wantwatchmovies_on_user_id; Type: INDEX; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE INDEX index_wantwatchmovies_on_user_id ON wantwatchmovies USING btree (user_id);
+
+
+--
+-- Name: index_watchedmovies_on_movie_id; Type: INDEX; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE INDEX index_watchedmovies_on_movie_id ON watchedmovies USING btree (movie_id);
+
+
+--
+-- Name: index_watchedmovies_on_user_id; Type: INDEX; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE INDEX index_watchedmovies_on_user_id ON watchedmovies USING btree (user_id);
+
+
+--
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: Mark; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: Mark
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM "Mark";
+GRANT ALL ON SCHEMA public TO "Mark";
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

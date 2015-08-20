@@ -23,4 +23,11 @@ class Api::MoviesController < ApplicationController
     @movies = Movie.where('release_date > ?', 3.months.ago).limit(8).offset((page.to_i  - 1) * 8)
     render 'movie_index'
   end
+
+  def search
+    title = params["title"] || "batman"
+    @movies = Movie.search_by_title(title)
+    @config = Movie.find_config
+    render 'search'
+  end
 end
