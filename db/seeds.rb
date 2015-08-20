@@ -73,8 +73,6 @@ config = Tmdb::Configuration.new
 #   newMovie.images.create(image_url:image_url)
 # end
 
-
-
 #---------------------------Actors---------------------------
 
 Movie.all.each do |dbmovie|

@@ -5,7 +5,7 @@
   right: 0;
   position: absolute;
   background-color: rgba(255, 255, 255, 0.43);
-  z-index: 10;
+  z-index: 10000;
 }
 
 .my-content {
@@ -19,6 +19,7 @@
   border: 1px solid;
   border-radius: 10px;
   -webkit-animation-duration: 0.3s;
+  z-index: 10000;
 }
 
 .alert {
@@ -36,6 +37,7 @@
   right: 0;
   position: fixed;
   -webkit-animation-duration: 0.3s;
+  z-index: 9999;
 }
 
 .review-item {

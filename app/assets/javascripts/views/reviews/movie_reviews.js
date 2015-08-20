@@ -7,7 +7,8 @@ BDMI.Views.MovieReviews = Backbone.CompositeView.extend({
 
   events: {
     "click .review-button": "newReview",
-    "click #load-more-button": "loadMore"
+    "hover #load-more-reviews": "handleHover",
+    "click #load-more-reviews": "loadMore"
   },
 
   initialize: function(options) {
@@ -36,20 +37,28 @@ BDMI.Views.MovieReviews = Backbone.CompositeView.extend({
     });
     this.$el.html(content);
     this.attachSubviews();
+    this.onRender();
     return this;
   },
 
+  onRender: function() {
+  },
+
   newReview: function(event) {
-    var review = new BDMI.Models.Review();
-    modal = new BDMI.Views.ReviewForm({
-      model: review,
-      collection: this.collection,
-      movie: this.movie,
-      mainView: this
-    });
-    $('body').prepend(modal.$el);
-    modal.render();
-    modal.$el.addClass('animated fadeIn');
+    if (BDMI.CURRENT_USER !== undefined) {
+      var review = new BDMI.Models.Review();
+      modal = new BDMI.Views.ReviewForm({
+        model: review,
+        collection: this.collection,
+        movie: this.movie,
+        mainView: this
+      });
+      $('body').prepend(modal.$el);
+      modal.render();
+      modal.$el.addClass('animated fadeIn');
+    } else {
+      this.flashAlert("login","Please login before writing reviews.");
+    }
   },
 
   loadMore: function(event) {

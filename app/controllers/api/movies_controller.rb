@@ -20,7 +20,7 @@ class Api::MoviesController < ApplicationController
 
   def in_theaters_movies_index
     page = params[:page] || 1
-    @movies = Movie.where('release_date > ?', 3.months.ago).limit(10).offset((page.to_i  - 1) * 10)
+    @movies = Movie.where('release_date > ?', 3.months.ago).limit(8).offset((page.to_i  - 1) * 8)
     render 'movie_index'
   end
 end

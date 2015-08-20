@@ -1,6 +1,14 @@
-<h3 class="section-title">Reviews</h3>
-<div class="review-list section-item"></div>
-<button class="review-button btn section-item">Write a new review</button>
-<div class="load-more section-item">
-<button href="javascript:void(0)" class="btn" id="load-more-button">Load more</button>
+<h1 class="section-title">Reviews</h1>
+<div class="create-new section-item">
+  <button class="review-button btn">Write a new review</button>
 </div>
+<div class="review-list section-item group"></div>
+<% if(reviews.length === 0) {%>
+  <div class="load-more section-item">
+    <h4 class="no-review">No Review yet!</h4>
+  </div>
+<% } else { %>
+  <div class="load-more section-item">
+    <a href="javascript:void(0)" id="load-more-reviews">Load more</a>
+  </div>
+<% } %>

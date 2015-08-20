@@ -3,6 +3,10 @@ BDMI.Views.InTheaters = Backbone.CompositeView.extend({
 
   className: "in-theaters-section",
 
+  events: {
+    "click #load-more-in-theaters": "loadMore"
+  },
+
   initialize: function() {
     this.page = 1;
     this.collection.fetch({
@@ -29,5 +33,26 @@ BDMI.Views.InTheaters = Backbone.CompositeView.extend({
 
   removeMovieView: function(movie) {
     this.removeModelSubview(".in-theaters",movie);
+  },
+
+  loadMore: function(event) {
+    this.page += 1;
+    this.fetchReview();
+  },
+
+  fetchReview: function() {
+    this.collection.fetch({
+      data: {
+        page: this.page,
+        movie_id: this.movie.id
+      },
+      processData: true,
+      success: function(resp) {
+        if (resp.length < 8 && this.page != 1) {
+          this.flashAlert("no_more",["No more movies!"]);
+          this.page -= 1;
+        }
+      }.bind(this)
+    });
   }
 });

@@ -17,27 +17,19 @@ BDMI.Views.Review = Backbone.View.extend({
       timeAgo: this.getTimeAgo()
     });
     this.$el.html(content);
-    this.generateStars();
+    this.onRender();
     return this;
   },
-
-  generateStars: function() {
-        this.$('.small-review-grade').empty();
-        var grade = this.model.attributes.vote_average / 2;
-        // var grade = 5;
-        var star = Math.max(0, (Math.min(5, grade)));
-        var blank = 5 - star;
-        while (star > 0) {
-          var $star = $("<span></span>");
-          $star.text("★");
-          this.$('.small-review-grade').append($star);
-          star--;
-        }
-        while (blank > 0) {
-          var $blank = $("<span></span>");
-          $blank.text("☆");
-          this.$('.small-review-grade').append($blank);
-          blank--;
-        }
-      }
+  onRender: function() {
+    this.$('#star').raty('destroy');
+    var grade = this.model.attributes.grade / 2;
+    this.$('#star').raty({
+      starOff: "http://res.cloudinary.com/dypfv4yqq/image/upload/v1439888579/star-off_j7trzb.png",
+      starOn: "http://res.cloudinary.com/dypfv4yqq/image/upload/v1439888579/star-on_iezcg6.png",
+      starHalf: "http://res.cloudinary.com/dypfv4yqq/image/upload/v1439888579/star-half_w79ezb.png",
+      helf: true,
+      score: grade,
+      readOnly: true
+    });
+  }
 });

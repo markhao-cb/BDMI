@@ -33,13 +33,5 @@ BDMI.Views.InfoView = Backbone.CompositeView.extend({
       score: grade,
       readOnly: true
     });
-  },
-
-  generateStars: function() {
-    var grade = this.model.attributes.vote_average / 2;
-    $('vote-average').raty({
-      score: grade,
-      readOnly: true
-    });
   }
 });

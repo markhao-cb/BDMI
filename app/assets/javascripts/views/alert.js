@@ -7,6 +7,8 @@ BDMI.Views.AlertView = Backbone.View.extend({
         return JST['alerts/decline_alert'];
       case "no_more":
         return JST['alerts/no_more_alert'];
+      case "login":
+        return JST['alerts/log_in_alert'];
       default:
         return JST['alerts/success_alert'];
     }

@@ -14,15 +14,25 @@
   margin-bottom: 10px;
 }
 
+#review-section {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 60px;
+}
+
 .section-item {
   float: left;
   display: block;
+  width: 100%;
+}
+
+.no-review {
+  padding-top: 5%;
 }
 
 .review {
   display: block;
   float: left;
-  padding: 5px 10px;
+  padding: 1% 4%;
   text-align: left;
 }
 
@@ -37,7 +47,7 @@
 
 .review-title {
   height: 50px;
-  width: 77%;
+  width: 70%;
 }
 
 .review-body {
@@ -55,13 +65,17 @@
   font-size: 18px;
 }
 
+.small-review-title {
+  padding-top: 5%;
+}
+
 .small-review-body {
   font-size: 16px;
   font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 .review-button {
-  margin-left:25%;
+
 }
 
 .review-button:hover {
@@ -69,16 +83,29 @@
   color: #333;
 }
 
+.create-new {
+  margin-left: 15%;
+  margin-bottom: 2%;
+  width: 70%;
+  text-align: center;
+}
+
 .load-more {
-  margin-left: 25%
+  width: 70%;
+  margin-left: 15%;
+  text-align: center;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
 }
 
-#load-more-button {
-  float: right;
+#load-more-reviews {
   color: #fff;
+  width: auto;
+  margin: 0 auto;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 20px
 }
 
-#load-more-button:hover {
-  background: #fff;
-  color: #333;
+#load-more-reviews:hover {
+  text-shadow: 0 1px 10px #E60000;
 }
