@@ -22,12 +22,11 @@ BDMI.Views.Intro = Backbone.CompositeView.extend({
     this.addPageScrollAnimation();
     $("#owl-example").owlCarousel({
       navigation : false, // Show next and prev buttons
-      // slideSpeed : 300,
-      // paginationSpeed : 400,
+      stopOnHover: true,
       singleItem:true,
-      autoplay:true,
+      autoPlay:true,
       afterAction: function(event) {
-        debugger
+
       }
   });
     return this;

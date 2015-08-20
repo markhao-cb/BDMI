@@ -4,7 +4,7 @@ BDMI.Views.InTheatersItem = Backbone.CompositeView.extend({
   className: "in_theaters_item",
 
   events: {
-    "click":"handleClick",
+    "click .small_image":"handleClick",
     "hover":"handleHover",
     "mouseenter .small_image": "handleEnter",
     "mouseleave .small_image": "handleLeave"
@@ -23,8 +23,8 @@ BDMI.Views.InTheatersItem = Backbone.CompositeView.extend({
   },
 
   handleClick: function(event) {
-    $(event.currentTarget).addClass('animated flipOutX');
-    $(event.currentTarget).one('webkitAnimationEnd', function() {
+    this.$el.addClass('animated flipOutX');
+    this.$el.one('webkitAnimationEnd', function() {
       this.movieShow();
       this.render();
     }.bind(this));

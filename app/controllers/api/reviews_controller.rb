@@ -1,7 +1,7 @@
 class Api::ReviewsController < ApplicationController
   def index
     page = params[:page] || 1
-    movie_id = params[:movie_id] || 1
+    movie_id = params[:movie_id]
     user_id = params[:user_id]
     if movie_id && user_id
       @reviews = Review.where('movie_id = ? and author_id = ?', movie_id, user_id)

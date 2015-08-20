@@ -41,18 +41,36 @@ BDMI.Views.InTheaters = Backbone.CompositeView.extend({
   },
 
   fetchReview: function() {
+    length = this.collection.length
     this.collection.fetch({
       data: {
         page: this.page,
-        movie_id: this.movie.id
       },
+      remove: false,
       processData: true,
       success: function(resp) {
-        if (resp.length < 8 && this.page != 1) {
+        if (resp.length === length && this.page != 1) {
           this.flashAlert("no_more",["No more movies!"]);
           this.page -= 1;
         }
       }.bind(this)
     });
+  },
+
+  flashAlert: function(type, message) {
+    var alertView = new BDMI.Views.AlertView({
+      alertType: type,
+      message: message
+    });
+    $('body').append(alertView.$el);
+    alertView.render();
+    alertView.$(".alert").addClass('animated fadeIn');
+    setTimeout(function() {
+      alertView.$(".alert").removeClass('fadeIn');
+      alertView.$(".alert").addClass('fadeOut');
+      alertView.$(".alert").one("webkitAnimationEnd", function() {
+        alertView.remove();
+      });
+    },2000);
   }
 });

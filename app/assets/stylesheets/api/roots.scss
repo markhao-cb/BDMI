@@ -115,3 +115,15 @@
 #rank {
   margin: 0 auto;
 }
+
+.alert {
+  background: rgba(0, 0, 0, 0.87);
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  border-radius: 5px;
+  color: #fff;
+  text-align: center;
+  height: auto;
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid darkgray;
+}

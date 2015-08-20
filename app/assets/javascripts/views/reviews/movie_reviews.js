@@ -73,6 +73,7 @@ BDMI.Views.MovieReviews = Backbone.CompositeView.extend({
         movie_id: this.movie.id
       },
       processData: true,
+      remove:false,
       success: function(resp) {
         if (resp.length < 4 && this.page != 1) {
           this.flashAlert("no_more",["No more reviews!"]);
