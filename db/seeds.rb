@@ -71,12 +71,8 @@ in_theaters_movies.each do |m|
 
   newMovie.posters.create(poster_url:poster_url)
   newMovie.images.create(image_url:image_url)
-end
 
-#---------------------------Actors---------------------------
-
-Movie.all.each do |dbmovie|
-  casts = Tmdb::Movie.casts(dbmovie.id)
+  casts = Tmdb::Movie.casts(newMovie.id)
   casts.each do |actor|
 
     if actor["order"] < 11
@@ -101,7 +97,7 @@ Movie.all.each do |dbmovie|
 
         Casting.create!(
           actor_id:person["id"],
-          movie_id:dbmovie.id,
+          movie_id:newMovie.id,
           ord: actor["order"],
           act_as: actor["character"]
         )
@@ -109,3 +105,40 @@ Movie.all.each do |dbmovie|
     end
   end
 end
+
+#---------------------------Actors---------------------------
+
+# Movie.all.each do |dbmovie|
+  #casts = Tmdb::Movie.casts(dbmovie.id)
+  # casts.each do |actor|
+  #
+  #   if actor["order"] < 11
+  #     person = Tmdb::Person.detail(actor["id"])
+  #
+  #     if person["profile_path"] != nil
+  #
+  #       if Actor.find_by(id:person["id"]) == nil
+  #         newActor = Actor.create!(
+  #                       id:person["id"],
+  #                       name:person["name"],
+  #                       place_of_birth:person["place_of_birth"],
+  #                       birthday:person["birthday"]
+  #                     )
+  #
+  #         profile_path = "#{config.base_url}original#{person["profile_path"]}"
+  #         profile = Cloudinary::Uploader.upload(profile_path,auth)
+  #         image_url = profile["url"]
+  #
+  #         newActor.images.create!(image_url:image_url)
+  #       end
+  #
+  #       Casting.create!(
+  #         actor_id:person["id"],
+  #         movie_id:dbmovie.id,
+  #         ord: actor["order"],
+  #         act_as: actor["character"]
+  #       )
+  #     end
+  #   end
+  # end
+# end
