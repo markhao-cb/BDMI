@@ -24,7 +24,7 @@ class Movie < ActiveRecord::Base
   has_many :reviews
   has_many :images, as: :imageable
   has_many :likes, as: :likeable
-  has_many :posters
+  has_many :posters, dependent: :destroy
   has_many :castings
   has_many :actors, through: :castings
   has_many :taggings
