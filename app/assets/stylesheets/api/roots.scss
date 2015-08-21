@@ -113,8 +113,13 @@
   min-height: 1098px;
 }
 
-#rank {
-  margin: 0 auto;
+#top {
+  background-color: rgba(41, 41, 41, 0.7);
+  width: 95%;
+  border-radius: 20px;
+  padding-top: 0;
+  padding-bottom: 50px;
+  min-height: 1098px;
 }
 
 .alert {

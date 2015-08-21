@@ -32,6 +32,14 @@ class Api::MoviesController < ApplicationController
     render 'movie_index'
   end
 
+  def top_rated
+    page = params[:page] || 1
+    @movies = Movie.where('vote_average > ? and vote_count > ?',
+                          6, 10).order("vote_average DESC")
+                          .limit(8).offset((page.to_i  - 1) * 8)
+    render 'movie_index'
+  end
+
   def search
     title = params["title"] || "Spider man"
     @movies = Movie.search_by_title(title)

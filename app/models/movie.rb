@@ -34,10 +34,6 @@ class Movie < ActiveRecord::Base
 
   Tmdb::Api.key(ENV['THEMOVIEDB_API_KEY'])
 
-  def self.get_in_theathers_data
-    Tmdb::Movie.now_playing
-  end
-
 
   def update_score_and_num_of_votes(score)
     all_scores = self.vote_average * (self.vote_count + self.reviews.count) + score

@@ -43,6 +43,7 @@ BDMI.Views.ResultView = Backbone.CompositeView.extend({
       section: this.section
     });
     this.$el.html(content);
+    
     if (_.size(this.collection) !== 0) {
       var filtered = _.filter(this.collection.models, function(model) {
         return model.escape("release_date") !== "" &&

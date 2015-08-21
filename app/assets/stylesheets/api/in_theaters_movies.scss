@@ -10,12 +10,17 @@
   height: 380px;
 }
 
+.top_rated_item {
+  display: block;
+  float: left;
+  width: 24%;
+  margin: 5px;
+  height: 380px;
+}
+
 .small_image {
   height: auto;
   width: 150px;
-}
-
-.small_title {
 }
 
 #movie_item {

@@ -6,7 +6,7 @@ BDMI.Views.Main = Backbone.CompositeView.extend({
   initialize: function() {
     this.addIntroView();
     this.addMovieInTheatersView();
-    this.addRankView();
+    this.addTopRatedView();
     this.addSearchView();
     this.addPageScrollAnimation();
   },
@@ -23,9 +23,10 @@ BDMI.Views.Main = Backbone.CompositeView.extend({
     this.addSubview('#new', subview);
   },
 
-  addRankView: function() {
-    var subview = new BDMI.Views.Rank();
-    this.addSubview('#rank',subview);
+  addTopRatedView: function() {
+    var movies = new BDMI.Collections.TopRatedMovies();
+    var subview = new BDMI.Views.TopRatedView({ collection: movies });
+    this.addSubview('#top',subview);
   },
 
   addSearchView: function() {

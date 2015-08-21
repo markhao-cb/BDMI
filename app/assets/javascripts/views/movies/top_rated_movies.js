@@ -1,7 +1,7 @@
-BDMI.Views.InTheaters = Backbone.CompositeView.extend({
-  template: JST['movie/in_theaters'],
+BDMI.Views.TopRatedView = Backbone.CompositeView.extend({
+  template: JST['movie/top_rated'],
 
-  className: "in-theaters-section",
+  className: "top-rated-section",
 
   events: {
     "click #load-more-in-theaters": "loadMore"
@@ -20,8 +20,8 @@ BDMI.Views.InTheaters = Backbone.CompositeView.extend({
   },
 
   addMovieView: function(movie) {
-    var subview = new BDMI.Views.InTheatersItem({ model: movie });
-    this.addSubview(".in-theaters", subview);
+    var subview = new BDMI.Views.TopRatedItem({ model: movie });
+    this.addSubview(".top-rated", subview);
   },
 
   render: function() {
@@ -32,15 +32,15 @@ BDMI.Views.InTheaters = Backbone.CompositeView.extend({
   },
 
   removeMovieView: function(movie) {
-    this.removeModelSubview(".in-theaters",movie);
+    this.removeModelSubview(".top-rated",movie);
   },
 
   loadMore: function(event) {
     this.page += 1;
-    this.fetchReview();
+    this.fetchMovies();
   },
 
-  fetchReview: function() {
+  fetchMovies: function() {
     length = this.collection.length;
     this.collection.fetch({
       data: {
