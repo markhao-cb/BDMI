@@ -57,10 +57,10 @@ BDMI.Views.InTheaters = Backbone.CompositeView.extend({
     });
   },
 
-  flashAlert: function(type, message) {
+  flashAlert: function(type, messages) {
     var alertView = new BDMI.Views.AlertView({
       alertType: type,
-      message: message
+      messages: messages
     });
     $('body').append(alertView.$el);
     alertView.render();

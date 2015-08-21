@@ -1,5 +1,5 @@
 BDMI.Views.ResultsItem = Backbone.CompositeView.extend({
-  template: JST['movie/results_item'],
+  template: JST['movie/in_theaters_item'],
 
   className: "results_item",
 
@@ -11,12 +11,13 @@ BDMI.Views.ResultsItem = Backbone.CompositeView.extend({
   },
 
   initialize: function() {
-    this.poster_url = this.model.posters().sample();
-    this.listenTo(this.model, 'sync', this.render);
+    this.listenTo(this.model, 'sync change', this.render);
   },
 
   render: function() {
-    var content = this.template({ movie: this.model, poster: this.poster });
+    var poster_url = this.model.attributes.base_url + "original" +
+    this.model.attributes.poster_path;
+    var content = this.template({ movie: this.model, poster_url: poster_url });
     this.$el.html(content);
     this.generateStars();
     return this;

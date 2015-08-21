@@ -1,5 +1,5 @@
 BDMI.Views.Intro = Backbone.CompositeView.extend({
-  template: JST.intro,
+  template: JST["movie/intro"],
 
   // className: "hot-body group",
 

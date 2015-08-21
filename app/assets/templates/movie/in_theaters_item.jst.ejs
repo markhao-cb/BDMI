@@ -1,6 +1,6 @@
 <div id="movie_item" class="group">
-  <% if(poster) { %>
-  <img src="<%= poster.escape("poster_url") %>" class="small_image"></img>
+  <% if(poster_url) { %>
+  <img src="<%- poster_url %>" class="small_image"></img>
   <% } else { %>
   <img src="http://i.imgur.com/Dc9Jiea.png" class="small_image" style="border:1px solid;"></img>
   <% } %>

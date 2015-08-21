@@ -1,8 +1,14 @@
 class Api::MoviesController < ApplicationController
   def index
-    movie = Movie.getData
-    a = Movie.getacData
-    fail
+    # movie = Movie.getData
+    # a = Movie.getacData
+    # fail
+    @movies = Movie.all
+    @movies.each do |movie|
+      if movie.images.empty? || movie.posters.empty?
+        movie.destroy
+      end
+    end
     # page = params[:page]|| 1
     # @movies = Movie.limit(10).offset((page.to_i  - 1) * 10)
     # render json: @movies
@@ -20,12 +26,14 @@ class Api::MoviesController < ApplicationController
 
   def in_theaters_movies_index
     page = params[:page] || 1
-    @movies = Movie.where('release_date > ?', 3.months.ago).limit(8).offset((page.to_i  - 1) * 8)
+    @movies = Movie.where('release_date > ? and release_date < ?',
+                          3.months.ago, Date.today).order("vote_count DESC")
+                          .limit(8).offset((page.to_i  - 1) * 8)
     render 'movie_index'
   end
 
   def search
-    title = params["title"] || "batman"
+    title = params["title"] || "Mission Impossible"
     @movies = Movie.search_by_title(title)
     @config = Movie.find_config
     render 'search'

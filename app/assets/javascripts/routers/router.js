@@ -35,7 +35,9 @@ BDMI.Routers.Router = Backbone.Router.extend({
       }
     });
     var resultView = new BDMI.Views.ResultView({
-      collection: searchedMovies
+      collection: searchedMovies,
+      keyword:title,
+      section: "movie"
     });
     this.swap(resultView);
   },
