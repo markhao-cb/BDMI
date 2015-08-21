@@ -11,9 +11,7 @@ BDMI.Views.ResultView = Backbone.CompositeView.extend({
 
   initialize: function(options) {
     this.firstItem = true;
-    // this.listenTo(this.collection, 'add', this.addResultView);
     this.listenTo(this.collection, 'sync', this.render);
-    // this.collection.each(this.addResultView.bind(this));
     this.keyword = options.keyword;
     this.section = options.section;
   },
@@ -38,22 +36,6 @@ BDMI.Views.ResultView = Backbone.CompositeView.extend({
     }
   },
 
-  // attachOrderedSubviews: function (selector, my_comparator) {
-  //   if(my_comparator === undefined) {
-  //     my_comparator = "vote_count";
-  //   }
-  //   var comparator = function (view) {
-  //     return -view.model.escape(my_comparator);
-  //   };
-  //   var view = this;
-  //   view.$(selector).empty();
-  //   this.firstItem = true;
-  //   selectorSubviews = this.subviews(selector).sortBy(comparator);
-  //   selectorSubviews.forEach(function (subview) {
-  //     view.attachSubview(selector, subview);
-  //   });
-  // },
-
   render: function() {
     var content = this.template({
       keyword: this.keyword,
@@ -64,11 +46,6 @@ BDMI.Views.ResultView = Backbone.CompositeView.extend({
       this.collection.each(this.addResultView.bind(this));
     }
     this.attachSubviews();
-    // this.attachOrderedSubviews('#results-section');
-    // if (_.size(this.subviews("#results-section")._wrapped) !== 0) {
-    //   debugger
-    //   this.insertModelToSubviews();
-    // }
     return this;
   },
 
