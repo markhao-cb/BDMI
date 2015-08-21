@@ -4,10 +4,14 @@
   display: block;
   text-align: center;
   height:380px;
+  margin: 5px;
 }
 
 .results_item:first-of-type {
-  width: 100%;
+  padding-top: 20px;
+  width: 90%;
+  margin-left: 3%;
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .my-search-result {
@@ -68,7 +72,7 @@
   width: 90%;
   padding-left: 41px;
   margin-left: 62px;
-  background: rgba(0, 0, 0, 0.81);
+  background: rgba(0, 0, 0, 0.6);
   border-radius: 10px;
   padding-top: 35px;
   border-bottom: 1px solid;
@@ -89,4 +93,32 @@
   width: 50%;
   float: left;
   display: block;
+}
+
+#first-result-info h4 {
+  text-align: left;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  padding-left: 30px;
+}
+
+#first-result-info label {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.first-star {
+  padding-right: 30px;
+  margin-top: 20px;
+}
+
+.exp-btn {
+  margin-left: 109%;
+}
+
+#explore:hover {
+  color: #fff;
+  -webkit-box-shadow: 0px 0px 28px 0px rgba(255,15,27,1);
+  -moz-box-shadow: 0px 0px 28px 0px rgba(255,15,27,1);
+  box-shadow: 0px 0px 28px 0px rgba(255,15,27,1);
 }

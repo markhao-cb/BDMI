@@ -14,6 +14,7 @@ BDMI.Views.ResultView = Backbone.CompositeView.extend({
     this.listenTo(this.collection, 'sync', this.render);
     this.keyword = options.keyword;
     this.section = options.section;
+    this.addLoadingView();
   },
 
   addResultView: function(result) {
@@ -43,16 +44,22 @@ BDMI.Views.ResultView = Backbone.CompositeView.extend({
     });
     this.$el.html(content);
     if (_.size(this.collection) !== 0) {
+      var filtered = _.filter(this.collection.models, function(model) {
+        return model.escape("release_date") !== "" &&
+               model.escape("vote_count") > 2;
+      });
+      this.collection = new BDMI.Collections.SearchedMovies(filtered);
       this.collection.each(this.addResultView.bind(this));
+      $(".wrap_body").remove();
     }
     this.attachSubviews();
     return this;
   },
 
   sort_by_date: function() {
-    this.collection.comparator = "release_date"
+    this.collection.comparator = "release_date";
     this.collection.sort();
-    this.insertModelToSubviews("release_date");
+    this.insertModelToSubviews();
   },
 
   sort_by_count: function() {
@@ -65,5 +72,10 @@ BDMI.Views.ResultView = Backbone.CompositeView.extend({
     this.collection.comparator = "vote_average";
     this.collection.sort();
     this.insertModelToSubviews();
+  },
+
+  addLoadingView: function() {
+    this.loadingView = new BDMI.Views.LoadingView();
+    $("body").append(this.loadingView.render().$el);
   }
 });

@@ -6,12 +6,14 @@ BDMI.Views.Movie = Backbone.CompositeView.extend({
   initialize: function() {
     this.listenTo(this.model, 'sync', this.generateSubviews);
     this.listenTo(this.model, 'sync', this.render);
+    this.addLoadingView();
   },
 
   generateSubviews: function() {
     this.addInfoView();
     this.addActorView();
     this.addReviewView();
+    $(".wrap_body").remove();
   },
 
   addInfoView: function() {
@@ -38,5 +40,10 @@ BDMI.Views.Movie = Backbone.CompositeView.extend({
     this.$el.html(content);
     this.attachSubviews();
     return this;
+  },
+
+  addLoadingView: function() {
+    this.loadingView = new BDMI.Views.LoadingView();
+    $("body").append(this.loadingView.render().$el);
   }
 });

@@ -4,10 +4,10 @@ BDMI.Views.FirstResultView = Backbone.CompositeView.extend({
   className: "results_item",
 
   events: {
-    "click .small_image":"handleClick",
-    "hover":"handleHover",
-    "mouseenter .small_image": "handleEnter",
-    "mouseleave .small_image": "handleLeave"
+    "click .first-item-image":"handleClick",
+    "click #explore": "explore",
+    "mouseenter .first-item-image": "handleEnter",
+    "mouseleave .first-item-image": "handleLeave"
   },
 
   initialize: function() {
@@ -19,7 +19,7 @@ BDMI.Views.FirstResultView = Backbone.CompositeView.extend({
     this.model.attributes.poster_path;
     var content = this.template({ movie: this.model, poster_url: poster_url });
     this.$el.html(content);
-    this.generateStars();
+    this.onRender();
     return this;
   },
 
@@ -44,23 +44,21 @@ BDMI.Views.FirstResultView = Backbone.CompositeView.extend({
     $(event.currentTarget).removeClass('animated infinite pulse');
   },
 
+  onRender: function() {
+    this.$('#star').raty('destroy');
+    var grade = this.model.attributes.vote_average / 2;
+    this.$('#star').raty({
+      starOff: "http://res.cloudinary.com/dypfv4yqq/image/upload/v1439888579/star-off_j7trzb.png",
+      starOn: "http://res.cloudinary.com/dypfv4yqq/image/upload/v1439888579/star-on_iezcg6.png",
+      starHalf: "http://res.cloudinary.com/dypfv4yqq/image/upload/v1439888579/star-half_w79ezb.png",
+      helf: true,
+      score: grade,
+      readOnly: true
+    });
+  },
 
-  generateStars: function() {
-        this.$('.small_movie_score').empty();
-        var grade = Math.floor(this.model.attributes.vote_average / 2);
-        var star = Math.max(0, (Math.min(5, grade)));
-        var blank = 5 - star;
-        while (star > 0) {
-          var $star = $("<span></span>");
-          $star.text("★");
-          this.$('.small_movie_score').append($star);
-          star--;
-        }
-        while (blank > 0) {
-          var $blank = $("<span></span>");
-          $blank.text("☆");
-          this.$('.small_movie_score').append($blank);
-          blank--;
-        }
-      }
+  explore: function(event) {
+    window.scrollTo(0, 0);
+    Backbone.history.navigate("movies/"+this.model.id, { trigger: true });
+  }
 });

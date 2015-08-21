@@ -30,7 +30,7 @@ BDMI.Routers.Router = Backbone.Router.extend({
         title:title
       },
       processData: true,
-      success: function() {
+      success: function(collection) {
 
       }
     });

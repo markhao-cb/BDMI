@@ -2,8 +2,20 @@
   <img src="<%- poster_url %>" class="first-item-image"></img>
 </div>
 <div id="first-result-info" class="group">
+  <h4> Title: </h4>
   <label class="small_title">
     <%= movie.escape("title") %>
   </label>
+  <h4> Release date: </h4>
+  <label class="small_title">
+    <%= movie.escape("release_date") %>
+  </label>
+  <h4> Votes: </h4>
+  <label class="small_title">
+    <%= movie.escape("vote_count") %>
+  </label>
+  <div class="exp-btn">
+    <button class="btn" id="explore">Explore</button>
+  </div>
 </div>
-  <div class="small_movie_score"></div>
+  <div id="star" class="first-star"></div>

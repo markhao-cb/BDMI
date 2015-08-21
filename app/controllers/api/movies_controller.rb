@@ -36,7 +36,7 @@ class Api::MoviesController < ApplicationController
   end
 
   def search
-    title = params["title"] || "Mission Impossible"
+    title = params["title"] || "Spider man"
     @movies = Movie.search_by_title(title)
     @config = Movie.find_config
     render 'search'
