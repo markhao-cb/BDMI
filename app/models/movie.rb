@@ -155,7 +155,7 @@ class Movie < ActiveRecord::Base
 
 #-------------------------------test---------------------------------
   def self.getData
-    Tmdb::Movie.trailers(268)
+    Tmdb::Movie.find("horry poter")
   end
 
   def self.getacData

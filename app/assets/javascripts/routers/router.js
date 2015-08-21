@@ -31,8 +31,11 @@ BDMI.Routers.Router = Backbone.Router.extend({
       },
       processData: true,
       success: function(collection) {
-
-      }
+        if (collection.length === 0) {
+          $(".wrap_body").remove();
+          this.flashAlert(["Results not found. Redirecting to the home page..."]);
+        }
+      }.bind(this)
     });
     var resultView = new BDMI.Views.ResultView({
       collection: searchedMovies,
@@ -50,5 +53,23 @@ BDMI.Routers.Router = Backbone.Router.extend({
     this._view && this._view.remove();
     this._view = view;
     this.$rootEl.html(view.render().$el);
+  },
+
+  flashAlert: function(messages) {
+    var alertView = new BDMI.Views.AlertView({
+      messages: messages
+    });
+    $('body').append(alertView.$el);
+    alertView.render();
+    alertView.$(".alert").addClass('animated fadeIn');
+    setTimeout(function() {
+      alertView.$(".alert").removeClass('fadeIn');
+      alertView.$(".alert").addClass('fadeOut');
+      alertView.$(".alert").one("webkitAnimationEnd", function() {
+        alertView.remove();
+        window.scrollTo(0, 0);
+        Backbone.history.navigate("", { trigger: true });
+      });
+    },3000);
   }
 });

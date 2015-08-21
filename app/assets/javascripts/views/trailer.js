@@ -43,6 +43,7 @@ BDMI.Views.TrailerView = Backbone.CompositeView.extend({
         'onStateChange': "onPlayerStateChange"
       }
     });
+    console.log("From the developer: It's possible that you are getting Chrome extension errors. It's a known bug which the Google Chromecast team is working on. Please ignore them or you can install a extension to temporarily remove those errors. Link here: 'https://chrome.google.com/webstore/detail/google-cast/boadgeojelhgndaghljhdicfkmllpafd/reviews?hl=en'")
   },
     // autoplay video
   onPlayerReady: function(event) {

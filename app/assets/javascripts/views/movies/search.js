@@ -17,7 +17,7 @@ BDMI.Views.Search = Backbone.CompositeView.extend({
     event.preventDefault();
     var formData = $(event.currentTarget).serializeJSON().search;
     if (formData[0].length < 2) {
-      this.flashAlert("too_short",["Too short! Please be more specific."]);
+      this.flashAlert(["Too short! Please be more specific."]);
     } else {
       if (formData[1] === "movie") {
         Backbone.history.navigate("search/movies/"+formData[0], { trigger: true });
@@ -29,9 +29,8 @@ BDMI.Views.Search = Backbone.CompositeView.extend({
     }
   },
 
-  flashAlert: function(type, messages) {
+  flashAlert: function(messages) {
     var alertView = new BDMI.Views.AlertView({
-      alertType: type,
       messages: messages
     });
     $('body').append(alertView.$el);

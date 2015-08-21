@@ -76,7 +76,7 @@ BDMI.Views.MovieReviews = Backbone.CompositeView.extend({
       remove:false,
       success: function(resp) {
         if (resp.length < 4 && this.page != 1) {
-          this.flashAlert("no_more",["No more reviews!"]);
+          this.flashAlert(["No more reviews!"]);
           this.page -= 1;
         }
       }.bind(this)
@@ -85,7 +85,6 @@ BDMI.Views.MovieReviews = Backbone.CompositeView.extend({
 
   flashAlert: function(type, message) {
     var alertView = new BDMI.Views.AlertView({
-      alertType: type,
       message: message
     });
     $('body').append(alertView.$el);

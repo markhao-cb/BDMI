@@ -80,7 +80,7 @@ BDMI.Views.ReviewForm = Backbone.View.extend({
       }.bind(this),
       error: function(model,error,options) {
         var messages = $.parseJSON(error.responseText);
-        this.flashAlert("decline",messages.error);
+        this.flashAlert(messages.error);
       }.bind(this),
     });
   },
@@ -97,9 +97,8 @@ BDMI.Views.ReviewForm = Backbone.View.extend({
     }.bind(this));
   },
 
-  flashAlert: function(type, messages) {
+  flashAlert: function(messages) {
     var alertView = new BDMI.Views.AlertView({
-      alertType: type,
       messages: messages
     });
     $('body').append(alertView.$el);

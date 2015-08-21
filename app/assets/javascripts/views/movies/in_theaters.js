@@ -50,16 +50,15 @@ BDMI.Views.InTheaters = Backbone.CompositeView.extend({
       processData: true,
       success: function(resp) {
         if (resp.length === length && this.page != 1) {
-          this.flashAlert("no_more",["No more movies!"]);
+          this.flashAlert(["No more movies!"]);
           this.page -= 1;
         }
       }.bind(this)
     });
   },
 
-  flashAlert: function(type, messages) {
+  flashAlert: function(messages) {
     var alertView = new BDMI.Views.AlertView({
-      alertType: type,
       messages: messages
     });
     $('body').append(alertView.$el);
