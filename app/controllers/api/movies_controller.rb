@@ -15,7 +15,10 @@ class Api::MoviesController < ApplicationController
   end
 
   def show
-    @movie = Movie.find(params[:id])
+    @movie = Movie.find_by(id: params[:id])
+    unless @movie
+      @movie = Movie.search_and_store_by_id(params[:id])
+    end
     render 'show'
   end
 

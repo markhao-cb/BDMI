@@ -48,106 +48,100 @@ class Movie < ActiveRecord::Base
     Tmdb::Configuration.new
   end
 
-  def self.create_new_movie(id)
-    # # movies.each do |movie|
-    #   if Movie.find_by(id: movie.id).nil?
-    #     self.create_new_movie(movie.id)
-    #   end
-    # # end
-    # movies
+  def self.search_and_store_by_id(id)
     auth = {
       cloud_name: ENV['CLOUD_NAME'],
       api_key: ENV['CLOUD_API_KEY'],
       api_secret: ENV['CLOUD_API_SECRET'],
       upload_preset: ENV['UPLOAD_PRESET']
-    };
+    }
     config = Tmdb::Configuration.new
     movie = Tmdb::Movie.detail(id)
-    id = movie["id"]
-    title = movie["title"]
-    release_date = movie["release_date"]
-    vote_average = movie["vote_average"]
-    vote_count = movie["vote_count"]
-    popularity = movie["popularity"]
-    overview = movie["overview"]
-    runtime = movie["runtime"]
-    imdb_id = movie["imdb_id"]
-    tagline = movie["tagline"]
-    budget = movie["budget"]
-    revenue = movie["revenue"]
+    id = movie['id']
+    title = movie['title']
+    release_date = movie['release_date']
+    vote_average = movie['vote_average']
+    vote_count = movie['vote_count']
+    popularity = movie['popularity']
+    overview = movie['overview']
+    runtime = movie['runtime']
+    imdb_id = movie['imdb_id']
+    tagline = movie['tagline']
+    budget = movie['budget']
+    revenue = movie['revenue']
+
+    unless movie['backdrop_path'].nil? || movie['poster_path'].nil? ||
+           vote_count == 0 || release_date.nil?
+
+      new_movie = Movie.create(
+                  id: id,
+                  title: title,
+                  release_date: release_date,
+                  vote_average: vote_average,
+                  vote_count: vote_count,
+                  popularity: popularity,
+                  overview: overview,
+                  runtime: runtime,
+                  imdb_id: imdb_id,
+                  tagline: tagline,
+                  budget: budget,
+                  revenue: revenue
+      )
+
+      movie['genres'].each do |genre|
+        genre_id = genre['id']
+        Tagging.create(genre_id: genre_id, movie_id: movie['id'])
+      end
+
+      backdrop_path = "#{config.base_url}original#{movie['backdrop_path']}"
+      backdrop = Cloudinary::Uploader.upload(backdrop_path, auth)
+      image_url = backdrop['url']
+      new_movie.images.create(image_url: image_url)
+
+      poster_path = "#{config.base_url}original#{movie['poster_path']}"
+      poster = Cloudinary::Uploader.upload(poster_path, auth)
+      poster_url = poster['url']
+      new_movie.posters.create(poster_url: poster_url)
 
 
-    newMovie = Movie.create(
-                id: id,
-                title: title,
-                release_date: release_date,
-                vote_average: vote_average,
-                vote_count: vote_count,
-                popularity: popularity,
-                overview: overview,
-                runtime: runtime,
-                imdb_id: imdb_id,
-                tagline: tagline,
-                budget: budget,
-                revenue: revenue
+
+      casts = Tmdb::Movie.casts(new_movie.id)
+      casts.each do |actor|
+        if actor['order'] < 11
+          person = Tmdb::Person.detail(actor['id'])
+
+          unless person['profile_path'].nil?
+
+            if Actor.find_by(id: person['id']).nil?
+              new_actor = Actor.create!(
+                          id: person['id'],
+                          name: person['name'],
+                          place_of_birth: person['place_of_birth'],
+                          birthday: person['birthday']
               )
 
-    movie["genres"].each do |genre|
-      genre_id = genre["id"]
-      Tagging.create(genre_id:genre_id, movie_id:movie["id"])
-    end
+              profile_path = "#{config.base_url}original#{person['profile_path']}"
+              profile = Cloudinary::Uploader.upload(profile_path, auth)
+              image_url = profile['url']
 
-    unless movie["backdrop_path"].nil?
-      backdrop_path = "#{config.base_url}original#{movie["backdrop_path"]}"
-      backdrop = Cloudinary::Uploader.upload(backdrop_path,auth)
-      image_url = backdrop["url"]
-      newMovie.images.create(image_url:image_url)
-    end
+              new_actor.images.create!(image_url: image_url)
+            end
 
-    unless movie["poster_path"].nil?
-      poster_path = "#{config.base_url}original#{movie["poster_path"]}"
-      poster = Cloudinary::Uploader.upload(poster_path,auth)
-      poster_url = poster["url"]
-      newMovie.posters.create(poster_url:poster_url)
-    end
-
-
-    casts = Tmdb::Movie.casts(newMovie.id)
-    casts.each do |actor|
-
-      if actor["order"] < 11
-        person = Tmdb::Person.detail(actor["id"])
-
-        if person["profile_path"] != nil
-
-          if Actor.find_by(id:person["id"]) == nil
-            newActor = Actor.create!(
-                          id:person["id"],
-                          name:person["name"],
-                          place_of_birth:person["place_of_birth"],
-                          birthday:person["birthday"]
-                        )
-
-            profile_path = "#{config.base_url}original#{person["profile_path"]}"
-            profile = Cloudinary::Uploader.upload(profile_path,auth)
-            image_url = profile["url"]
-
-            newActor.images.create!(image_url:image_url)
+            Casting.create!(
+              actor_id: person['id'],
+              movie_id: new_movie.id,
+              ord: actor['order'],
+              act_as: actor['character']
+            )
           end
-
-          Casting.create!(
-            actor_id:person["id"],
-            movie_id:newMovie.id,
-            ord: actor["order"],
-            act_as: actor["character"]
-          )
         end
       end
     end
+    new_movie
   end
 
 
-  def self.getData
+  def self.getDdata
     config = Tmdb::Configuration.new
   end
 
