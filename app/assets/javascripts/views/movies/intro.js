@@ -19,7 +19,6 @@ BDMI.Views.Intro = Backbone.CompositeView.extend({
     var content = this.template({ movie: this.model, movie_image: this.image });
     this.$el.html(content);
     this.attachSubviews();
-    this.addPageScrollAnimation();
     $("#owl-example").owlCarousel({
       navigation : false, // Show next and prev buttons
       stopOnHover: true,
@@ -30,19 +29,6 @@ BDMI.Views.Intro = Backbone.CompositeView.extend({
       }
   });
     return this;
-  },
-
-  addPageScrollAnimation: function() {
-    $('a.page-scroll').bind('click', function(event) {
-        if(Backbone.history.getFragment() !== "") {
-          Backbone.history.navigate("", { trigger: true });
-        }
-        var $anchor = $(this);
-        $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top
-        }, 1500, 'easeInOutExpo');
-        event.preventDefault();
-    });
   },
 
   generateYTPlayer: function() {
