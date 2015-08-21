@@ -89,6 +89,38 @@
   left: 10%;
 }
 
+// player
+
+.player {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 7777;
+  background: rgba(80, 80, 80, 0.67);
+}
+
+.close-play {
+  position: absolute;
+  right: 5%;
+  top: 5%;
+}
+
+.close-play a{
+  color: #fff;
+  font-size: 26px;
+  padding: 6px 12px;
+  background-color: rgba(0, 0, 0, 0.81);
+}
+
+#player {
+  position: absolute;
+  left: 12%;
+  top: 17%;
+}
+
+
 
 // avatar section ------------------
 

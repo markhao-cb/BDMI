@@ -31,25 +31,6 @@ BDMI.Views.Intro = Backbone.CompositeView.extend({
     return this;
   },
 
-  generateYTPlayer: function() {
-    var player;
-    player = new YT.Player('player', {
-      height: '484',
-      width: '750',
-      videoId: 'gOW_azQbOjw',
-      events: {
-        'onReady': "onPlayerReady",
-        'onStateChange': "onPlayerStateChange"
-      }
-    });
-  },
-
-    // autoplay video
-  onPlayerReady: function(event) {
-        // event.target.playVideo();
-        // $('.carousel').carousel();
-    },
-
     // when video ends
     onPlayerStateChange: function(event) {
       if(event.data === 0) {

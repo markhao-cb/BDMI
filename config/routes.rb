@@ -11,5 +11,6 @@ Rails.application.routes.draw do
     get '/intro_movies_index', to: 'movies#intro_movies_index'
     get '/in_theaters_movies', to: 'movies#in_theaters_movies_index'
     get '/search_results', to: 'movies#search'
+    get '/trailer', to: 'movies#search_trailer'
   end
 end

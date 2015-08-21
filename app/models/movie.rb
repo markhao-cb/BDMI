@@ -29,10 +29,14 @@ class Movie < ActiveRecord::Base
   has_many :actors, through: :castings
   has_many :taggings
   has_many :genres, through: :taggings
+  has_one :trailer
   belongs_to :director, foreign_key: :director_id, class_name: :Actor
 
   Tmdb::Api.key(ENV['THEMOVIEDB_API_KEY'])
 
+  def self.get_in_theathers_data
+    Tmdb::Movie.now_playing
+  end
 
 
   def update_score_and_num_of_votes(score)
@@ -140,9 +144,18 @@ class Movie < ActiveRecord::Base
     new_movie
   end
 
+  def self.search_trailer_by_id(id)
+    resp = Tmdb::Movie.trailers(id)
+    trailer = resp["youtube"].first
+    Trailer.create!(source: trailer["source"], movie_id:id)
+  end
 
-  def self.getDdata
-    config = Tmdb::Configuration.new
+
+
+
+#-------------------------------test---------------------------------
+  def self.getData
+    Tmdb::Movie.trailers(268)
   end
 
   def self.getacData
@@ -160,7 +173,5 @@ class Movie < ActiveRecord::Base
     a = Cloudinary::Uploader.upload("http://cf2.imgobject.com/t/p/w500/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg", auth)
   end
 
-  def self.get_in_theathers_data
-    Tmdb::Movie.now_playing
-  end
+
 end

@@ -18,7 +18,10 @@ BDMI.Views.InfoView = Backbone.CompositeView.extend({
 
   addPosterView: function() {
     var poster = this.model.posters().first();
-    var subview = new BDMI.Views.Poster({ model: poster });
+    var subview = new BDMI.Views.Poster({
+      model: poster,
+      movie_id: this.model.id
+    });
     this.addSubview(".movie-poster", subview);
   },
 

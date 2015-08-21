@@ -1,17 +1,14 @@
 class Api::MoviesController < ApplicationController
   def index
-    # movie = Movie.getData
-    # a = Movie.getacData
-    # fail
-    @movies = Movie.all
-    @movies.each do |movie|
-      if movie.images.empty? || movie.posters.empty?
-        movie.destroy
-      end
-    end
-    # page = params[:page]|| 1
-    # @movies = Movie.limit(10).offset((page.to_i  - 1) * 10)
-    # render json: @movies
+    movie = Movie.getData
+    a = Movie.getacData
+    fail
+    # @movies = Movie.all
+    # @movies.each do |movie|
+    #   if movie.images.empty? || movie.posters.empty?
+    #     movie.destroy
+    #   end
+    # end
   end
 
   def show
@@ -40,5 +37,15 @@ class Api::MoviesController < ApplicationController
     @movies = Movie.search_by_title(title)
     @config = Movie.find_config
     render 'search'
+  end
+
+  def search_trailer
+    @movie = Movie.find(params[:movie_id])
+    unless @movie.trailer
+      trailer = Movie.search_trailer_by_id(@movie.id)
+      render json: trailer
+    else
+      render json: @movie.trailer
+    end
   end
 end
