@@ -4,10 +4,10 @@ BDMI.Views.FirstResultView = Backbone.CompositeView.extend({
   className: "results_item",
 
   events: {
-    "click .first-item-image":"handleClick",
+    // "click .first-item-image":"handleClick",
     "click #explore": "explore",
-    "mouseenter .first-item-image": "handleEnter",
-    "mouseleave .first-item-image": "handleLeave"
+    // "mouseenter .first-item-image": "handleEnter",
+    // "mouseleave .first-item-image": "handleLeave"
   },
 
   initialize: function() {
