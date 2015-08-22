@@ -21,12 +21,16 @@ class User < ActiveRecord::Base
   has_many :images, as: :imageable
   has_many :reviews, foreign_key: :author_id, class_name: :Review
   has_many :likes, foreign_key: :author_id, class_name: :Like
+  has_many :want_watchs, foreign_key: :user_id, class_name: :Wantwatchmovie
+  has_many :wanted_movies, through: :want_watchs, source: :movie
+  has_many :has_watcheds, foreign_key: :user_id, class_name: :Watchedmovie
+  has_many :watched_movies, through: :has_watcheds, source: :movie
 
   after_initialize :ensure_session_token
 
   def password=(password)
     @password = password
-    self.password_digest = BCrypt::Password.create(password);
+    self.password_digest = BCrypt::Password.create(password)
   end
 
   def is_password?(password)

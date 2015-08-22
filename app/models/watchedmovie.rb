@@ -10,4 +10,8 @@
 #
 
 class Watchedmovie < ActiveRecord::Base
+  validates :user, :movie, presence: true
+
+  belongs_to :user
+  belongs_to :movie
 end

@@ -20,7 +20,7 @@
 
 .info-overview {
   font-family: serif;
-  font-size: 18px;
+  font-size: 15px;
 }
 
 .overview {
@@ -51,12 +51,16 @@
 }
 
 .info-body {
-  width: 30%
+  width: 37%
 }
 
 .info-title {
   border-bottom: 1px solid;
   width: 15%;
+}
+
+#watched-btn {
+  margin-left: 20px;
 }
 
 .detail-item {

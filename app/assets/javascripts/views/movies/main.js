@@ -8,7 +8,6 @@ BDMI.Views.Main = Backbone.CompositeView.extend({
     this.addMovieInTheatersView();
     this.addTopRatedView();
     this.addSearchView();
-    this.addPageScrollAnimation();
   },
 
   addIntroView: function() {
@@ -39,19 +38,6 @@ BDMI.Views.Main = Backbone.CompositeView.extend({
     this.$el.html(content);
     this.attachSubviews();
     return this;
-  },
-
-  addPageScrollAnimation: function() {
-    $('a.page-scroll').bind('click', function(event) {
-        if(Backbone.history.getFragment() !== "") {
-          Backbone.history.navigate("", { trigger: true });
-        }
-        var $anchor = $(this);
-        $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top
-        }, 1500, 'easeInOutExpo');
-        event.preventDefault();
-    });
   }
 
 });

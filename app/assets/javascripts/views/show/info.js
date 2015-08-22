@@ -3,6 +3,11 @@ BDMI.Views.InfoView = Backbone.CompositeView.extend({
 
   className: "movie-info",
 
+  events : {
+    "click #add-to-list-btn": "addToList",
+    "click #watched-btn": "addWatched"
+  },
+
   initialize: function() {
     this.listenTo(this.model, 'sync', this.render);
     this.addPosterView();
@@ -36,5 +41,26 @@ BDMI.Views.InfoView = Backbone.CompositeView.extend({
       score: grade,
       readOnly: true
     });
+  },
+
+  addToList: function(event) {
+
+  },
+
+  addWatched: function(event) {
+    if (BDMI.CURRENT_USER === undefined) {
+      this.flashAlert(["Please login before writing reviews."]);
+    } else {
+      var watchedMovie = new BDMI.Models.WatchedMovie();
+      watchedMovie.save({ movie_id: this.model.id }, {
+        success: function() {
+          $("#watched-btn").prop('disable', 'true');
+          $("#watched-btn").text("You've watched this movie.");
+        },
+        error: function() {
+          debugger
+        }
+      });
+    }
   }
 });

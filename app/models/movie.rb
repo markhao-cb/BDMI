@@ -30,7 +30,10 @@ class Movie < ActiveRecord::Base
   has_many :taggings
   has_many :genres, through: :taggings
   has_one :trailer
-  belongs_to :director, foreign_key: :director_id, class_name: :Actor
+  has_many :watch_wants, foreign_key: :movie_id, class_name: :Wantwatchmovie
+  has_many :want_watchers, through: :watch_wants, source: :user
+  has_many :watcheds, foreign_key: :movie_id, class_name: :Watchedmovie
+  has_many :watchers, through: :watcheds, source: :user
 
   Tmdb::Api.key(ENV['THEMOVIEDB_API_KEY'])
 

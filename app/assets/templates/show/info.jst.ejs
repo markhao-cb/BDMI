@@ -7,7 +7,6 @@
         <div class="col-lg-6 wp2 delay-05s movie-poster">
 
         </div><!-- /.col-lg-6 -->
-
         <div class="col-lg-6 wp2 delay-1s info-body">
         <h2><%= movie.escape("title")%></h2>
         <h4 class="sub-text">Release Date: <%= movie.escape("release_date") %> <br>
@@ -42,7 +41,12 @@
           <div id="star"></div>
         </div>
         <p></p>
-        </div><!-- /.col-lg-6 -->
+        <div class="vote-count">
+          <h4 class="sub-text movie-count">Votes:&nbsp;&nbsp;&nbsp;<%= movie.escape("vote_count") %></h4>
+        </div>
+        <!-- <button class="btn" id="add-to-list-btn">Add to watchlist</button>
+        <button class="btn" id="watched-btn">I've watched it!</button> -->
+      </div><!-- /.col-lg-6 -->
   </div><!-- /.row -->
 </div><!-- /.container -->
 </section><!-- /#about -->

@@ -18,6 +18,7 @@ BDMI.Views.Intro = Backbone.CompositeView.extend({
   render: function() {
     var content = this.template({ movie: this.model, movie_image: this.image });
     this.$el.html(content);
+    this.addPageScrollAnimation();
     this.attachSubviews();
     $("#owl-example").owlCarousel({
       navigation : false, // Show next and prev buttons
@@ -31,11 +32,19 @@ BDMI.Views.Intro = Backbone.CompositeView.extend({
     return this;
   },
 
-    // when video ends
-    onPlayerStateChange: function(event) {
-      if(event.data === 0) {
-          $('.carousel').carousel();
-          event.target.parent.removeChild();
-      }
-    }
+  addPageScrollAnimation: function() {
+    $('a.page-scroll').bind('click', function(event) {
+        if(Backbone.history.getFragment() !== "" &&
+          !$(event.currentTarget).hasClass('user_login')) {
+          Backbone.history.navigate("", { trigger: true });
+        }
+        var $anchor = $(this);
+        if ($($anchor.attr('href')) !== []) {
+          $('html, body').stop().animate({
+              scrollTop: $($anchor.attr('href')).offset().top
+          }, 1500, 'easeInOutExpo');
+        }
+        event.preventDefault();
+    });
+  }
 });

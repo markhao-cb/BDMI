@@ -57,7 +57,7 @@ BDMI.Views.MovieReviews = Backbone.CompositeView.extend({
       modal.render();
       modal.$el.addClass('animated fadeIn');
     } else {
-      this.flashAlert("login","Please login before writing reviews.");
+      this.flashAlert(["Please login before writing reviews."]);
     }
   },
 
@@ -83,7 +83,7 @@ BDMI.Views.MovieReviews = Backbone.CompositeView.extend({
     });
   },
 
-  flashAlert: function(type, message) {
+  flashAlert: function(message) {
     var alertView = new BDMI.Views.AlertView({
       message: message
     });
