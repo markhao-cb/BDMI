@@ -1,14 +1,14 @@
 class Api::MoviesController < ApplicationController
   def index
-    # movie = Movie.getData
-    # a = Movie.getacData
-    # fail
-    @movies = Movie.all
-    @movies.each do |movie|
-      if movie.images.empty? || movie.posters.empty? || movie.actors.empty? || movie.genres.empty?
-        movie.destroy
-      end
-    end
+    movie = Movie.getData
+    a = Movie.getacData
+    fail
+    # @movies = Movie.all
+    # @movies.each do |movie|
+    #   if movie.images.empty? || movie.posters.empty? || movie.actors.empty? || movie.genres.empty?
+    #     movie.destroy
+    #   end
+    # end
   end
 
   def show

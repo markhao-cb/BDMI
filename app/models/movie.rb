@@ -154,11 +154,11 @@ class Movie < ActiveRecord::Base
 
 #-------------------------------test---------------------------------
   def self.getData
-    Tmdb::Movie.find("horry poter")
+    Tmdb::Genre.detail(18)
   end
 
   def self.getacData
-    Tmdb::Person.detail(500)
+    Tmdb::Person.detail(287)
   end
 
 
