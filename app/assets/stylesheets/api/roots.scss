@@ -133,3 +133,8 @@
   padding: 10px;
   border: 1px solid darkgray;
 }
+
+.main_container section {
+  min-width: 900px;
+  overflow-x: scroll;
+}

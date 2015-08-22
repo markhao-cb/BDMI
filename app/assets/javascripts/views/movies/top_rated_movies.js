@@ -1,7 +1,7 @@
 BDMI.Views.TopRatedView = Backbone.CompositeView.extend({
   template: JST['movie/top_rated'],
 
-  className: "top-rated-section",
+  className: "top-rated-section group",
 
   events: {
     "click #load-more-in-theaters": "loadMore"

@@ -1,7 +1,7 @@
 BDMI.Views.InTheaters = Backbone.CompositeView.extend({
   template: JST['movie/in_theaters'],
 
-  className: "in-theaters-section",
+  className: "in-theaters-section group",
 
   events: {
     "click #load-more-in-theaters": "loadMore"
