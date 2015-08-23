@@ -3,6 +3,10 @@ BDMI.Views.CarouselItemView = Backbone.CompositeView.extend({
 
   className: "item",
 
+  events: {
+    "click": "show"
+  },
+
   initialize: function() {
     this.listenTo(this.model, 'sync', this.render);
   },
@@ -12,5 +16,9 @@ BDMI.Views.CarouselItemView = Backbone.CompositeView.extend({
     var content = this.template({ image: image });
     this.$el.html(content);
     return this;
+  },
+
+  show: function(event) {
+    Backbone.history.navigate("movies/" + this.model.id, { trigger: true} );
   }
 });

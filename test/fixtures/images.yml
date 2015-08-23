@@ -4,7 +4,7 @@
 #
 #  id             :integer          not null, primary key
 #  image_url      :string           not null
-#  thumbnil_url   :string           not null
+#  thumbnil_url   :string
 #  imageable_id   :integer
 #  imageable_type :string
 #  created_at     :datetime         not null

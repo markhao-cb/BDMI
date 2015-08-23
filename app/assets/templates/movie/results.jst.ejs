@@ -1,9 +1,12 @@
 <h1 class="big-title">Search Results</h1>
 <div class="big-title-border"></div>
 <div id="search-info-section" class="search-result-body">
-  <label>You searched for <b>"<%- keyword %>"</b> in <strong><%- section %>s</strong>.</label>
+
 </div>
 <div id="sort-section" class="search-result-body">
+  <label id="title-lbl">
+    You searched for <b>"<%- keyword %>"</b> in <strong><%- section %></strong>.
+  </label>
   <label id="sort-by">Sort by:</label>
   <button href="javascript:void(0)" class="btn" id="sort_by_date">Release date</button>
   <button href="javascript:void(0)" class="btn" id="sort_by_rating">Rating</button>

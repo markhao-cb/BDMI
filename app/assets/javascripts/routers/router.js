@@ -47,20 +47,20 @@ BDMI.Routers.Router = Backbone.Router.extend({
   },
 
   personIndex: function(name) {
-    var searchedPerson = new BDMI.Collections.Actors();
+    var searchedPerson = new BDMI.Collections.MovieActors();
     var person = searchedPerson.fetch({
       data: {
         name: name
       },
       processData: true,
-      success: function() {
-        debugger
-      }.bind(this),
-      error: function(m,e) {
-        debugger
-      }
+      success: function(collection) {
+        $(".wrap_body").remove();
+        if (collection.length === 0) {
+          this.flashAlert(["Results not found. Redirecting to the home page..."]);
+        }
+      }.bind(this)
     });
-    var resultView = new BDMI.Views.ResultView({
+    var resultView = new BDMI.Views.ActorResult({
       collection: searchedPerson,
       keyword: name,
       section: "person"
