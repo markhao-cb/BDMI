@@ -47,7 +47,25 @@ BDMI.Routers.Router = Backbone.Router.extend({
   },
 
   personIndex: function(name) {
-
+    var searchedPerson = new BDMI.Collections.Actors();
+    var person = searchedPerson.fetch({
+      data: {
+        name: name
+      },
+      processData: true,
+      success: function() {
+        debugger
+      }.bind(this),
+      error: function(m,e) {
+        debugger
+      }
+    });
+    var resultView = new BDMI.Views.ResultView({
+      collection: searchedPerson,
+      keyword: name,
+      section: "person"
+    });
+    this.swap(resultView);
   },
 
   genresIndex: function(genre) {

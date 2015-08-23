@@ -76,7 +76,7 @@ a:focus {
 
 .navbar-custom .navbar-brand:hover {
   outline: 0;
-  color: rgba(250, 140, 140, 0.8);
+  border-bottom: 3px solid;
   background-color: transparent;
 }
 
@@ -107,7 +107,14 @@ a:focus {
 
 .navbar-custom .nav li a:hover {
     outline: 0;
-    color: rgba(250, 140, 140, 0.8);
+    border-bottom: 3px solid;
+    background-color: transparent;
+}
+
+.navbar-custom .nav .dropdown .dropdown-menu li a:hover {
+    outline: 0;
+    color: #000;
+    border-bottom: 0;
     background-color: transparent;
 }
 

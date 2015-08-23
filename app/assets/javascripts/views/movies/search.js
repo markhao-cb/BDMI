@@ -22,9 +22,7 @@ BDMI.Views.Search = Backbone.CompositeView.extend({
       if (formData[1] === "movie") {
         Backbone.history.navigate("search/movies/"+formData[0], { trigger: true });
       } else {
-        var searchPerson = new BDMI.Models.Actor({
-          name: formData[0]
-        });
+        Backbone.history.navigate("search/person/"+formData[0], { trigger: true });
       }
     }
   },
