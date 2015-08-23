@@ -43,7 +43,7 @@ BDMI.Views.ResultView = Backbone.CompositeView.extend({
       section: this.section
     });
     this.$el.html(content);
-    
+
     if (_.size(this.collection) !== 0) {
       var filtered = _.filter(this.collection.models, function(model) {
         return model.escape("release_date") !== "" &&
@@ -57,19 +57,25 @@ BDMI.Views.ResultView = Backbone.CompositeView.extend({
     return this;
   },
 
-  sort_by_date: function() {
+  sort_by_date: function(event) {
+    this.$(".btn").removeClass('active')
+    $(event.currentTarget).addClass('active');
     this.collection.comparator = "release_date";
     this.collection.sort();
     this.insertModelToSubviews();
   },
 
-  sort_by_count: function() {
+  sort_by_count: function(event) {
+    this.$(".btn").removeClass('active')
+    $(event.currentTarget).addClass('active');
     this.collection.comparator = "vote_count";
     this.collection.sort();
     this.insertModelToSubviews();
   },
 
-  sort_by_rating: function() {
+  sort_by_rating: function(event) {
+    this.$(".btn").removeClass('active')
+    $(event.currentTarget).addClass('active');
     this.collection.comparator = "vote_average";
     this.collection.sort();
     this.insertModelToSubviews();

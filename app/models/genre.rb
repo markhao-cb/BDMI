@@ -18,4 +18,9 @@ class Genre < ActiveRecord::Base
   def self.search_genre_detail_by_id(id)
     Tmdb::Genre.detail(id)
   end
+
+  def self.find_genre(genre)
+    @genre = Genre.find_by(name: genre.capitalize) unless genre.nil?
+    @genre
+  end
 end

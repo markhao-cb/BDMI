@@ -13,5 +13,6 @@ json.array! @movies.results do |movie|
     )
     json.set! :genre_name, @genre.name
     json.set! :page_num, @movies.page
+    json.set! :base_url, @config.base_url
   end
 end

@@ -1,7 +1,7 @@
 BDMI.Routers.Router = Backbone.Router.extend({
   routes: {
     "": "index",
-    "movies/:id": "show",
+    "movies(/:id)": "show",
     "search/movies/:title": "movieIndex",
     "search/person/:name": "personIndex",
     "genres/:genre":"genresIndex"
@@ -52,20 +52,9 @@ BDMI.Routers.Router = Backbone.Router.extend({
 
   genresIndex: function(genre) {
     var genres = new BDMI.Collections.Genres();
-    genres.fetch({
-      data:{
-        genre:genre
-      },
-      processData:true,
-      success: function(collection) {
-        debugger
-      },
-      error: function(collection, error) {
-        debugger
-      }
-    })
     var genresIndexView = new BDMI.Views.GenresIndex({
-      collection: genres
+      collection: genres,
+      genre: genre
     });
     this.swap(genresIndexView);
   },

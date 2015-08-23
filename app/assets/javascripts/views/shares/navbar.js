@@ -13,7 +13,8 @@ BDMI.Views.Navbar = Backbone.CompositeView.extend({
     this.$el.html(content);
     this.onRender();
     this.navScroll();
-    $("body").scrollspy({ target: '.navbar-fixed-top' });
+    this.addPageScrollAnimation();
+    // $("body").scrollspy({ target: '.navbar-fixed-top' });
     return this;
   },
 
@@ -38,6 +39,22 @@ BDMI.Views.Navbar = Backbone.CompositeView.extend({
             $(".navbar-fixed-top").removeClass("top-nav-collapse");
         }
       }
+    });
+  },
+
+  addPageScrollAnimation: function() {
+    $('a.page-scroll').bind('click', function(event) {
+        if(Backbone.history.getFragment() !== "" &&
+          !$(event.currentTarget).hasClass('user_login')) {
+          Backbone.history.navigate("", { trigger: true });
+        }
+        var $anchor = $(this);
+        if ($($anchor.attr('href')) !== []) {
+          $('html, body').stop().animate({
+              scrollTop: $($anchor.attr('href')).offset().top
+          }, 1500, 'easeInOutExpo');
+        }
+        event.preventDefault();
     });
   }
 });

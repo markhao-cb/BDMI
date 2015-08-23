@@ -7,6 +7,12 @@
   margin: 5px;
 }
 
+#sort-section .active {
+  -webkit-box-shadow: 0px 0px 20px 3px rgba(86, 204, 255, 0.75);
+  -moz-box-shadow:    0px 0px 20px 3px rgba(86, 204, 255, 0.75);
+  box-shadow:         0px 0px 20px 3px rgba(86, 204, 255, 0.75);
+}
+
 .results_item:first-of-type {
   padding-top: 20px;
   width: 90%;
