@@ -13,6 +13,11 @@ BDMI.Views.GenresIndex = Backbone.CompositeView.extend({
     this.genres = [];
     this.addLoadingView();
     this.genre = options.genre;
+    if(this.genre === "all") {
+      this.notChoose = true;
+    } else {
+      this.notChoose = false;
+    }
     this.collection.fetch({
       data:{
         genre: this.genre
@@ -29,25 +34,34 @@ BDMI.Views.GenresIndex = Backbone.CompositeView.extend({
   },
 
   render: function() {
-    var content = this.template({
-      keyword: this.genre,
-      section: "genres",
-      genres : this.genres
-    });
-    this.$el.html(content);
-    if (_.size(this.collection) !== 0) {
-      var filtered = _.filter(this.collection.models, function(model) {
-        return model.escape("release_date") !== "" &&
-               model.escape("vote_count") > 2;
-      });
-      this.collection = new BDMI.Collections.Genres(filtered);
-      this.collection.each(this.addResultView.bind(this));
-      this.generatePagination();
-      debugger
-      this.addButtonActive();
+    if (this.notChoose) {
+      var content = this.template({
+        genres: this.genres,
+        notChoose: this.notChoose
+      })
+      this.$el.html(content);
       $(".wrap_body").remove();
+    } else {
+      var content = this.template({
+        keyword: this.genre,
+        section: "genres",
+        genres : this.genres,
+        notChoose: this.notChoose
+      });
+      this.$el.html(content);
+      if (_.size(this.collection) !== 0) {
+        var filtered = _.filter(this.collection.models, function(model) {
+          return model.escape("release_date") !== "" &&
+                 model.escape("vote_count") > 2;
+        });
+        this.collection = new BDMI.Collections.Genres(filtered);
+        this.collection.each(this.addResultView.bind(this));
+        this.generatePagination();
+        this.addButtonActive();
+        $(".wrap_body").remove();
+      }
+      this.attachSubviews();
     }
-    this.attachSubviews();
     return this;
   },
 
