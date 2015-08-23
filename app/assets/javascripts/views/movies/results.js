@@ -58,7 +58,7 @@ BDMI.Views.ResultView = Backbone.CompositeView.extend({
   },
 
   sort_by_date: function(event) {
-    this.$(".btn").removeClass('active')
+    this.$(".btn").removeClass('active');
     $(event.currentTarget).addClass('active');
     this.collection.comparator = "release_date";
     this.collection.sort();
@@ -66,7 +66,7 @@ BDMI.Views.ResultView = Backbone.CompositeView.extend({
   },
 
   sort_by_count: function(event) {
-    this.$(".btn").removeClass('active')
+    this.$(".btn").removeClass('active');
     $(event.currentTarget).addClass('active');
     this.collection.comparator = "vote_count";
     this.collection.sort();
@@ -74,7 +74,7 @@ BDMI.Views.ResultView = Backbone.CompositeView.extend({
   },
 
   sort_by_rating: function(event) {
-    this.$(".btn").removeClass('active')
+    this.$(".btn").removeClass('active');
     $(event.currentTarget).addClass('active');
     this.collection.comparator = "vote_average";
     this.collection.sort();

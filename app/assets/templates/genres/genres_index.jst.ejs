@@ -1,9 +1,16 @@
 <h1 class="big-title">Genres</h1>
 <div class="big-title-border"></div>
-<div id="search-info-section" class="search-result-body">
-  <label>You searched for <b>"<%- keyword %>"</b> in <strong><%- section %></strong>.</label>
+<div id="all-genres-section" class="search-result-body">
+  <% genres.forEach(function(genre){ %>
+    <a href="#/genres/<%- genre.name %>" class="btn <%- genre.name %>" id="genre-btn">
+      <%- genre.name %>
+    </a>
+  <% }) %>
 </div>
 <div id="sort-section" class="search-result-body">
+  <label id="title-lbl">
+    You searched for <b>"<%- keyword %>"</b> in <strong><%- section %></strong>.
+  </label>
   <label id="sort-by">Sort by:</label>
   <button href="javascript:void(0)" class="btn" id="sort_by_date">Release date</button>
   <button href="javascript:void(0)" class="btn" id="sort_by_rating">Rating</button>
@@ -11,5 +18,7 @@
 </div>
 <div class="col-md-13" id="page-content">
     <div class="group" id="results-section"></div>
+    <div class="group" id="pagination-section">
+      <ul id="pagination-genres" class="pagination-sm"></ul>
+    </div>
 </div>
-<ul id="pagination-genres" class="pagination-sm"></ul>

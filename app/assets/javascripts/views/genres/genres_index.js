@@ -4,11 +4,13 @@ BDMI.Views.GenresIndex = Backbone.CompositeView.extend({
   events: {
     "click #sort_by_date":"sort_by_date",
     "click #sort_by_rating":"sort_by_rating",
-    "click #sort_by_count":"sort_by_count"
+    "click #sort_by_count":"sort_by_count",
+    "click .btn": "handleRedirect"
   },
 
   initialize: function(options) {
     this.firstItem = true;
+    this.genres = [];
     this.addLoadingView();
     this.genre = options.genre;
     this.collection.fetch({
@@ -17,19 +19,20 @@ BDMI.Views.GenresIndex = Backbone.CompositeView.extend({
       },
       processData:true,
       success: function(collection) {
-
+        this.genres = this.collection.first().attributes.genres;
       }.bind(this),
       error: function(collection, error) {
         debugger
       }
-    })
+    });
     this.listenTo(this.collection, 'sync', this.render);
   },
 
   render: function() {
     var content = this.template({
       keyword: this.genre,
-      section: "genres"
+      section: "genres",
+      genres : this.genres
     });
     this.$el.html(content);
     if (_.size(this.collection) !== 0) {
@@ -40,10 +43,16 @@ BDMI.Views.GenresIndex = Backbone.CompositeView.extend({
       this.collection = new BDMI.Collections.Genres(filtered);
       this.collection.each(this.addResultView.bind(this));
       this.generatePagination();
+      debugger
+      this.addButtonActive();
       $(".wrap_body").remove();
     }
     this.attachSubviews();
     return this;
+  },
+
+  handleRedirect: function(event) {
+
   },
 
   addResultView: function(result) {
@@ -74,7 +83,6 @@ BDMI.Views.GenresIndex = Backbone.CompositeView.extend({
         totalPages: 96,
         visiblePages: 8,
         onPageClick: function (event, page) {
-          debugger
           this.collection.fetch({
             data: {
               page:page
@@ -92,7 +100,7 @@ BDMI.Views.GenresIndex = Backbone.CompositeView.extend({
   },
 
   sort_by_date: function(event) {
-    this.$(".btn").removeClass('active')
+    this.$("#sort-section .btn").removeClass('active');
     $(event.currentTarget).addClass('active');
     this.collection.comparator = "release_date";
     this.collection.sort();
@@ -100,7 +108,7 @@ BDMI.Views.GenresIndex = Backbone.CompositeView.extend({
   },
 
   sort_by_count: function(event) {
-    this.$(".btn").removeClass('active')
+    this.$("#sort-section .btn").removeClass('active');
     $(event.currentTarget).addClass('active');
     this.collection.comparator = "vote_count";
     this.collection.sort();
@@ -108,7 +116,7 @@ BDMI.Views.GenresIndex = Backbone.CompositeView.extend({
   },
 
   sort_by_rating: function(event) {
-    this.$(".btn").removeClass('active')
+    this.$("#sort-section .btn").removeClass('active');
     $(event.currentTarget).addClass('active');
     this.collection.comparator = "vote_average";
     this.collection.sort();
@@ -118,5 +126,15 @@ BDMI.Views.GenresIndex = Backbone.CompositeView.extend({
   addLoadingView: function() {
     this.loadingView = new BDMI.Views.LoadingView();
     $("body").append(this.loadingView.render().$el);
+  },
+
+  addButtonActive: function() {
+    var currentGenre = Backbone.history.fragment.slice(7);
+    if (currentGenre === "Science Fiction") {
+      this.$(".Science.Fiction").addClass('active');
+    } else {
+      this.$("#all-genres-section .active").removeClass('active');
+      this.$("#all-genres-section ." + currentGenre).addClass('active');
+    }
   }
 });
