@@ -18,6 +18,8 @@
 #  updated_at   :datetime         not null
 #
 
+require 'rest-client'
+
 class Movie < ActiveRecord::Base
   validates :title, presence: true
 
@@ -155,7 +157,7 @@ class Movie < ActiveRecord::Base
 
 #-------------------------------test---------------------------------
   def self.getData
-    Tmdb::Genre.detail(18)
+    RestClient.get "http://api.themoviedb.org/3/movie/10195/reviews?api_key=#{ENV['THEMOVIEDB_API_KEY']}"
   end
 
   def self.getacData
@@ -170,7 +172,7 @@ class Movie < ActiveRecord::Base
       api_secret: ENV['CLOUD_API_SECRET'],
       upload_preset: ENV['UPLOAD_PRESET']
     };
-    a = Cloudinary::Uploader.upload("http://cf2.imgobject.com/t/p/w500/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg", auth)
+     Cloudinary::Uploader.upload("http://cf2.imgobject.com/t/p/w500/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg", auth)
   end
 
 

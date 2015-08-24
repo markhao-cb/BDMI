@@ -31,6 +31,11 @@ BDMI.Views.InfoView = Backbone.CompositeView.extend({
   },
 
   onRender: function() {
+    this.generateStar();
+    this.generateRelation();
+  },
+
+  generateStar: function() {
     this.$('#star').raty('destroy');
     var grade = this.model.attributes.vote_average / 2;
     this.$('#star').raty({
@@ -41,6 +46,31 @@ BDMI.Views.InfoView = Backbone.CompositeView.extend({
       score: grade,
       readOnly: true
     });
+  },
+
+  generateRelation: function() {
+    if (this.model.attributes.in_watched) {
+      this.changeToWatched();
+    }
+    if (this.model.attributes.in_wanted) {
+      this.changeToWanted();
+    }
+  },
+
+  changeToWatched: function() {
+    $("#watched-btn").remove();
+    var $watched = $("<label><i class='fa fa-check'></i> Watched!</label>");
+    $watched.addClass('btn');
+    $watched.css('color', 'red');
+    $('#watched').append($watched);
+  },
+
+  changeToWanted: function() {
+    $("#add-to-list-btn").remove();
+    var $wanted = $("<label><i class='fa fa-check'></i> Added!</label>");
+    $wanted.addClass('btn');
+    $wanted.css('color', 'green');
+    $('#add-to-list').append($wanted);
   },
 
   addToList: function(event) {
@@ -54,8 +84,7 @@ BDMI.Views.InfoView = Backbone.CompositeView.extend({
       var watchedMovie = new BDMI.Models.WatchedMovie();
       watchedMovie.save({ movie_id: this.model.id }, {
         success: function() {
-          $("#watched-btn").prop('disable', 'true');
-          $("#watched-btn").text("Watched!");
+          this.changeToWatched();
         },
         error: function() {
           debugger

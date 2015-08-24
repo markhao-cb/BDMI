@@ -1,8 +1,7 @@
 class Api::MoviesController < ApplicationController
   def index
     movie = Movie.getData
-    a = Movie.getacData
-    fail
+    render json: movie
     # @movies = Movie.all
     # @movies.each do |movie|
     #   if movie.images.empty? || movie.posters.empty? || movie.actors.empty? || movie.genres.empty?

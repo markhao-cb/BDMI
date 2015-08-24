@@ -6,4 +6,5 @@ json.partial! 'movie_show',
               display_reviews: true,
               display_posters: true,
               display_actors: true,
-              display_genres: true
+              display_genres: true,
+              display_user: true
