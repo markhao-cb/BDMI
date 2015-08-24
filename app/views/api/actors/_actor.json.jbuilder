@@ -11,7 +11,7 @@ end
 if display_casting
   json.castings do
     json.array! actor.castings.where(movie_id: movie_id) do |casting|
-        json.extract!(casting, :act_as, :ord)
+      json.extract!(casting, :act_as, :ord)
     end
   end
 end

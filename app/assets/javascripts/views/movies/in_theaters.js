@@ -50,7 +50,7 @@ BDMI.Views.InTheaters = Backbone.CompositeView.extend({
       processData: true,
       success: function(resp) {
         if (resp.length === length && this.page != 1) {
-          this.flashAlert(["No more movies!"]);
+          this.flashAlert(["No more movies in theaters!"]);
           this.page -= 1;
         }
       }.bind(this)

@@ -50,7 +50,7 @@ BDMI.Views.TopRatedView = Backbone.CompositeView.extend({
       processData: true,
       success: function(resp) {
         if (resp.length === length && this.page != 1) {
-          this.flashAlert(["No more movies!"]);
+          this.flashAlert(["No more top-rated movies!"]);
           this.page -= 1;
         }
       }.bind(this)

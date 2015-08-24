@@ -1,12 +1,6 @@
 BDMI.Views.ActorResult = Backbone.CompositeView.extend({
   template: JST["actors/result"],
 
-  events: {
-    "click #sort_by_date":"sort_by_date",
-    "click #sort_by_rating":"sort_by_rating",
-    "click #sort_by_count":"sort_by_count"
-  },
-
   class_name: "my-search-result",
 
   initialize: function(options) {

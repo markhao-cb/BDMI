@@ -120,7 +120,8 @@ class Movie < ActiveRecord::Base
                           id: person['id'],
                           name: person['name'],
                           place_of_birth: person['place_of_birth'],
-                          birthday: person['birthday']
+                          birthday: person['birthday'],
+                          biography: person['biography']
               )
 
               profile_path = "#{config.base_url}original#{person['profile_path']}"

@@ -1,0 +1,22 @@
+
+<section id="about">
+<div class="container wp2">
+<h1 class="section-title" id="about-title">About the person</h1>
+
+    <div class="row">
+      <div class="col-lg-6 wp2 delay-05s movie-poster">
+        <img src="<%- profile_url %>" width="70%" height="auto"/>
+      </div><!-- /.col-lg-6 -->
+      <div class="col-lg-6 wp2 delay-1s info-body">
+        <h2><%= actor.escape("name")%></h2>
+        <h4 class="sub-text">Birthday: <%= actor.escape("birthday") %> <br>
+        </h4>
+        <h4 class="sub-text">Place of Birth: <br><%= actor.escape("place_of_birth") %>
+        <br>
+        <h4 class="sub-text overview">Overview: <br></h4>
+        <span class="info-overview"> <%= actor.escape("biography") %> </span>
+        <br>
+      </div><!-- /.col-lg-6 -->
+  </div><!-- /.row -->
+</div><!-- /.container -->
+</section><!-- /#about -->

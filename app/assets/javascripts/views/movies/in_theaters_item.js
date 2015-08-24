@@ -19,6 +19,7 @@ BDMI.Views.InTheatersItem = Backbone.CompositeView.extend({
     var content = this.template({ movie: this.model, poster_url: this.poster_url });
     this.$el.html(content);
     this.generateStars();
+    // this.onRender();
     return this;
   },
 
@@ -43,6 +44,18 @@ BDMI.Views.InTheatersItem = Backbone.CompositeView.extend({
     $(event.currentTarget).removeClass('animated infinite pulse');
   },
 
+  onRender: function() {
+    this.$('#star').raty('destroy');
+    var grade = this.model.attributes.vote_average / 2;
+    this.$('#star').raty({
+      starOff: "http://res.cloudinary.com/dypfv4yqq/image/upload/v1439888579/star-off_j7trzb.png",
+      starOn: "http://res.cloudinary.com/dypfv4yqq/image/upload/v1439888579/star-on_iezcg6.png",
+      starHalf: "http://res.cloudinary.com/dypfv4yqq/image/upload/v1439888579/star-half_w79ezb.png",
+      helf: true,
+      score: grade,
+      readOnly: true
+    });
+  },
 
   generateStars: function() {
         this.$('.small_movie_score').empty();
@@ -51,6 +64,7 @@ BDMI.Views.InTheatersItem = Backbone.CompositeView.extend({
         var blank = 5 - star;
         while (star > 0) {
           var $star = $("<span></span>");
+          $star.css('color', 'orange');
           $star.text("★");
           this.$('.small_movie_score').append($star);
           star--;

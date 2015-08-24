@@ -3,6 +3,10 @@ BDMI.Views.ActorItem = Backbone.View.extend({
 
   className: 'actor-item group',
 
+  events: {
+    'click': 'handleClick'
+  },
+
   initialize: function() {
     this.listenTo(this.model, 'sync', this.render);
   },
@@ -16,5 +20,9 @@ BDMI.Views.ActorItem = Backbone.View.extend({
      });
     this.$el.html(content);
     return this;
+  },
+
+  handleClick: function(event) {
+    Backbone.history.navigate('person/'+ this.model.id, { trigger: true });
   }
 });

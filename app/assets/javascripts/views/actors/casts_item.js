@@ -1,10 +1,11 @@
-BDMI.Views.TopRatedItem = Backbone.CompositeView.extend({
+BDMI.Views.CastsItem = Backbone.CompositeView.extend({
   template: JST['movie/in_theaters_item'],
 
-  className: "top_rated_item",
+  className: "in_theaters_item",
 
   events: {
     "click .small_image":"handleClick",
+    "hover":"handleHover",
     "mouseenter .small_image": "handleEnter",
     "mouseleave .small_image": "handleLeave"
   },
@@ -14,7 +15,8 @@ BDMI.Views.TopRatedItem = Backbone.CompositeView.extend({
   },
 
   render: function() {
-    var poster_url = this.model.posters().sample().attributes.poster_url;
+    var poster_url = this.model.attributes.base_url + "original" +
+    this.model.attributes.poster_path;
     var content = this.template({ movie: this.model, poster_url: poster_url });
     this.$el.html(content);
     this.generateStars();
@@ -50,7 +52,6 @@ BDMI.Views.TopRatedItem = Backbone.CompositeView.extend({
         var blank = 5 - star;
         while (star > 0) {
           var $star = $("<span></span>");
-          $star.css('color', 'orange');
           $star.text("★");
           this.$('.small_movie_score').append($star);
           star--;

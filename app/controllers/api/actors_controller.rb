@@ -7,10 +7,14 @@ class Api::ActorsController < ApplicationController
   end
 
   def show
-    @actor = Actor.find_by(id: params[:id])
+    person_id = params[:id]
+    @credits = Actor.search_credits(person_id)['cast']
+    @actor = Actor.find_by(id: person_id)
     if @actor.nil? || @actor.biography.nil?
-      @actor = Actor.search_and_store_by_id(params[:id])
+      Actor.search_and_store_by_id(person_id)
+      @actor = Actor.find_by(id: person_id)
     end
+    @config = Movie.find_config
     render 'show'
   end
 end

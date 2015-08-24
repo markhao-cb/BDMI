@@ -35,7 +35,7 @@ class Api::MoviesController < ApplicationController
   def top_rated
     page = params[:page] || 1
     @movies = Movie.where('vote_average > ? and vote_count > ?',
-                          6, 10).order("vote_average DESC")
+                          7.5, 10).order("created_at DESC")
                           .limit(8).offset((page.to_i  - 1) * 8)
     render 'movie_index'
   end
