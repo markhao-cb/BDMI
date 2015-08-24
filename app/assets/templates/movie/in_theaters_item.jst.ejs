@@ -9,6 +9,11 @@
   <label class="small_title">
     <%= movie.escape("title") %>
   </label>
+  <br>
+  <% if(movie.attributes.character) { %>
+    <em>As: <%= movie.escape("character") %></em>
+  <% } %>
 </div>
-  <div class="small_movie_score"></div>
-  <div id="star"></div>
+
+<div class="small_movie_score"></div>
+<div id="star"></div>

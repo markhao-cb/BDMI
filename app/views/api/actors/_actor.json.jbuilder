@@ -1,4 +1,4 @@
-json.extract!(actor, :name, :birthday)
+json.extract!(actor, :id, :name, :birthday)
 
 if display_images
   json.images do

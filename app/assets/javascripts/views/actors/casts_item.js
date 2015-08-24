@@ -17,7 +17,10 @@ BDMI.Views.CastsItem = Backbone.CompositeView.extend({
   render: function() {
     var poster_url = this.model.attributes.base_url + "original" +
     this.model.attributes.poster_path;
-    var content = this.template({ movie: this.model, poster_url: poster_url });
+    var content = this.template({
+      movie: this.model,
+      poster_url: poster_url
+    });
     this.$el.html(content);
     this.generateStars();
     return this;

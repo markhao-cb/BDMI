@@ -3,6 +3,10 @@ BDMI.Views.Actor = Backbone.CompositeView.extend({
 
   className: "view view-ninth actots-item",
 
+  events: {
+    'click .read-more': "handleClick"
+  },
+
   render: function() {
     character = this.model.attributes.castings[0].act_as;
     image_url = this.model.attributes.images[0].image_url;
@@ -14,5 +18,10 @@ BDMI.Views.Actor = Backbone.CompositeView.extend({
     });
     this.$el.html(content);
     return this;
+  },
+
+  handleClick: function(event) {
+    window.scrollTo(0, 0);
+    Backbone.history.navigate('person/'+ this.model.attributes.id, { trigger: true });
   }
 });
