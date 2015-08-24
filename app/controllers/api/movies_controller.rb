@@ -16,6 +16,8 @@ class Api::MoviesController < ApplicationController
     unless @movie
       @movie = Movie.search_and_store_by_id(params[:id])
     end
+    @watched =  @movie.watchers.include?(current_user)
+    @wanted = @movie.want_watchers.include?(current_user)
     render 'show'
   end
 

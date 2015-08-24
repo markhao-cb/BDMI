@@ -1,5 +1,7 @@
 json.partial! 'movie_show',
               movie: @movie,
+              watched: @watched,
+              wanted: @wanted,
               display_images: true,
               display_reviews: true,
               display_posters: true,

@@ -1,10 +1,15 @@
 class Api::WatchedsController < ApplicationController
   def create
-    watched = current_user.has_watcheds.new(movie_id: params[:movie_id])
-    if watched.save
-      render json: watched
+    watched = Watchedmovie.find_by(user_id: current_user.id, movie_id: params[:movie_id])
+    unless watched
+      watched = current_user.has_watcheds.new(movie_id: params[:movie_id])
+      if watched.save
+        render json: watched
+      else
+        render json: { error: watched.errors.full_messages }, status: 422
+      end
     else
-      render json: { error: watched.errors.full_messages }, status: 422
+      render json: watched
     end
   end
 

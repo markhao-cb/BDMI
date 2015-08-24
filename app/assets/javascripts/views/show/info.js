@@ -49,13 +49,13 @@ BDMI.Views.InfoView = Backbone.CompositeView.extend({
 
   addWatched: function(event) {
     if (BDMI.CURRENT_USER === undefined) {
-      this.flashAlert(["Please login before writing reviews."]);
+      this.flashAlert(["Please login first."]);
     } else {
       var watchedMovie = new BDMI.Models.WatchedMovie();
       watchedMovie.save({ movie_id: this.model.id }, {
         success: function() {
           $("#watched-btn").prop('disable', 'true');
-          $("#watched-btn").text("You've watched this movie.");
+          $("#watched-btn").text("Watched!");
         },
         error: function() {
           debugger

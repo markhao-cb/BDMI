@@ -14,6 +14,9 @@ json.extract!(
   :imdb_id,
 )
 
+json.set! :in_watched, watched
+json.set! :in_wanted, wanted
+
 if display_images
   json.images do
     json.array! movie.images do |image|
