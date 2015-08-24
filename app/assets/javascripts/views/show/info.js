@@ -60,21 +60,33 @@ BDMI.Views.InfoView = Backbone.CompositeView.extend({
   changeToWatched: function() {
     $("#watched-btn").remove();
     var $watched = $("<label><i class='fa fa-check'></i> Watched!</label>");
-    $watched.addClass('btn');
-    $watched.css('color', 'red');
+    $watched.addClass('btn').addClass('disabled');
+    $watched.css('color', 'lime');
     $('#watched').append($watched);
   },
 
   changeToWanted: function() {
     $("#add-to-list-btn").remove();
     var $wanted = $("<label><i class='fa fa-check'></i> Added!</label>");
-    $wanted.addClass('btn');
-    $wanted.css('color', 'green');
+    $wanted.addClass('btn').addClass('disabled');
+    $wanted.css('color', 'lime');
     $('#add-to-list').append($wanted);
   },
 
   addToList: function(event) {
-
+    if (BDMI.CURRENT_USER === undefined) {
+      this.flashAlert(["Please login first."]);
+    } else {
+      var wantedMovie = new BDMI.Models.WantedMovie();
+      wantedMovie.save({ movie_id: this.model.id }, {
+        success: function() {
+          this.changeToWanted();
+        }.bind(this),
+        error: function() {
+          debugger
+        }
+      });
+    }
   },
 
   addWatched: function(event) {
