@@ -4,7 +4,9 @@ BDMI.Views.ActorItem = Backbone.View.extend({
   className: 'actor-item group',
 
   events: {
-    'click': 'handleClick'
+    'click': 'handleClick',
+    "mouseenter .small_image": "handleEnter",
+    "mouseleave .small_image": "handleLeave"
   },
 
   initialize: function() {
@@ -23,6 +25,17 @@ BDMI.Views.ActorItem = Backbone.View.extend({
   },
 
   handleClick: function(event) {
-    Backbone.history.navigate('person/'+ this.model.id, { trigger: true });
-  }
+    this.$el.addClass('animated flipOutX');
+    this.$el.one('webkitAnimationEnd', function() {
+      Backbone.history.navigate('person/'+ this.model.id, { trigger: true });
+    }.bind(this));
+  },
+
+  handleEnter: function(event) {
+    $(event.currentTarget).addClass('animated infinite pulse');
+  },
+
+  handleLeave: function(event) {
+    $(event.currentTarget).removeClass('animated infinite pulse');
+  },
 });

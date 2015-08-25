@@ -147,8 +147,11 @@ BDMI.Views.GenresIndex = Backbone.CompositeView.extend({
     var currentGenre = Backbone.history.fragment.slice(7);
     if (currentGenre === "Science Fiction") {
       this.$(".Science.Fiction").addClass('active');
+    } else if (currentGenre === "TV Movie") {
+      this.$(".TV.Movie").addClass('active');
     } else {
       this.$("#all-genres-section .active").removeClass('active');
+      debugger
       this.$("#all-genres-section ." + currentGenre).addClass('active');
     }
   },

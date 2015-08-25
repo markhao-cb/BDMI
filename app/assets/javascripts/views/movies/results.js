@@ -19,6 +19,7 @@ BDMI.Views.ResultView = Backbone.CompositeView.extend({
   },
 
   addResultView: function(result) {
+    debugger
     if (this.firstItem) {
       var firstSubview = new BDMI.Views.FirstResultView({ model: result });
       this.addSubview("#results-section", firstSubview);
@@ -44,15 +45,19 @@ BDMI.Views.ResultView = Backbone.CompositeView.extend({
       section: this.section
     });
     this.$el.html(content);
-
     if (_.size(this.collection) !== 0) {
       var filtered = _.filter(this.collection.models, function(model) {
         return model.escape("release_date") !== "" &&
                model.escape("vote_count") > 2;
       });
-      this.collection = new BDMI.Collections.SearchedMovies(filtered);
-      this.collection.each(this.addResultView.bind(this));
-      $(".wrap_body").remove();
+      if (filtered.length === 0) {
+        $(".wrap_body").remove();
+        this.flashAlert(['No results for "'+ this.keyword +'"... ']);
+      } else {
+        this.collection = new BDMI.Collections.SearchedMovies(filtered);
+        this.collection.each(this.addResultView.bind(this));
+        $(".wrap_body").remove();
+      }
     }
     this.attachSubviews();
     return this;
@@ -101,5 +106,23 @@ BDMI.Views.ResultView = Backbone.CompositeView.extend({
         }
         event.preventDefault();
     });
+  },
+
+  flashAlert: function(messages) {
+    var alertView = new BDMI.Views.AlertView({
+      messages: messages
+    });
+    $('body').append(alertView.$el);
+    alertView.render();
+    alertView.$(".alert").addClass('animated fadeIn');
+    setTimeout(function() {
+      alertView.$(".alert").removeClass('fadeIn');
+      alertView.$(".alert").addClass('fadeOut');
+      alertView.$(".alert").one("webkitAnimationEnd", function() {
+        alertView.remove();
+        window.scrollTo(0, 0);
+        Backbone.history.navigate("", { trigger: true });
+      });
+    },3000);
   }
 });
