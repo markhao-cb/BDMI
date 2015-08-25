@@ -18,6 +18,6 @@ Type
 Types
 
 ### Views
-Rank
+User_show, User_reviews, Watch_list, Watched_list
 
 ## Gems/Libraries
