@@ -1,7 +1,7 @@
 BDMI.Views.Intro = Backbone.CompositeView.extend({
   template: JST["movie/intro"],
 
-  // className: "hot-body group",
+  className: "hot-section",
 
   initialize: function() {
     this.collection.fetch();

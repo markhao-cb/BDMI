@@ -14,6 +14,13 @@
   min-height: 825px;
 }
 
+#search {
+  width: 80%;
+  margin: 0 auto;
+  border-radius: 0;
+  background-color: rgba(6, 5, 5, 0.35);
+}
+
 .hot-body {
   width: 80%;
   text-align: center;
@@ -23,7 +30,6 @@
 
 .content-section {
   padding-top: 50px;
-  margin-bottom: 50px;
   background: rgba(19, 19, 19, 0.7);
 }
 
