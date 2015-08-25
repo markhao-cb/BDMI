@@ -52,6 +52,7 @@ BDMI.Views.ResultsItem = Backbone.CompositeView.extend({
         var blank = 5 - star;
         while (star > 0) {
           var $star = $("<span></span>");
+          $star.css('color', 'orange');
           $star.text("★");
           this.$('.small_movie_score').append($star);
           star--;

@@ -1,3 +1,7 @@
+.radio-inline {
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
 .results_item {
   width: 24%;
   float: left;
@@ -122,6 +126,8 @@
 }
 
 #results-section {
+  min-width: 1000px;
+  overflow-x: scroll;
   width: 90%;
   margin-left: 62px;
   background: rgba(0, 0, 0, 0.6);
