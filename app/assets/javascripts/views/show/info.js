@@ -97,7 +97,7 @@ BDMI.Views.InfoView = Backbone.CompositeView.extend({
       watchedMovie.save({ movie_id: this.model.id }, {
         success: function() {
           this.changeToWatched();
-        },
+        }.bind(this),
         error: function() {
           debugger
         }

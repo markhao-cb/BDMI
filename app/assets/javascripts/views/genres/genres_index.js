@@ -12,6 +12,7 @@ BDMI.Views.GenresIndex = Backbone.CompositeView.extend({
     this.firstItem = true;
     this.genres = [];
     this.addLoadingView();
+    this.addPageScrollAnimation();
     this.genre = options.genre;
     if(this.genre === "all") {
       this.notChoose = true;
@@ -150,5 +151,21 @@ BDMI.Views.GenresIndex = Backbone.CompositeView.extend({
       this.$("#all-genres-section .active").removeClass('active');
       this.$("#all-genres-section ." + currentGenre).addClass('active');
     }
+  },
+
+  addPageScrollAnimation: function() {
+    $('a.page-scroll').bind('click', function(event) {
+        if(Backbone.history.getFragment() !== "" &&
+          !$(event.currentTarget).hasClass('user_login')) {
+          Backbone.history.navigate("", { trigger: true });
+        }
+        var $anchor = $(this);
+        if ($($anchor.attr('href')) !== []) {
+          $('html, body').stop().animate({
+              scrollTop: $($anchor.attr('href')).offset().top
+          }, 1500, 'easeInOutExpo');
+        }
+        event.preventDefault();
+    });
   }
 });

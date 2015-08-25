@@ -10,6 +10,7 @@ BDMI.Views.ActorResult = Backbone.CompositeView.extend({
     this.section = options.section;
     this.collection.each(this.addResultView.bind(this));
     this.addLoadingView();
+    this.addPageScrollAnimation();
   },
 
   addResultView: function(result) {
@@ -30,5 +31,21 @@ BDMI.Views.ActorResult = Backbone.CompositeView.extend({
   addLoadingView: function() {
     this.loadingView = new BDMI.Views.LoadingView();
     $("body").append(this.loadingView.render().$el);
+  },
+
+  addPageScrollAnimation: function() {
+    $('a.page-scroll').bind('click', function(event) {
+        if(Backbone.history.getFragment() !== "" &&
+          !$(event.currentTarget).hasClass('user_login')) {
+          Backbone.history.navigate("", { trigger: true });
+        }
+        var $anchor = $(this);
+        if ($($anchor.attr('href')) !== []) {
+          $('html, body').stop().animate({
+              scrollTop: $($anchor.attr('href')).offset().top
+          }, 1500, 'easeInOutExpo');
+        }
+        event.preventDefault();
+    });
   }
 });

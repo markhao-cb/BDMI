@@ -11,7 +11,11 @@ BDMI.Views.InTheatersItem = Backbone.CompositeView.extend({
   },
 
   initialize: function() {
-    this.poster_url = this.model.posters().sample().attributes.poster_url;
+    if (this.model.attributes.poster) {
+      this.poster_url = this.model.attributes.poster.poster_url;
+    } else {
+      this.poster_url = this.model.posters().sample().attributes.poster_url;
+    }
     this.listenTo(this.model, 'sync', this.render);
   },
 

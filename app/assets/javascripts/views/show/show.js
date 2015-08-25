@@ -7,6 +7,7 @@ BDMI.Views.Movie = Backbone.CompositeView.extend({
     this.listenTo(this.model, 'sync', this.generateSubviews);
     this.listenTo(this.model, 'sync', this.render);
     this.addLoadingView();
+    this.addPageScrollAnimation();
   },
 
   generateSubviews: function() {
@@ -45,5 +46,21 @@ BDMI.Views.Movie = Backbone.CompositeView.extend({
   addLoadingView: function() {
     this.loadingView = new BDMI.Views.LoadingView();
     $("body").append(this.loadingView.render().$el);
+  },
+
+  addPageScrollAnimation: function() {
+    $('a.page-scroll').bind('click', function(event) {
+        if(Backbone.history.getFragment() !== "" &&
+          !$(event.currentTarget).hasClass('user_login')) {
+          Backbone.history.navigate("", { trigger: true });
+        }
+        var $anchor = $(this);
+        if ($($anchor.attr('href')) !== []) {
+          $('html, body').stop().animate({
+              scrollTop: $($anchor.attr('href')).offset().top
+          }, 1500, 'easeInOutExpo');
+        }
+        event.preventDefault();
+    });
   }
 });

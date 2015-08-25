@@ -1,8 +1,8 @@
 json.extract! @user, :username
 
 json.reviews do
-  json.array! @user.reviews.includes(:movie) do |review|
-    json.partial! 'user_review', review: review
+  json.array! @user.reviews.includes(:movie, :author) do |review|
+    json.partial! 'user_review', review: review, author_name: @user.username
   end
 end
 

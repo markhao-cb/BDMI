@@ -15,6 +15,7 @@ BDMI.Views.ResultView = Backbone.CompositeView.extend({
     this.keyword = options.keyword;
     this.section = options.section;
     this.addLoadingView();
+    this.addPageScrollAnimation();
   },
 
   addResultView: function(result) {
@@ -84,5 +85,21 @@ BDMI.Views.ResultView = Backbone.CompositeView.extend({
   addLoadingView: function() {
     this.loadingView = new BDMI.Views.LoadingView();
     $("body").append(this.loadingView.render().$el);
+  },
+
+  addPageScrollAnimation: function() {
+    $('a.page-scroll').bind('click', function(event) {
+        if(Backbone.history.getFragment() !== "" &&
+          !$(event.currentTarget).hasClass('user_login')) {
+          Backbone.history.navigate("", { trigger: true });
+        }
+        var $anchor = $(this);
+        if ($($anchor.attr('href')) !== []) {
+          $('html, body').stop().animate({
+              scrollTop: $($anchor.attr('href')).offset().top
+          }, 1500, 'easeInOutExpo');
+        }
+        event.preventDefault();
+    });
   }
 });
