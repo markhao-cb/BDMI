@@ -81,10 +81,7 @@ BDMI.Views.InfoView = Backbone.CompositeView.extend({
       wantedMovie.save({ movie_id: this.model.id }, {
         success: function() {
           this.changeToWanted();
-        }.bind(this),
-        error: function() {
-          debugger
-        }
+        }.bind(this)
       });
     }
   },
@@ -97,11 +94,24 @@ BDMI.Views.InfoView = Backbone.CompositeView.extend({
       watchedMovie.save({ movie_id: this.model.id }, {
         success: function() {
           this.changeToWatched();
-        }.bind(this),
-        error: function() {
-          debugger
-        }
+        }.bind(this)
       });
     }
+  },
+
+  flashAlert: function(messages) {
+    var alertView = new BDMI.Views.AlertView({
+      messages: messages
+    });
+    $('body').append(alertView.$el);
+    alertView.render();
+    alertView.$(".alert").addClass('animated fadeIn');
+    setTimeout(function() {
+      alertView.$(".alert").removeClass('fadeIn');
+      alertView.$(".alert").addClass('fadeOut');
+      alertView.$(".alert").one("webkitAnimationEnd", function() {
+        alertView.remove();
+      });
+    },2000);
   }
 });
