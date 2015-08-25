@@ -46,7 +46,7 @@ BDMI.Routers.Router = Backbone.Router.extend({
       success: function(collection) {
         if (collection.length === 0) {
           $(".wrap_body").remove();
-          this.flashAlert(["Results not found. Redirecting to the home page..."]);
+          this.flashAlert(['No results for "'+ title +'"... ']);
         }
       }.bind(this)
     });

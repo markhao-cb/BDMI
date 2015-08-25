@@ -83,9 +83,9 @@ BDMI.Views.MovieReviews = Backbone.CompositeView.extend({
     });
   },
 
-  flashAlert: function(message) {
+  flashAlert: function(messages) {
     var alertView = new BDMI.Views.AlertView({
-      message: message
+      messages: messages
     });
     $('body').append(alertView.$el);
     alertView.render();
