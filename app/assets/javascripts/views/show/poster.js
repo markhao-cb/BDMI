@@ -26,8 +26,9 @@ BDMI.Views.Poster = Backbone.View.extend({
         movie_id: this.movie_id
       },
       processData: true,
-      success: function(collection) {
-        if (collection.length === 0) {
+      success: function(model) {
+        if (model.attributes.source === undefined) {
+          $(".player").remove();
           this.flashAlert(["Sorry, trailer is not available."]);
         }
       }.bind(this)
@@ -62,7 +63,6 @@ BDMI.Views.Poster = Backbone.View.extend({
       alertView.$(".alert").addClass('fadeOut');
       alertView.$(".alert").one("webkitAnimationEnd", function() {
         alertView.remove();
-        $(".player").remove();
       });
     },3000);
   }

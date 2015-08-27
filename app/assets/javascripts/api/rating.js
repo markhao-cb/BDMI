@@ -10,7 +10,6 @@ function StarRating() {
  * Initialize
  */
 StarRating.prototype.init = function() {
-  debugger
   this.stars = document.querySelectorAll('#add-rating span');
   for (var i = 0; i < this.stars.length; i++) {
     this.stars[i].setAttribute('data-count', i);

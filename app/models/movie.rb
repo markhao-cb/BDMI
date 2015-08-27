@@ -149,7 +149,7 @@ class Movie < ActiveRecord::Base
   def self.search_trailer_by_id(id)
     resp = Tmdb::Movie.trailers(id)
     trailer = resp["youtube"].first
-    Trailer.create!(source: trailer["source"], movie_id:id)
+    Trailer.create!(source: trailer["source"], movie_id:id) unless trailer.nil?
   end
 
 

@@ -28,7 +28,6 @@ BDMI.Views.GenresIndex = Backbone.CompositeView.extend({
         this.genres = this.collection.first().attributes.genres;
       }.bind(this),
       error: function(collection, error) {
-        debugger
       }
     });
     this.listenTo(this.collection, 'sync', this.render);
@@ -87,7 +86,7 @@ BDMI.Views.GenresIndex = Backbone.CompositeView.extend({
       modelArr = modelArr.reverse();
     }
     var subviews = _.toArray(this.subviews("#results-section")._wrapped);
-    for (var i = 0; i < modelArr.length; i++) {
+    for (var i = 0; i < subviews.length && i < modelArr.length; i++) {
       subviews[i].model = modelArr[i];
       subviews[i].render();
     }
@@ -98,13 +97,13 @@ BDMI.Views.GenresIndex = Backbone.CompositeView.extend({
         totalPages: 96,
         visiblePages: 8,
         onPageClick: function (event, page) {
+          window.scrollTo(0, 0);
           this.collection.fetch({
             data: {
               page:page
             },
             processData:true,
             success: function() {
-              window.scrollTo(0, 0);
               this.insertModelToSubviews(false);
               $(".wrap_body").remove();
             }.bind(this)
@@ -151,7 +150,6 @@ BDMI.Views.GenresIndex = Backbone.CompositeView.extend({
       this.$(".TV.Movie").addClass('active');
     } else {
       this.$("#all-genres-section .active").removeClass('active');
-      debugger
       this.$("#all-genres-section ." + currentGenre).addClass('active');
     }
   },

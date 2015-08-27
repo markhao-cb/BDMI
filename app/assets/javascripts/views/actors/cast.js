@@ -14,7 +14,6 @@ BDMI.Views.Casts = Backbone.CompositeView.extend({
   },
 
   addItemView: function(movie) {
-    debugger
     var subview = new BDMI.Views.CastsItem({ model: movie });
     this.addSubview('.all-casts',subview);
   }

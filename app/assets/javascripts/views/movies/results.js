@@ -19,7 +19,6 @@ BDMI.Views.ResultView = Backbone.CompositeView.extend({
   },
 
   addResultView: function(result) {
-    debugger
     if (this.firstItem) {
       var firstSubview = new BDMI.Views.FirstResultView({ model: result });
       this.addSubview("#results-section", firstSubview);
