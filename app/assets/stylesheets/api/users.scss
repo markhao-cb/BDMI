@@ -16,11 +16,15 @@
 
 #login-logo {
   position: relative;
+  width: 30%;
+  margin: 0 auto;
+  top: 5%;
 }
 
 .login-logo-image {
   margin: 0 auto;
   display: block;
+  height:280px;
 }
 #error {
   color: #b94a48;
