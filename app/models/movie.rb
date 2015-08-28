@@ -75,8 +75,7 @@ class Movie < ActiveRecord::Base
     budget = movie['budget']
     revenue = movie['revenue']
 
-    unless movie['backdrop_path'].nil? || movie['poster_path'].nil? ||
-           vote_count == 0 || release_date.nil?
+    unless movie['poster_path'].nil? || vote_count == 0 || release_date.nil?
 
       new_movie = Movie.create(
                   id: id,
@@ -98,10 +97,12 @@ class Movie < ActiveRecord::Base
         Tagging.create(genre_id: genre_id, movie_id: movie['id'])
       end
 
-      backdrop_path = "#{config.base_url}original#{movie['backdrop_path']}"
-      backdrop = Cloudinary::Uploader.upload(backdrop_path, auth)
-      image_url = backdrop['url']
-      new_movie.images.create(image_url: image_url)
+      unless movie['backdrop_path'].nil?
+        backdrop_path = "#{config.base_url}original#{movie['backdrop_path']}"
+        backdrop = Cloudinary::Uploader.upload(backdrop_path, auth)
+        image_url = backdrop['url']
+        new_movie.images.create(image_url: image_url)
+      end
 
       poster_path = "#{config.base_url}original#{movie['poster_path']}"
       poster = Cloudinary::Uploader.upload(poster_path, auth)
