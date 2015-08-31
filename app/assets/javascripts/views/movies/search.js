@@ -31,12 +31,13 @@ BDMI.Views.Search = Backbone.CompositeView.extend({
 
   registerSearchListener: function() {
     var typingTimer;                //timer identifier
-    var doneTypingInterval = 3000;  //time in ms, 3 seconds
+    var doneTypingInterval = 2000;  //time in ms, 3 seconds
     var $input = this.$('#myInput');
     //on keyup, start the countdown
     $input.on('paste keypress', function() {
+      $('.search_dropdown_section').remove();
       clearTimeout(typingTimer);
-      typingTimer = setTimeout(this.doneTyping, doneTypingInterval);
+      typingTimer = setTimeout(this.doneTyping.bind(this), doneTypingInterval);
     }.bind(this));
   },
 
@@ -51,7 +52,7 @@ BDMI.Views.Search = Backbone.CompositeView.extend({
   },
 
   doneTyping: function() {
-    var formData = this.$('form').serilizeJSON().search;
+    var formData = this.$('form').serializeJSON().search;
     if (formData[1] === "movie") {
       this.movieSearchDrop(formData[0]);
     } else {
@@ -61,14 +62,14 @@ BDMI.Views.Search = Backbone.CompositeView.extend({
 
   movieSearchDrop: function(title) {
     var searchedMovies = new BDMI.Collections.SearchedMovies();
-    var searchedMovie = searchedMovies.fetch({
-      data: {
-        title:title
-      },
-      processData: true,
-      success: function(collection) {
-      }.bind(this)
-    });
+    // var searchedMovie = searchedMovies.fetch({
+    //   data: {
+    //     title:title
+    //   },
+    //   processData: true,
+    //   success: function(collection) {
+    //   }.bind(this)
+    // });
     var dropDownView = new BDMI.Views.SearchDropDown({
       collection: searchedMovies
     });
