@@ -1,7 +1,7 @@
 #owl-example .item img{
     display: block;
-    width: auto;
-    height: 427px;
+    width: 100%;
+    height: auto;
     margin: 0 auto;
 }
 
@@ -35,20 +35,17 @@
 
 
 .search-section {
-  min-width: 800px;
-  overflow-x: scroll;
+  overflow-x: visible;
   margin-top: 10%;
 }
 
 .in-theaters-section {
-  min-width: 800px;
-  overflow-x: scroll;
+  overflow-x: visible;
   margin-top: 10%;
 }
 
 .top-rated-section {
-  min-width: 800px;
-  overflow-x: scroll;
+  overflow-x: visible;
   margin-top: 10%;
 }
 

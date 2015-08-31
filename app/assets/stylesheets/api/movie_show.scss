@@ -16,7 +16,7 @@
 
 #about {
   min-width: 1000px;
-  overflow-x: scroll;
+  overflow-x: visible;
 }
 
 #casts {
@@ -54,7 +54,7 @@
 
 #info-section {
   min-width: 1100px;
-  overflow-x: scroll;
+  overflow-x: visible;
   background: rgba(0, 0, 0, 0.7);
   padding: 60px;
 }
