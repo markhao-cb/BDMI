@@ -18,26 +18,28 @@ BDMI.Views.Search = Backbone.CompositeView.extend({
   search: function(event) {
     event.preventDefault();
     var formData = $(event.currentTarget).serializeJSON().search;
-    if (formData[0].length < 2) {
+    if (formData[1].length < 2) {
       this.flashAlert(["Too short! Please be more specific."]);
     } else {
-      if (formData[1] === "movie") {
-        Backbone.history.navigate("search/movies/"+formData[0], { trigger: true });
+      if (formData[0] === "movie") {
+        Backbone.history.navigate("search/movies/"+formData[1], { trigger: true });
       } else {
-        Backbone.history.navigate("search/person/"+formData[0], { trigger: true });
+        Backbone.history.navigate("search/person/"+formData[1], { trigger: true });
       }
     }
   },
 
   registerSearchListener: function() {
     var typingTimer;                //timer identifier
-    var doneTypingInterval = 2000;  //time in ms, 3 seconds
+    var doneTypingInterval = 500;  //time in ms, 0.5 seconds
     var $input = this.$('#myInput');
     //on keyup, start the countdown
-    $input.on('paste keypress', function() {
+    $input.on('paste keyup', function() {
       $('.search_dropdown_section').remove();
       clearTimeout(typingTimer);
-      typingTimer = setTimeout(this.doneTyping.bind(this), doneTypingInterval);
+      if ($input.val() !== "") {
+        typingTimer = setTimeout(this.doneTyping.bind(this), doneTypingInterval);
+      }
     }.bind(this));
   },
 
@@ -53,25 +55,49 @@ BDMI.Views.Search = Backbone.CompositeView.extend({
 
   doneTyping: function() {
     var formData = this.$('form').serializeJSON().search;
-    if (formData[1] === "movie") {
-      this.movieSearchDrop(formData[0]);
+    if (formData[0] === "movie") {
+      this.movieSearchDrop(formData[1]);
     } else {
-      Backbone.history.navigate("search/person/"+formData[0], { trigger: true });
+      this.persionSearchDrop(formData[1]);
     }
   },
 
   movieSearchDrop: function(title) {
     var searchedMovies = new BDMI.Collections.SearchedMovies();
-    // var searchedMovie = searchedMovies.fetch({
-    //   data: {
-    //     title:title
-    //   },
-    //   processData: true,
-    //   success: function(collection) {
-    //   }.bind(this)
-    // });
+    searchedMovies.fetch({
+      data: {
+        title:title
+      },
+      processData: true,
+      success: function(collection) {
+        if (collection.length === 0) {
+          $('.search_dropdown_section').remove();
+        }
+      }.bind(this)
+    });
     var dropDownView = new BDMI.Views.SearchDropDown({
-      collection: searchedMovies
+      collection: searchedMovies,
+      type: 'movie'
+    });
+    this.addSubview('#dropdown',dropDownView);
+  },
+
+  persionSearchDrop: function(name) {
+    var searchedPerson = new BDMI.Collections.MovieActors();
+    var person = searchedPerson.fetch({
+      data: {
+        name: name
+      },
+      processData: true,
+      success: function(collection) {
+        if (collection.length === 0) {
+          $('.search_dropdown_section').remove();
+        }
+      }.bind(this)
+    });
+    var dropDownView = new BDMI.Views.SearchDropDown({
+      collection: searchedPerson,
+      type: 'person'
     });
     this.addSubview('#dropdown',dropDownView);
   },

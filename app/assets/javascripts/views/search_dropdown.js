@@ -3,15 +3,23 @@ BDMI.Views.SearchDropDown = Backbone.CompositeView.extend({
 
   className: 'search_dropdown_section',
 
-  initialize: function() {
-    this.listenTo(this.collection, 'add', this.addSubview);
+  initialize: function(options) {
+    this.listenTo(this.collection, 'sync', this.render);
+    this.listenTo(this.collection, 'add', this.addDropDownItem);
     this.collection.each(this.addDropDownItem.bind(this));
-    this.addDropDownItem();
+    this.count = 0;
+    this.type = options.type;
   },
 
-  addDropDownItem: function() {
-    var subview = new BDMI.Views.SearchDropDownItem({ });
-    this.addSubview('#dropdown-index', subview);
+  addDropDownItem: function(model) {
+    if(this.count < 5) {
+      var subview = new BDMI.Views.SearchDropDownItem({
+        model: model,
+        type: this.type
+      });
+      this.addSubview('#dropdown-index', subview);
+      this.count += 1;
+    }
   },
 
   render: function() {
