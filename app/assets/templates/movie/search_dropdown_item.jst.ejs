@@ -1,7 +1,8 @@
-<div class="dropdown-image group">
-  <img src="<%= image_url %>" width="auto", height="100px">
+<div class="dropdown-image" class="group">
+  <img src="<%- poster_url %>" width="auto", height="100px"></img>
 </div>
-
-<div class="dropdown-title group">
-  <h5><%- title %></h5>
+<div id="movie-dropdown-title" class="group">
+  <h5>Title:  <%= movie.escape("title") %><h5>
+  <h5 class="movie-dropdown-date">Release Date:  <%= movie.escape("release_date") %></h5>
+  <div id="star" class="movie-dropdown-star"></div>
 </div>

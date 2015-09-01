@@ -17,7 +17,7 @@
 
 .search-dropdown-item {
   background-color: rgba(0, 0, 0, 0.37);
-  border-bottom: 1px solid #333;
+  border-bottom: 2px solid #333;
 }
 
 .search-dropdown-item:hover {
@@ -37,6 +37,30 @@
   padding-top: 45px;
 }
 
+#movie-dropdown-title {
+  width: 70%;
+  margin-left: 28%;
+  text-align: left;
+  padding-top: 3%;
+}
+
+.movie-dropdown-date {
+  margin: 0;
+}
+
+.movie-dropdown-star {
+    padding-right: 30px;
+    width: 40%;
+    text-align: right;
+    float: right;
+    margin: 0;
+    margin-top: -5%;
+}
+
+.movie-dropdown-star img {
+  width: 20px;
+  height: auto;
+}
 .actor-item {
   width: 24%;
   float: left;
