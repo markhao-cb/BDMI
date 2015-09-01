@@ -34,7 +34,7 @@ BDMI.Views.Search = Backbone.CompositeView.extend({
     var doneTypingInterval = 500;  //time in ms, 0.5 seconds
     var $input = this.$('#myInput');
     //on keyup, start the countdown
-    $input.on('paste keyup', function() {
+    $input.on('paste keydown', function() {
       $('.search_dropdown_section').remove();
       clearTimeout(typingTimer);
       if ($input.val() !== "") {
