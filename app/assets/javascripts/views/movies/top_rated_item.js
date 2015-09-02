@@ -14,7 +14,8 @@ BDMI.Views.TopRatedItem = Backbone.CompositeView.extend({
   },
 
   render: function() {
-    var poster_url = this.model.posters().sample().attributes.poster_url;
+    var poster_url = this.model.posters().sample().attributes.poster_url.slice(0,48)+
+    "/c_lpad,w_180"+this.model.posters().sample().attributes.poster_url.slice(48);
     var content = this.template({ movie: this.model, poster_url: poster_url });
     this.$el.html(content);
     this.generateStars();

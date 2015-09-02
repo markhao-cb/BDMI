@@ -14,7 +14,8 @@ BDMI.Views.InTheatersItem = Backbone.CompositeView.extend({
     if (this.model.attributes.poster) {
       this.poster_url = this.model.attributes.poster.poster_url;
     } else {
-      this.poster_url = this.model.posters().sample().attributes.poster_url;
+      this.poster_url = this.model.posters().sample().attributes.poster_url.slice(0,48) +
+      "/c_lpad,w_180"+this.model.posters().sample().attributes.poster_url.slice(48);
     }
     this.listenTo(this.model, 'sync', this.render);
   },
