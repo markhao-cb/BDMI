@@ -2,6 +2,15 @@
 
 Live: www.bdmi.co
 
+## Screenshots
+![alt tag](http://res.cloudinary.com/dypfv4yqq/image/upload/c_scale,w_400/v1441694957/Screen_Shot_2015-09-07_at_11.43.19_PM_ucpox6.png)
+![alt tag](http://res.cloudinary.com/dypfv4yqq/image/upload/c_scale,w_400/v1441694957/Screen_Shot_2015-09-07_at_11.43.51_PM_r0z1hk.png)
+![alt tag](http://res.cloudinary.com/dypfv4yqq/image/upload/c_scale,w_400/v1441694957/Screen_Shot_2015-09-07_at_11.44.06_PM_yzw9rf.png)
+![alt tag](http://res.cloudinary.com/dypfv4yqq/image/upload/c_scale,w_400/v1441694957/Screen_Shot_2015-09-07_at_11.44.28_PM_rkmwzf.png)
+![alt tag](http://res.cloudinary.com/dypfv4yqq/image/upload/c_scale,w_400/v1441694957/Screen_Shot_2015-09-07_at_11.46.02_PM_geim40.png)
+![alt tag](http://res.cloudinary.com/dypfv4yqq/image/upload/c_scale,w_400/v1441694957/Screen_Shot_2015-09-07_at_11.44.42_PM_ghrtfx.png)
+![alt tag](http://res.cloudinary.com/dypfv4yqq/image/upload/c_scale,w_400/v1441694958/Screen_Shot_2015-09-07_at_11.45.26_PM_y1yeil.png)
+
 
 ## Description
 
@@ -40,6 +49,14 @@ BDMI is a clone of IMDB built on Rails and Backbone. Users can:
 - [x] Search for actor/actress by name
 - [x] Add movie to personal watch list
 - [x] Collect watched movies
+
+
+## TO-DO List
+- [ ] Add third parties login
+- [ ] Allow user delete movies from list
+- [ ] Allow user to reply to reviews
+- [ ] Redesign user homepage for better user experience
+
 
 <!--## Design Docs-->
 <!--* [View Wireframes][views]-->
