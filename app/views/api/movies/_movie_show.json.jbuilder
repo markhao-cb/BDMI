@@ -14,6 +14,8 @@ json.extract!(
   :imdb_id,
 )
 
+json.set! :votes, movie.vote_count + movie.reviews.count
+
 if display_user
   json.set! :in_watched, watched
   json.set! :in_wanted, wanted

@@ -41,7 +41,7 @@ class Movie < ActiveRecord::Base
 
 
   def update_score_and_num_of_votes(score)
-    all_scores = self.vote_average * (self.vote_count + self.reviews.count) + score
+    all_scores = self.vote_average * (self.vote_count + self.reviews.count - 1) + score
     score = all_scores / (self.vote_count + self.reviews.count)
   end
 

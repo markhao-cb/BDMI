@@ -69,6 +69,7 @@ BDMI.Views.ReviewForm = Backbone.View.extend({
     formdata.movie_id = this.movie.id;
     this.model.save(formdata, {
       success: function() {
+        this.movie.set('votes', this.movie.get('votes') + 1);
         this.model.attributes.author_name = BDMI.CURRENT_USER.username;
         this.parentView.fromFetch = false;
         this.collection.add(this.model);
