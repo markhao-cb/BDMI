@@ -69,8 +69,12 @@ BDMI.Views.ReviewForm = Backbone.View.extend({
     formdata.movie_id = this.movie.id;
     this.model.save(formdata, {
       success: function() {
-        this.movie.set('votes', this.movie.get('votes') + 1);
-        this.model.attributes.author_name = BDMI.CURRENT_USER.username;
+        var per_votes = this.movie.get('votes');
+        var updated_score = (this.movie.get('vote_score') * per_votes +
+                            formdata.grade) / (per_votes + 1);
+        this.movie.set('vote_score', updated_score);
+        this.movie.set('votes', per_votes + 1);
+        this.model.set('author_name', BDMI.CURRENT_USER.username);
         this.parentView.fromFetch = false;
         this.collection.add(this.model);
         this.$(".my-background").remove();

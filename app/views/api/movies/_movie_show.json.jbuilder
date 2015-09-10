@@ -13,8 +13,10 @@ json.extract!(
   :tagline,
   :imdb_id,
 )
-
-json.set! :votes, movie.vote_count + movie.reviews.count
+if display_score
+  json.set! :votes, votes
+  json.set! :vote_score, score
+end
 
 if display_user
   json.set! :in_watched, watched

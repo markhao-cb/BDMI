@@ -1,14 +1,4 @@
 class Api::MoviesController < ApplicationController
-  def index
-    movie = Movie.getData
-    render json: movie
-    # @movies = Movie.all
-    # @movies.each do |movie|
-    #   if movie.images.empty? || movie.posters.empty? || movie.actors.empty? || movie.genres.empty?
-    #     movie.destroy
-    #   end
-    # end
-  end
 
   def show
     @movie = Movie.find_by(id: params[:id])
@@ -17,6 +7,10 @@ class Api::MoviesController < ApplicationController
     end
     @watched =  @movie.watchers.include?(current_user)
     @wanted = @movie.want_watchers.include?(current_user)
+    @reviews = @movie.reviews
+    @votes = @movie.vote_count + @movie.reviews.count
+    @vote_score = (@movie.vote_average * @movie.vote_count +
+                  @reviews.sum(:grade) + @reviews.count) / @votes
     render 'show'
   end
 

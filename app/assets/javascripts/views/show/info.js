@@ -37,7 +37,7 @@ BDMI.Views.InfoView = Backbone.CompositeView.extend({
 
   generateStar: function() {
     this.$('#star').raty('destroy');
-    var grade = this.model.attributes.vote_average / 2;
+    var grade = this.model.get("vote_score") / 2;
     this.$('#star').raty({
       starOff: "http://res.cloudinary.com/dypfv4yqq/image/upload/v1439888579/star-off_j7trzb.png",
       starOn: "http://res.cloudinary.com/dypfv4yqq/image/upload/v1439888579/star-on_iezcg6.png",

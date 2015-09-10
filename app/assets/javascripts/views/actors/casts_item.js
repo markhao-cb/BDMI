@@ -50,7 +50,7 @@ BDMI.Views.CastsItem = Backbone.CompositeView.extend({
 
   generateStars: function() {
         this.$('.small_movie_score').empty();
-        var grade = Math.floor(this.model.attributes.vote_average / 2);
+        var grade = Math.floor(this.model.get('vote_score') / 2);
         var star = Math.max(0, (Math.min(5, grade)));
         var blank = 5 - star;
         while (star > 0) {
