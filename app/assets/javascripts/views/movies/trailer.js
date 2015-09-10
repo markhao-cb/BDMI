@@ -31,9 +31,11 @@ BDMI.Views.TrailerView = Backbone.CompositeView.extend({
 
   generateYTPlayer: function() {
     var player;
+    var width = $(window).width() * 0.5;
+    var height = width / 16 * 9;
     player = new YT.Player('player', {
-      height: '506',
-      width: '900',
+      height: height.toString(),
+      width: width.toString(),
       videoId: this.model.get("source"),
       playerVars: {
         'showinfo' : 0
